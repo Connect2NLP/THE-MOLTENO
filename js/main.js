@@ -11,3 +11,21 @@ if (header) {
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 }
+
+const navToggle = document.getElementById('navToggle');
+
+if (navToggle && header) {
+  const closeMenu = () => {
+    header.classList.remove('nav-open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  };
+
+  navToggle.addEventListener('click', () => {
+    const isOpen = header.classList.toggle('nav-open');
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  header.querySelectorAll('.nav a').forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
+}

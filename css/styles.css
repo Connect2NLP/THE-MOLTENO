@@ -179,7 +179,32 @@ img { max-width: 100%; display: block; }
   transition: transform var(--transition);
 }
 .nav a:hover::after { transform: scaleX(1); }
-.nav-toggle { display: none; }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  z-index: 60;
+}
+.nav-toggle span {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background: var(--color-cream);
+  transition: background var(--transition), transform var(--transition), opacity var(--transition);
+}
+.is-scrolled .nav-toggle span { background: var(--color-ink); }
+.nav-open .nav-toggle span { background: var(--color-cream); }
+.nav-open .nav-toggle span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
 /* Hero (placeholder — new hero design TBD) */
 .hero {
@@ -435,8 +460,34 @@ img { max-width: 100%; display: block; }
   .feature-strip li:nth-child(3n+1) { border-left: none; }
   .footer-grid { grid-template-columns: 1fr; }
 }
+@media (max-width: 900px) {
+  .nav-toggle { display: flex; }
+  .nav {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    background: var(--color-forest-dark);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity var(--transition), visibility var(--transition), transform var(--transition);
+  }
+  .nav-open .nav {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .nav a {
+    color: var(--color-cream) !important;
+    font-size: 0.95rem;
+  }
+  .header-row .btn { display: none; }
+}
 @media (max-width: 640px) {
-  .nav { display: none; }
   .room-grid { grid-template-columns: 1fr; }
   .exp-grid { grid-template-columns: 1fr; }
   .feature-strip { grid-template-columns: repeat(2, 1fr); }

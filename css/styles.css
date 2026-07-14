@@ -35,10 +35,25 @@ body {
   margin: 0;
   font-family: var(--font-body);
   color: var(--color-ink);
-  background: var(--color-sand);
+  background-color: var(--color-sand);
+  background-image: linear-gradient(120deg,
+    transparent 0%,
+    rgba(173, 138, 78, 0.10) 45%,
+    rgba(212, 175, 105, 0.22) 50%,
+    rgba(173, 138, 78, 0.10) 55%,
+    transparent 100%);
+  background-size: 220% 220%;
+  animation: bgShimmer 16s linear infinite;
   font-size: 16px;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+}
+@keyframes bgShimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
 }
 
 /* Headings — Montserrat everywhere except the hero title */
@@ -123,7 +138,20 @@ textarea:focus-visible {
   color: var(--color-sand);
 }
 .section--dark h3 { color: var(--color-cream); }
-.section--alt { background: var(--color-sand-deep); }
+.section--alt {
+  background-color: var(--color-sand-deep);
+  background-image: linear-gradient(120deg,
+    transparent 0%,
+    rgba(173, 138, 78, 0.14) 45%,
+    rgba(212, 175, 105, 0.28) 50%,
+    rgba(173, 138, 78, 0.14) 55%,
+    transparent 100%);
+  background-size: 220% 220%;
+  animation: bgShimmer 16s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .section--alt { animation: none; }
+}
 
 .section-head {
   max-width: 640px;

@@ -12,6 +12,7 @@
   --color-green-dark: #2c4f3c;
   --color-gold: #ad8a4e;         /* gold — titles & subtitles */
   --color-gold-dark: #8f7140;
+  --gradient-metallic-gold: linear-gradient(120deg, #8f7140 0%, #d4af69 22%, #fdf3d0 42%, #d4af69 62%, #8f7140 82%, #d4af69 100%);
   --color-sand: #f1e7d2;         /* natural earth sand — main background */
   --color-sand-deep: #e4d3ab;    /* deeper sand — alt sections */
   --color-cream: #fffdf8;
@@ -52,15 +53,33 @@ h1 { font-size: clamp(2.75rem, 6vw, 5rem); font-weight: 500; }
 h2 { font-size: clamp(2rem, 4vw, 3rem); }
 h3 { font-size: clamp(1.35rem, 2.5vw, 1.75rem); }
 
-/* Main headings on dark backgrounds — Montserrat 200, gold */
+/* Main headings on dark backgrounds — Montserrat 200, animated metallic gold */
 .hero h1,
 .section--dark h2,
 .cta-band h2,
 .page-hero h1 {
   font-family: var(--font-heading-dark);
   font-weight: 200;
-  color: var(--color-gold);
   letter-spacing: 0.01em;
+  color: var(--color-gold);
+  background-image: var(--gradient-metallic-gold);
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: metallicShimmer 5s linear infinite;
+}
+@keyframes metallicShimmer {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero h1,
+  .section--dark h2,
+  .cta-band h2,
+  .page-hero h1 {
+    animation: none;
+  }
 }
 
 p { margin: 0 0 1em; }
@@ -171,6 +190,8 @@ textarea:focus-visible {
   width: 80px;
   height: 80px;
   background-color: var(--color-gold);
+  background-image: var(--gradient-metallic-gold);
+  background-size: 200% auto;
   -webkit-mask-image: url("../assets/logo/molteno-logo.png");
   mask-image: url("../assets/logo/molteno-logo.png");
   -webkit-mask-size: contain;
@@ -180,8 +201,12 @@ textarea:focus-visible {
   -webkit-mask-position: center;
   mask-position: center;
   transition: width var(--transition), height var(--transition);
+  animation: metallicShimmer 4s linear infinite;
 }
 .is-scrolled .brand-logo { width: 64px; height: 64px; }
+@media (prefers-reduced-motion: reduce) {
+  .brand-logo { animation: none; }
+}
 .brand-word {
   font-family: var(--font-display);
   font-size: 1.6rem;
@@ -295,12 +320,24 @@ textarea:focus-visible {
   max-width: 460px;
 }
 
-/* Hero logo lockup — metallic gold, animated glow + gentle float */
+/* Hero logo lockup — animated metallic gold, glow + gentle float */
 .hero-logo {
-  height: 120px;
-  width: auto;
+  display: inline-block;
+  height: 130px;
+  width: 130px;
   margin: 0 auto 28px;
-  animation: logoLive 4s ease-in-out infinite;
+  background-color: var(--color-gold);
+  background-image: var(--gradient-metallic-gold);
+  background-size: 200% auto;
+  -webkit-mask-image: url("../assets/logo/molteno-logo.png");
+  mask-image: url("../assets/logo/molteno-logo.png");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  animation: logoLive 4s ease-in-out infinite, metallicShimmer 4s linear infinite;
 }
 @keyframes logoLive {
   0%, 100% {
@@ -320,6 +357,17 @@ textarea:focus-visible {
 .feature-band {
   background: var(--color-green);
 }
+.feature-band__intro {
+  padding: 64px 0 48px;
+  text-align: center;
+}
+.feature-band__lede {
+  font-size: 1.15rem;
+  color: var(--color-sand);
+  max-width: 620px;
+  margin: 0 auto 32px;
+}
+.feature-band__intro .hero-actions { justify-content: center; }
 .feature-strip {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -452,12 +500,33 @@ textarea:focus-visible {
   background: var(--color-line);
 }
 .exp-card {
+  display: block;
   background: var(--color-cream);
-  padding: 40px 24px;
+  padding: 28px 24px 32px;
   text-align: center;
+  transition: box-shadow var(--transition), transform var(--transition);
 }
+.exp-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px -18px rgba(31, 42, 26, 0.28);
+  position: relative;
+  z-index: 1;
+}
+.exp-card__img {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  margin-bottom: 20px;
+  border-radius: var(--radius);
+}
+.exp-card__img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 500ms ease;
+}
+.exp-card:hover .exp-card__img img { transform: scale(1.06); }
 .exp-card h4 { font-size: 1rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; color: var(--color-gold-dark); }
 .exp-card p { font-size: 0.85rem; color: #5c5644; margin: 0; }
+.exp-more { text-align: center; margin-top: 48px; }
 
 /* FAQ */
 .faq-list { max-width: 760px; margin: 0 auto; }

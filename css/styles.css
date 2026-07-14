@@ -298,10 +298,25 @@ textarea:focus-visible {
   background: linear-gradient(160deg, var(--color-navy) 0%, var(--color-navy-dark) 65%, #0e1d29 100%);
   overflow: hidden;
 }
+.hero-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(160deg, rgba(20,38,53,0.7) 0%, rgba(14,29,41,0.82) 100%);
+}
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 1;
   background-image: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.06), transparent 45%),
     radial-gradient(circle at 80% 80%, rgba(0,96,96,0.28), transparent 50%);
   pointer-events: none;

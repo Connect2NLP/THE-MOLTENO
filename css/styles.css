@@ -165,14 +165,28 @@ textarea:focus-visible {
   justify-content: space-between;
   gap: 24px;
 }
-.brand { display: flex; align-items: center; gap: 14px; }
-.brand img { height: 66px; width: auto; transition: height var(--transition); }
-.is-scrolled .brand img { height: 54px; }
+.brand { display: flex; align-items: center; gap: 16px; }
+.brand-logo {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  background-color: var(--color-gold);
+  -webkit-mask-image: url("../assets/logo/molteno-logo.png");
+  mask-image: url("../assets/logo/molteno-logo.png");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  transition: width var(--transition), height var(--transition);
+}
+.is-scrolled .brand-logo { width: 64px; height: 64px; }
 .brand-word {
   font-family: var(--font-display);
-  font-size: 1.55rem;
+  font-size: 1.6rem;
   letter-spacing: 0.06em;
-  color: var(--color-navy);
+  color: var(--color-gold);
 }
 
 .nav {
@@ -187,7 +201,9 @@ textarea:focus-visible {
   color: var(--color-navy);
   position: relative;
   padding-bottom: 4px;
+  transition: color var(--transition);
 }
+.nav a:hover { color: var(--color-gold); }
 .nav a::after {
   content: "";
   position: absolute;
@@ -263,6 +279,11 @@ textarea:focus-visible {
   max-width: 560px;
   margin-bottom: 36px;
 }
+.hero-eyebrow {
+  font-size: 0.85rem;
+  margin-top: 6px;
+  margin-bottom: 28px;
+}
 .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
 .hero-placeholder-note {
   margin-top: 48px;
@@ -274,32 +295,36 @@ textarea:focus-visible {
   max-width: 460px;
 }
 
-/* Hero logo lockup — metallic gold with animated glow */
+/* Hero logo lockup — metallic gold, animated glow + gentle float */
 .hero-logo {
   height: 120px;
   width: auto;
   margin: 0 auto 28px;
-  filter: drop-shadow(0 0 8px rgba(173, 138, 78, 0.45)) drop-shadow(0 0 18px rgba(173, 138, 78, 0.25));
-  animation: logoGlow 3.5s ease-in-out infinite;
+  animation: logoLive 4s ease-in-out infinite;
 }
-@keyframes logoGlow {
+@keyframes logoLive {
   0%, 100% {
+    transform: translateY(0) scale(1);
     filter: drop-shadow(0 0 8px rgba(173, 138, 78, 0.45)) drop-shadow(0 0 18px rgba(173, 138, 78, 0.25));
   }
   50% {
-    filter: drop-shadow(0 0 20px rgba(212, 175, 105, 0.85)) drop-shadow(0 0 42px rgba(212, 175, 105, 0.5));
+    transform: translateY(-6px) scale(1.035);
+    filter: drop-shadow(0 0 22px rgba(212, 175, 105, 0.9)) drop-shadow(0 0 44px rgba(212, 175, 105, 0.55));
   }
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-logo { animation: none; }
 }
 
-/* Feature strip */
+/* Feature band — secondary green section */
+.feature-band {
+  background: var(--color-green);
+}
 .feature-strip {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  border-top: 1px solid var(--color-line);
-  border-bottom: 1px solid var(--color-line);
+  border-top: 1px solid rgba(255,255,255,0.15);
+  border-bottom: none;
 }
 .feature-strip li {
   list-style: none;
@@ -308,8 +333,8 @@ textarea:focus-visible {
   font-size: 0.72rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-green);
-  border-left: 1px solid var(--color-line);
+  color: var(--color-sand);
+  border-left: 1px solid rgba(255,255,255,0.15);
 }
 .feature-strip li:first-child { border-left: none; }
 

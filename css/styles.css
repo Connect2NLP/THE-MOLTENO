@@ -13,10 +13,10 @@
   --color-gold: #ad8a4e;         /* gold — titles & subtitles */
   --color-gold-dark: #8f7140;
   --gradient-metallic-gold: linear-gradient(120deg, #8f7140 0%, #d4af69 22%, #fdf3d0 42%, #d4af69 62%, #8f7140 82%, #d4af69 100%);
-  --color-sand: #f1e7d2;         /* natural earth sand — main background */
-  --color-sand-deep: #e4d3ab;    /* deeper sand — alt sections */
+  --color-sand: #F8F8FF;         /* light grey — main background */
+  --color-sand-deep: #D3D3D3;    /* deeper grey — alt sections */
   --color-cream: #fffdf8;
-  --color-line: #ddccA0;
+  --color-line: #c0c0c0;
 
   --font-display: "Cormorant Garamond", "Playfair Display", Georgia, serif;
   --font-body: "Jost", "Helvetica Neue", Arial, sans-serif;

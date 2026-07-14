@@ -40,11 +40,45 @@
     flex: 1;
     margin-bottom: 18px;
   }
+  .review-card__header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .review-card__avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid var(--color-line);
+  }
+  .review-card__meta { min-width: 0; }
+  .review-card__name-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
   .review-card__name {
     font-size: 0.78rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--color-gold-dark);
+  }
+  .review-card__flag {
+    width: 20px;
+    height: 14px;
+    object-fit: cover;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+    flex-shrink: 0;
+  }
+  .review-stars {
+    color: var(--color-gold);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    margin-top: 2px;
   }
   @media (max-width: 900px) {
     .review-grid { grid-template-columns: 1fr; }
@@ -86,53 +120,141 @@
     <div class="review-grid">
 
       <article class="review-card">
+        <div class="review-card__header">
+          <img src="assets/images/reviews/ann-cortez.jpg" alt="Ann Cortez" class="review-card__avatar" loading="lazy" decoding="async">
+          <div class="review-card__meta">
+            <div class="review-card__name-row">
+              <span class="review-card__name">Ann Cortez</span>
+              <img src="assets/images/flags/germany.png" alt="Germany" class="review-card__flag" loading="lazy" decoding="async">
+            </div>
+            <span class="review-stars">★★★★★</span>
+          </div>
+        </div>
         <p>"Staying with Jules was an unforgettable experience. From the moment I arrived, Jules greeted me with genuine warmth and charm that instantly made me feel at home. The house is beautiful and elegant yet relaxed, with breathtaking views of Table Mountain. Every morning felt like a treat, and being a professional food writer, I can say, Jules cooking is absolutely amazing. If you're coming to Cape Town, do yourself a favor and stay here. The Molteno is more than accommodation — it's something you'll remember for a long time."</p>
-        <span class="review-card__name">Ann Cortez</span>
       </article>
 
       <article class="review-card">
+        <div class="review-card__header">
+          <img src="assets/images/reviews/kuba.jpg" alt="Kuba" class="review-card__avatar" loading="lazy" decoding="async">
+          <div class="review-card__meta">
+            <div class="review-card__name-row">
+              <span class="review-card__name">Kuba</span>
+              <img src="assets/images/flags/czech-republic.png" alt="Czech Republic" class="review-card__flag" loading="lazy" decoding="async">
+            </div>
+            <span class="review-stars">★★★★★</span>
+          </div>
+        </div>
         <p>"Located in a nice, walkable neighborhood in Cape Town, it was the perfect base for exploring the city. The house has a pool, which was really nice for cooling off after a day of sightseeing. The host is genuinely nice and incredibly helpful — he knows all the tips and tricks that will make your holiday feel much more local. If you're looking for a comfortable, well-located spot with a fantastic atmosphere and a truly exceptional host, this is the place!"</p>
-        <span class="review-card__name">Kuba</span>
       </article>
 
       <article class="review-card">
+        <div class="review-card__header">
+          <img src="assets/images/reviews/stras.jpg" alt="Stras" class="review-card__avatar" loading="lazy" decoding="async">
+          <div class="review-card__meta">
+            <div class="review-card__name-row">
+              <span class="review-card__name">Stras</span>
+              <img src="assets/images/flags/russia.png" alt="Russia" class="review-card__flag" loading="lazy" decoding="async">
+            </div>
+            <span class="review-stars">★★★★★</span>
+          </div>
+        </div>
         <p>"I've spent over a month at The Molteno and what can I say — it was simply wonderful. Julian is the kind of host who makes you feel at home from the very first day. I often worked remotely from the pool area, which was both peaceful and refreshing. Staying here felt less like a rental and more like being invited into a friend's space. I'll look back on my time here with real fondness and will be returning. Highly recommend."</p>
-        <span class="review-card__name">Stras</span>
       </article>
 
       <article class="review-card">
+        <div class="review-card__header">
+          <img src="assets/images/reviews/italio.png" alt="Italio" class="review-card__avatar" loading="lazy" decoding="async">
+          <div class="review-card__meta">
+            <div class="review-card__name-row">
+              <span class="review-card__name">Italio</span>
+              <img src="assets/images/flags/italy.png" alt="Italy" class="review-card__flag" loading="lazy" decoding="async">
+            </div>
+            <span class="review-stars">★★★★★</span>
+          </div>
+        </div>
         <p>"I have recently visited Cape Town for the first time, while traveling on my own. What made my vacation so perfect was my stay at The Molteno. Although traveling alone, I never felt lonely there. The host Julian knows how to bring people together, make them feel at ease and entertain them. So whether you are traveling alone or not, my advice is to choose The Molteno. I can't wait to go back!"</p>
-        <span class="review-card__name">Italio</span>
       </article>
 
       <article class="review-card">
+        <div class="review-card__header">
+          <img src="assets/images/reviews/nicolai.jpg" alt="Nicolai Garde Dinesen" class="review-card__avatar" loading="lazy" decoding="async">
+          <div class="review-card__meta">
+            <div class="review-card__name-row">
+              <span class="review-card__name">Nicolai Garde Dinesen</span>
+              <img src="assets/images/flags/denmark.png" alt="Denmark" class="review-card__flag" loading="lazy" decoding="async">
+            </div>
+            <span class="review-stars">★★★★★</span>
+          </div>
+        </div>
         <p>"I arrived at The Molteno and was warmly welcomed by Julian and the other guests, instantly creating a true home-away-from-home feeling. I chose to celebrate my 40th birthday here, and it was truly beyond special. What makes The Molteno exceptional is undoubtedly Julian — he cares for every guest while keeping everything effortlessly under control. Thank you, Julian and team, it was amazing once again!"</p>
-        <span class="review-card__name">Nicolai Garde Dinesen</span>
       </article>
 
       <article class="review-card">
+        <div class="review-card__header">
+          <img src="assets/images/reviews/bruce-and-george.jpg" alt="Bruce and George" class="review-card__avatar" loading="lazy" decoding="async">
+          <div class="review-card__meta">
+            <div class="review-card__name-row">
+              <span class="review-card__name">Bruce &amp; George</span>
+              <img src="assets/images/flags/usa.png" alt="USA" class="review-card__flag" loading="lazy" decoding="async">
+            </div>
+            <span class="review-stars">★★★★★</span>
+          </div>
+        </div>
         <p>"This was our first time in Cape Town and Julian not only made us feel comfortable and at home at his guest house, but he also provided us with great recommendations about where to eat and things to do. You really feel like you are staying with a good friend at his very elegant house. We would definitely stay there again the next time."</p>
-        <span class="review-card__name">Bruce &amp; George</span>
       </article>
 
       <article class="review-card">
+        <div class="review-card__header">
+          <img src="assets/images/reviews/lauren.jpg" alt="Lauren Goldstein Crowe" class="review-card__avatar" loading="lazy" decoding="async">
+          <div class="review-card__meta">
+            <div class="review-card__name-row">
+              <span class="review-card__name">Lauren Goldstein Crowe</span>
+              <img src="assets/images/flags/united-kingdom.png" alt="United Kingdom" class="review-card__flag" loading="lazy" decoding="async">
+            </div>
+            <span class="review-stars">★★★★★</span>
+          </div>
+        </div>
         <p>"My partner and I spent a wonderful month at The Molteno House in Gardens, Cape Town. Julian was a fantastic host with great suggestions for both us and our kids. We've stayed across Cape Town, but loved the Gardens location most, with its cool bars, great restaurants, and easy access to hiking trails and beaches. We made many friends and can't wait to return."</p>
-        <span class="review-card__name">Lauren Goldstein Crowe</span>
       </article>
 
       <article class="review-card">
+        <div class="review-card__header">
+          <img src="assets/images/reviews/henrik.jpg" alt="Henrik D" class="review-card__avatar" loading="lazy" decoding="async">
+          <div class="review-card__meta">
+            <div class="review-card__name-row">
+              <span class="review-card__name">Henrik D</span>
+              <img src="assets/images/flags/denmark.png" alt="Denmark" class="review-card__flag" loading="lazy" decoding="async">
+            </div>
+            <span class="review-stars">★★★★★</span>
+          </div>
+        </div>
         <p>"The Molteno is much more than a guest house. It's a home away from home. The rooms are spacious, excellently furnished and spotless. But the best is the host — Jules is great at entertaining all in moderation. He has a great sense of humour and is always up for a good laugh. I love the plunge pool at cocktail hour. I know you'll enjoy your stay."</p>
-        <span class="review-card__name">Henrik D</span>
       </article>
 
       <article class="review-card">
+        <div class="review-card__header">
+          <img src="assets/images/reviews/peter-and-holger.jpg" alt="Peter and Holger" class="review-card__avatar" loading="lazy" decoding="async">
+          <div class="review-card__meta">
+            <div class="review-card__name-row">
+              <span class="review-card__name">Peter and Holger</span>
+              <img src="assets/images/flags/canada.png" alt="Canada" class="review-card__flag" loading="lazy" decoding="async">
+            </div>
+            <span class="review-stars">★★★★★</span>
+          </div>
+        </div>
         <p>"Staying at The Molteno Guesthouse was an absolute delight! Jules is an incredible host, always ready with great tips, recommendations, and a welcoming smile. He cooks really well and is very social with his guests. When he arranges a dinner, I suggest you accept this — it's just fabulous. The house itself is a beautiful blend of historic elegance."</p>
-        <span class="review-card__name">Peter and Holger</span>
       </article>
 
       <article class="review-card">
+        <div class="review-card__header">
+          <div class="review-card__meta">
+            <div class="review-card__name-row">
+              <span class="review-card__name">Omar Derhem</span>
+            </div>
+            <span class="review-stars">★★★★★</span>
+          </div>
+        </div>
         <p>"I had an amazing very long stay at The Molteno Guesthouse! Waking up every morning to train with Jules was an absolute highlight — his energy, guidance, and encouragement set the tone for the whole day. The house itself is beautiful, full of charm and comfort, with stunning views of Table Mountain. Can't recommend it highly enough!"</p>
-        <span class="review-card__name">Omar Derhem</span>
       </article>
 
     </div>

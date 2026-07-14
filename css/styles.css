@@ -36,21 +36,20 @@ body {
   font-family: var(--font-body);
   color: var(--color-ink);
   background-color: var(--color-sand);
-  background-image: linear-gradient(120deg,
-    transparent 0%,
-    rgba(173, 138, 78, 0.10) 45%,
-    rgba(212, 175, 105, 0.22) 50%,
-    rgba(173, 138, 78, 0.10) 55%,
-    transparent 100%);
-  background-size: 220% 220%;
-  animation: bgShimmer 16s linear infinite;
+  background-image:
+    radial-gradient(ellipse 55% 45% at 20% 25%, rgba(212, 175, 105, 0.16), transparent 65%),
+    radial-gradient(ellipse 50% 40% at 80% 75%, rgba(173, 138, 78, 0.14), transparent 65%);
+  background-repeat: no-repeat;
+  background-size: 160% 160%;
+  animation: mistDrift 34s ease-in-out infinite alternate;
   font-size: 16px;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
-@keyframes bgShimmer {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 200% 50%; }
+@keyframes mistDrift {
+  0% { background-position: 0% 10%, 100% 90%; }
+  50% { background-position: 25% 30%, 75% 65%; }
+  100% { background-position: 5% 40%, 95% 55%; }
 }
 @media (prefers-reduced-motion: reduce) {
   body { animation: none; }
@@ -140,14 +139,12 @@ textarea:focus-visible {
 .section--dark h3 { color: var(--color-cream); }
 .section--alt {
   background-color: var(--color-sand-deep);
-  background-image: linear-gradient(120deg,
-    transparent 0%,
-    rgba(173, 138, 78, 0.14) 45%,
-    rgba(212, 175, 105, 0.28) 50%,
-    rgba(173, 138, 78, 0.14) 55%,
-    transparent 100%);
-  background-size: 220% 220%;
-  animation: bgShimmer 16s linear infinite;
+  background-image:
+    radial-gradient(ellipse 55% 45% at 20% 25%, rgba(212, 175, 105, 0.2), transparent 65%),
+    radial-gradient(ellipse 50% 40% at 80% 75%, rgba(173, 138, 78, 0.18), transparent 65%);
+  background-repeat: no-repeat;
+  background-size: 160% 160%;
+  animation: mistDrift 34s ease-in-out infinite alternate;
 }
 @media (prefers-reduced-motion: reduce) {
   .section--alt { animation: none; }

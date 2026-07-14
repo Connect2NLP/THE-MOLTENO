@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reviews — The Molteno</title>
+<meta name="description" content="What our guests say about staying at The Molteno, Cape Town's Victorian Gem guesthouse in Gardens.">
+<link rel="icon" href="assets/logo/molteno-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  .page-hero {
+    background: var(--color-navy);
+    color: var(--color-cream);
+    padding: 200px 0 90px;
+    text-align: center;
+  }
+  .page-hero .eyebrow { color: var(--color-gold); }
+  .page-hero h1 { margin-bottom: 12px; }
+  .page-hero p { color: #dbe4dc; max-width: 620px; margin: 0 auto; }
+
+  .review-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+  .review-card {
+    background: var(--color-cream);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+  }
+  .review-card p {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: #4b4536;
+    flex: 1;
+    margin-bottom: 18px;
+  }
+  .review-card__name {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-gold-dark);
+  }
+  @media (max-width: 900px) {
+    .review-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <div class="container header-row">
+    <a href="index.html" class="brand">
+      <img src="assets/logo/molteno-logo.png" alt="The Molteno" class="brand-logo">
+      <span class="brand-word">The Molteno</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="reviews.html">Reviews</a>
+      <a href="contact.html">Contact</a>
+      <a href="experiences.html">Experiences</a>
+      <a href="rooms-rates.html">Rooms &amp; Rates</a>
+    </nav>
+    <a href="contact.html" class="btn">Reservations</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Reviews</span>
+    <h1>What Our Guests Say</h1>
+    <p>Our guests enjoy more than just a stay — they indulge in a true escape. Here's what our distinguished guests have to say.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="review-grid">
+
+      <article class="review-card">
+        <p>"Staying with Jules was an unforgettable experience. From the moment I arrived, Jules greeted me with genuine warmth and charm that instantly made me feel at home. The house is beautiful and elegant yet relaxed, with breathtaking views of Table Mountain. Every morning felt like a treat, and being a professional food writer, I can say, Jules cooking is absolutely amazing. If you're coming to Cape Town, do yourself a favor and stay here. The Molteno is more than accommodation — it's something you'll remember for a long time."</p>
+        <span class="review-card__name">Ann Cortez</span>
+      </article>
+
+      <article class="review-card">
+        <p>"Located in a nice, walkable neighborhood in Cape Town, it was the perfect base for exploring the city. The house has a pool, which was really nice for cooling off after a day of sightseeing. The host is genuinely nice and incredibly helpful — he knows all the tips and tricks that will make your holiday feel much more local. If you're looking for a comfortable, well-located spot with a fantastic atmosphere and a truly exceptional host, this is the place!"</p>
+        <span class="review-card__name">Kuba</span>
+      </article>
+
+      <article class="review-card">
+        <p>"I've spent over a month at The Molteno and what can I say — it was simply wonderful. Julian is the kind of host who makes you feel at home from the very first day. I often worked remotely from the pool area, which was both peaceful and refreshing. Staying here felt less like a rental and more like being invited into a friend's space. I'll look back on my time here with real fondness and will be returning. Highly recommend."</p>
+        <span class="review-card__name">Stras</span>
+      </article>
+
+      <article class="review-card">
+        <p>"I have recently visited Cape Town for the first time, while traveling on my own. What made my vacation so perfect was my stay at The Molteno. Although traveling alone, I never felt lonely there. The host Julian knows how to bring people together, make them feel at ease and entertain them. So whether you are traveling alone or not, my advice is to choose The Molteno. I can't wait to go back!"</p>
+        <span class="review-card__name">Italio</span>
+      </article>
+
+      <article class="review-card">
+        <p>"I arrived at The Molteno and was warmly welcomed by Julian and the other guests, instantly creating a true home-away-from-home feeling. I chose to celebrate my 40th birthday here, and it was truly beyond special. What makes The Molteno exceptional is undoubtedly Julian — he cares for every guest while keeping everything effortlessly under control. Thank you, Julian and team, it was amazing once again!"</p>
+        <span class="review-card__name">Nicolai Garde Dinesen</span>
+      </article>
+
+      <article class="review-card">
+        <p>"This was our first time in Cape Town and Julian not only made us feel comfortable and at home at his guest house, but he also provided us with great recommendations about where to eat and things to do. You really feel like you are staying with a good friend at his very elegant house. We would definitely stay there again the next time."</p>
+        <span class="review-card__name">Bruce &amp; George</span>
+      </article>
+
+      <article class="review-card">
+        <p>"My partner and I spent a wonderful month at The Molteno House in Gardens, Cape Town. Julian was a fantastic host with great suggestions for both us and our kids. We've stayed across Cape Town, but loved the Gardens location most, with its cool bars, great restaurants, and easy access to hiking trails and beaches. We made many friends and can't wait to return."</p>
+        <span class="review-card__name">Lauren Goldstein Crowe</span>
+      </article>
+
+      <article class="review-card">
+        <p>"The Molteno is much more than a guest house. It's a home away from home. The rooms are spacious, excellently furnished and spotless. But the best is the host — Jules is great at entertaining all in moderation. He has a great sense of humour and is always up for a good laugh. I love the plunge pool at cocktail hour. I know you'll enjoy your stay."</p>
+        <span class="review-card__name">Henrik D</span>
+      </article>
+
+      <article class="review-card">
+        <p>"Staying at The Molteno Guesthouse was an absolute delight! Jules is an incredible host, always ready with great tips, recommendations, and a welcoming smile. He cooks really well and is very social with his guests. When he arranges a dinner, I suggest you accept this — it's just fabulous. The house itself is a beautiful blend of historic elegance."</p>
+        <span class="review-card__name">Peter and Holger</span>
+      </article>
+
+      <article class="review-card">
+        <p>"I had an amazing very long stay at The Molteno Guesthouse! Waking up every morning to train with Jules was an absolute highlight — his energy, guidance, and encouragement set the tone for the whole day. The house itself is beautiful, full of charm and comfort, with stunning views of Table Mountain. Can't recommend it highly enough!"</p>
+        <span class="review-card__name">Omar Derhem</span>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="section cta-band">
+  <div class="container">
+    <h2>Ready for your Cape Town escape?</h2>
+    <p>Get in touch and let us help you plan the perfect stay at The Molteno.</p>
+    <a href="contact.html" class="btn btn--light">Reserve My Room</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/logo/molteno-logo.png" alt="The Molteno">
+        <p>Cape Town's Victorian Gem — a classy, elegant, effortless home away from home beneath the slopes of Table Mountain.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Explore</h4>
+        <a href="index.html">Home</a>
+        <a href="reviews.html">Reviews</a>
+        <a href="experiences.html">Experiences</a>
+        <a href="rooms-rates.html">Rooms &amp; Rates</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-links">
+        <h4>Get In Touch</h4>
+        <div>4 Molteno Road, Gardens, Cape Town</div>
+        <a href="tel:+27723034857">+27 72 303 4857</a>
+        <a href="mailto:info@themolteno.com">info@themolteno.com</a>
+      </div>
+      <div class="footer-links">
+        <h4>Follow Us</h4>
+        <a href="https://www.facebook.com/share/1BxByJtBjG/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.instagram.com/themolteno" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@themolteno" target="_blank" rel="noopener">TikTok</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 The Molteno. All rights reserved.</span>
+      <a href="#">Terms and Conditions</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

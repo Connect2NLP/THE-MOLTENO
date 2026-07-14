@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — The Molteno</title>
+<meta name="description" content="Get in touch with The Molteno, Cape Town's Victorian Gem guesthouse in Gardens.">
+<link rel="icon" href="assets/logo/molteno-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  .page-hero {
+    background: var(--color-forest);
+    color: var(--color-cream);
+    padding: 200px 0 90px;
+    text-align: center;
+  }
+  .page-hero .eyebrow { color: var(--color-brass); }
+  .page-hero h1 { color: var(--color-cream); margin-bottom: 12px; }
+  .page-hero p { color: #cfd8cd; max-width: 520px; margin: 0 auto; }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 64px;
+  }
+  .contact-info dt {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-clay);
+    margin-top: 28px;
+  }
+  .contact-info dt:first-child { margin-top: 0; }
+  .contact-info dd {
+    margin: 6px 0 0;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--color-forest-dark);
+  }
+  form { display: grid; gap: 18px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  label {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #5b6459;
+    margin-bottom: 8px;
+  }
+  input, textarea {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    padding: 13px 14px;
+    border: 1px solid var(--color-line);
+    background: var(--color-cream);
+    color: var(--color-ink);
+    border-radius: var(--radius);
+  }
+  input:focus, textarea:focus { outline: none; border-color: var(--color-clay); }
+  textarea { min-height: 140px; resize: vertical; }
+  @media (max-width: 800px) {
+    .contact-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header is-scrolled">
+  <div class="container header-row">
+    <a href="index.html" class="brand">
+      <img src="assets/logo/molteno-logo.png" alt="The Molteno">
+      <span class="brand-word">The Molteno</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="index.html#reviews">Reviews</a>
+      <a href="contact.html">Contact</a>
+      <a href="index.html#experiences">Experiences</a>
+      <a href="rooms-rates.html">Rooms &amp; Rates</a>
+    </nav>
+    <a href="contact.html" class="btn">Book Now</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Let's Talk</span>
+    <h1>Want to know more?</h1>
+    <p>We are here for you — reach out and we'll help plan your Cape Town stay.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container contact-grid">
+    <dl class="contact-info">
+      <dt>Visit Us</dt>
+      <dd>4 Molteno Road, Gardens, Cape Town</dd>
+      <dt>Call Us</dt>
+      <dd><a href="tel:+27723034857">+27 72 303 4857</a></dd>
+      <dt>Email Us</dt>
+      <dd><a href="mailto:info@themolteno.com">info@themolteno.com</a></dd>
+    </dl>
+
+    <form action="mailto:info@themolteno.com" method="post" enctype="text/plain">
+      <div class="form-row">
+        <div>
+          <label for="fname">First Name</label>
+          <input id="fname" name="First Name" type="text" required>
+        </div>
+        <div>
+          <label for="lname">Last Name</label>
+          <input id="lname" name="Last Name" type="text" required>
+        </div>
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input id="email" name="Email" type="email" required>
+      </div>
+      <div>
+        <label for="subject">Subject</label>
+        <input id="subject" name="Subject" type="text">
+      </div>
+      <div>
+        <label for="message">Your Message</label>
+        <textarea id="message" name="Message" required></textarea>
+      </div>
+      <button type="submit" class="btn btn--solid" style="justify-self:start;">Submit Form</button>
+    </form>
+  </div>
+</section>
+
+<section class="section section--alt" id="faq">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">FAQ's</span>
+      <h2>Frequently asked questions</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Do the rooms have views of Table Mountain?</summary>
+        <p>Several of our rooms, including the Monarch Suite and Panorama Suite, offer direct views of Table Mountain.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is parking available at The Molteno?</summary>
+        <p>Yes, secure parking can be arranged for guests — just let us know ahead of your stay.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How far is The Molteno from Cape Town's main attractions?</summary>
+        <p>We're just minutes from Kloof Street, Company's Garden and the Table Mountain cableway.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is Wi-Fi available throughout the property?</summary>
+        <p>Yes, complimentary Wi-Fi covers the whole property.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is The Molteno suitable for couples or solo travelers?</summary>
+        <p>Absolutely — our rooms suit solo travellers, couples, and everyone in between.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/logo/molteno-logo.png" alt="The Molteno">
+        <p>Cape Town's Victorian Gem — a classy, elegant, effortless home away from home beneath the slopes of Table Mountain.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Explore</h4>
+        <a href="index.html">Home</a>
+        <a href="index.html#reviews">Reviews</a>
+        <a href="index.html#experiences">Experiences</a>
+        <a href="rooms-rates.html">Rooms &amp; Rates</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-links">
+        <h4>Get In Touch</h4>
+        <div>4 Molteno Road, Gardens, Cape Town</div>
+        <a href="tel:+27723034857">+27 72 303 4857</a>
+        <a href="mailto:info@themolteno.com">info@themolteno.com</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 The Molteno. All rights reserved.</span>
+      <a href="#">Terms and Conditions</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

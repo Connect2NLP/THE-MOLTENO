@@ -8,8 +8,8 @@
   --color-ink: #24211a;          /* warm charcoal for body text */
   --color-navy: #1f3a52;         /* deep blue — secondary accent */
   --color-navy-dark: #142635;
-  --color-green: #04442a;        /* modern green — secondary accent */
-  --color-green-dark: #022e1c;
+  --color-green: #3E6353;        /* modern green — secondary accent */
+  --color-green-dark: #2f4a3e;
   --color-gold: #ad8a4e;         /* gold — titles & subtitles */
   --color-gold-dark: #8f7140;
   --gradient-metallic-gold: linear-gradient(120deg, #8f7140 0%, #d4af69 22%, #fdf3d0 42%, #d4af69 62%, #8f7140 82%, #d4af69 100%);
@@ -327,7 +327,7 @@ textarea:focus-visible {
   inset: 0;
   z-index: 1;
   background-image: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.06), transparent 45%),
-    radial-gradient(circle at 80% 80%, rgba(4,68,42,0.28), transparent 50%);
+    radial-gradient(circle at 80% 80%, rgba(62,99,83,0.28), transparent 50%);
   pointer-events: none;
 }
 .hero-content {

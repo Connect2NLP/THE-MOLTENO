@@ -378,7 +378,7 @@ textarea:focus-visible {
 
 /* Hero logo lockup — 4.5x scale, animated metallic gold shimmer + float */
 .hero-logo {
-  height: clamp(255px, 42vw, 585px);
+  height: clamp(170px, 28vw, 390px);
   width: auto;
   margin: 0 auto 8px;
   animation: logoLive 3.5s ease-in-out infinite;
@@ -688,7 +688,7 @@ textarea:focus-visible {
   .feature-strip li:nth-child(3n+1) { border-left: none; }
   .footer-grid { grid-template-columns: 1fr; }
 }
-@media (max-width: 1300px) {
+@media (max-width: 960px) {
   .nav-toggle { display: flex; }
   .nav {
     position: fixed;

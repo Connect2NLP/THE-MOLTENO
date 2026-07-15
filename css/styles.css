@@ -661,7 +661,7 @@ textarea:focus-visible {
   text-transform: uppercase;
   margin-bottom: 18px;
 }
-.footer-brand img { height: 46px; margin-bottom: 16px; }
+.footer-brand img { height: 96px; margin-bottom: 16px; }
 .footer-brand p { font-size: 0.9rem; max-width: 320px; }
 .footer-links a, .footer-links div { display: block; margin-bottom: 10px; font-size: 0.92rem; }
 .footer-bottom {

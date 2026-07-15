@@ -25,7 +25,7 @@
   --container: 1180px;
   --radius: 2px;
   --transition: 300ms ease;
-  --header-h: 200px;
+  --header-h: 176px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -195,13 +195,13 @@ textarea:focus-visible {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 40;
-  padding: 20px 0;
+  padding: 6px 0;
   background: var(--color-cream);
   box-shadow: 0 1px 0 var(--color-line);
   transition: padding var(--transition), box-shadow var(--transition);
 }
 .site-header.is-scrolled {
-  padding: 12px 0;
+  padding: 4px 0;
   box-shadow: 0 4px 16px -8px rgba(31, 42, 26, 0.25);
 }
 .site-header .container {
@@ -380,27 +380,23 @@ textarea:focus-visible {
 .hero-logo {
   height: clamp(170px, 28vw, 390px);
   width: auto;
-  margin: 0 auto 8px;
+  margin: 0 auto 0;
   animation: logoLive 3.5s ease-in-out infinite;
 }
 @keyframes logoLive {
   0%, 100% {
-    transform: translateY(0) scale(1);
     filter: brightness(0) invert(50%) sepia(50%) saturate(350%) hue-rotate(0deg) brightness(100%)
       drop-shadow(0 0 8px rgba(173, 138, 78, 0.45)) drop-shadow(0 0 18px rgba(173, 138, 78, 0.25));
   }
   30% {
-    transform: translateY(-4px) scale(1.02);
     filter: brightness(0) invert(52%) sepia(58%) saturate(390%) hue-rotate(-2deg) brightness(110%)
       drop-shadow(0 0 14px rgba(190, 155, 90, 0.65)) drop-shadow(0 0 28px rgba(190, 155, 90, 0.4));
   }
   50% {
-    transform: translateY(-8px) scale(1.045);
     filter: brightness(0) invert(55%) sepia(70%) saturate(480%) hue-rotate(-4deg) brightness(125%)
       drop-shadow(0 0 26px rgba(220, 185, 115, 0.95)) drop-shadow(0 0 50px rgba(220, 185, 115, 0.6));
   }
   70% {
-    transform: translateY(-4px) scale(1.02);
     filter: brightness(0) invert(52%) sepia(58%) saturate(390%) hue-rotate(-2deg) brightness(110%)
       drop-shadow(0 0 14px rgba(190, 155, 90, 0.65)) drop-shadow(0 0 28px rgba(190, 155, 90, 0.4));
   }

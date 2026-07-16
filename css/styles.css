@@ -196,13 +196,13 @@ textarea:focus-visible {
   top: 0; left: 0; right: 0;
   z-index: 40;
   padding: 6px 0;
-  background: var(--color-cream);
-  box-shadow: 0 1px 0 var(--color-line);
+  background: var(--color-navy-dark);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
   transition: padding var(--transition), box-shadow var(--transition);
 }
 .site-header.is-scrolled {
   padding: 4px 0;
-  box-shadow: 0 4px 16px -8px rgba(31, 42, 26, 0.25);
+  box-shadow: 0 4px 16px -8px rgba(0, 0, 0, 0.45);
 }
 .site-header .container {
   max-width: 1500px;
@@ -251,7 +251,7 @@ textarea:focus-visible {
   font-size: 0.78rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-navy);
+  color: var(--color-cream);
   position: relative;
   padding-bottom: 4px;
   transition: color var(--transition);
@@ -288,7 +288,7 @@ textarea:focus-visible {
   display: block;
   width: 100%;
   height: 1.5px;
-  background: var(--color-navy);
+  background: var(--color-cream);
   transition: background var(--transition), transform var(--transition), opacity var(--transition);
 }
 .nav-open .nav-toggle span { background: var(--color-cream); }

@@ -219,9 +219,9 @@ textarea:focus-visible {
 /* Hero variant — soft green shading over the video, solid green once scrolled */
 .site-header.header--hero {
   background: linear-gradient(to bottom,
-    rgba(31, 58, 82, 0.62) 0%,
-    rgba(43, 73, 78, 0.42) 35%,
-    rgba(55, 89, 74, 0.24) 70%,
+    rgba(31, 58, 82, 0.74) 0%,
+    rgba(43, 73, 78, 0.52) 35%,
+    rgba(55, 89, 74, 0.3) 70%,
     transparent 100%);
   box-shadow: none;
 }
@@ -345,7 +345,7 @@ textarea:focus-visible {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(180deg, rgba(20,38,53,0.12) 0%, rgba(20,38,53,0.28) 50%, rgba(14,29,41,0.6) 100%);
+  background: linear-gradient(180deg, rgba(20,38,53,0.18) 0%, rgba(20,38,53,0.35) 50%, rgba(14,29,41,0.68) 100%);
 }
 .hero::before {
   content: "";

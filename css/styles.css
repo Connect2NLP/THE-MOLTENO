@@ -8,8 +8,8 @@
   --color-ink: #24211a;          /* warm charcoal for body text */
   --color-navy: #1f3a52;         /* deep blue — secondary accent */
   --color-navy-dark: #142635;
-  --color-green: #3E6353;        /* modern green — secondary accent */
-  --color-green-dark: #2f4a3e;
+  --color-green: #37594A;        /* modern green — secondary accent */
+  --color-green-dark: #294338;
   --color-gold: #ad8a4e;         /* gold — titles & subtitles */
   --color-gold-dark: #8f7140;
   --gradient-metallic-gold: linear-gradient(120deg, #8f7140 0%, #d4af69 22%, #fdf3d0 42%, #d4af69 62%, #8f7140 82%, #d4af69 100%);
@@ -196,12 +196,22 @@ textarea:focus-visible {
   top: 0; left: 0; right: 0;
   z-index: 40;
   padding: 6px 0;
-  background: var(--color-navy-dark);
+  background: var(--color-green);
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
-  transition: padding var(--transition), box-shadow var(--transition);
+  transition: padding var(--transition), box-shadow var(--transition), background var(--transition);
 }
 .site-header.is-scrolled {
   padding: 4px 0;
+  box-shadow: 0 4px 16px -8px rgba(0, 0, 0, 0.45);
+}
+
+/* Hero variant — transparent over the video, solid green once scrolled */
+.site-header.header--hero {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.15) 70%, transparent 100%);
+  box-shadow: none;
+}
+.site-header.header--hero.is-scrolled {
+  background: var(--color-green);
   box-shadow: 0 4px 16px -8px rgba(0, 0, 0, 0.45);
 }
 .site-header .container {
@@ -327,7 +337,7 @@ textarea:focus-visible {
   inset: 0;
   z-index: 1;
   background-image: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.06), transparent 45%),
-    radial-gradient(circle at 80% 80%, rgba(62,99,83,0.28), transparent 50%);
+    radial-gradient(circle at 80% 80%, rgba(55,89,74,0.28), transparent 50%);
   pointer-events: none;
 }
 .hero-content {
@@ -694,7 +704,7 @@ textarea:focus-visible {
     justify-content: center;
     align-items: center;
     gap: 32px;
-    background: var(--color-navy-dark);
+    background: var(--color-green);
     opacity: 0;
     visibility: hidden;
     transform: translateY(-8px);

@@ -177,6 +177,17 @@ textarea:focus-visible {
 }
 .btn:hover { background: var(--color-navy); color: var(--color-cream); }
 
+.btn--nav {
+  background: var(--color-cream);
+  border: 1px solid var(--color-gold);
+  color: var(--color-navy);
+}
+.btn--nav:hover {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-cream);
+}
+
 .btn--solid {
   background: var(--color-navy);
   border-color: var(--color-navy);
@@ -205,9 +216,9 @@ textarea:focus-visible {
   box-shadow: 0 4px 16px -8px rgba(0, 0, 0, 0.45);
 }
 
-/* Hero variant — transparent over the video, solid green once scrolled */
+/* Hero variant — soft green shading over the video, solid green once scrolled */
 .site-header.header--hero {
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.15) 70%, transparent 100%);
+  background: linear-gradient(to bottom, rgba(55, 89, 74, 0.55) 0%, rgba(55, 89, 74, 0.22) 70%, transparent 100%);
   box-shadow: none;
 }
 .site-header.header--hero.is-scrolled {

@@ -55,11 +55,13 @@ if (musicToggle && musicPlayerEl) {
       },
       events: {
         onReady: (event) => {
+          event.target.setVolume(100);
           event.target.mute();
           event.target.playVideo();
         },
       },
     });
+    window.__ytPlayer = ytPlayer;
   };
 
   musicToggle.addEventListener('click', () => {
@@ -68,6 +70,7 @@ if (musicToggle && musicPlayerEl) {
     if (isMuted) {
       ytPlayer.mute();
     } else {
+      ytPlayer.setVolume(100);
       ytPlayer.unMute();
       ytPlayer.playVideo();
     }

@@ -13,9 +13,9 @@
   --color-gold: #ad8a4e;         /* gold — titles & subtitles */
   --color-gold-dark: #8f7140;
   --gradient-metallic-gold: linear-gradient(120deg, #8f7140 0%, #d4af69 22%, #fdf3d0 42%, #d4af69 62%, #8f7140 82%, #d4af69 100%);
-  --color-sand: #F4EEDD;         /* earthy, gold-tinted off-white — main background */
+  --color-sand: #F4F4E7;         /* earthy, gold-tinted off-white — main background */
   --color-sand-deep: #E2CFA0;    /* deeper earthy gold — alt sections */
-  --color-cream: #fffdf8;
+  --color-cream: #F8F8EF;
   --color-line: #C8AF74;
 
   --font-display: "Cormorant Garamond", "Playfair Display", Georgia, serif;
@@ -594,7 +594,7 @@ textarea:focus-visible {
   padding: 36px;
   border-radius: var(--radius);
 }
-.testimonial-card p { color: #eaf0ea; font-family: var(--font-display); font-size: 1.15rem; }
+.testimonial-card p { color: #eaf0ea; font-family: var(--font-heading-dark); font-size: 1.15rem; }
 .testimonial-name { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-gold); }
 
 /* Experiences */

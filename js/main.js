@@ -36,11 +36,28 @@ const musicPlayerEl = document.getElementById('bgMusicPlayer');
 if (musicToggle && musicPlayerEl) {
   const BG_MUSIC_VIDEO_ID = 'vZzbTdnbLmo';
   let ytPlayer = null;
+  let userStopped = false;
   let isMuted = true;
 
   const tag = document.createElement('script');
   tag.src = 'https://www.youtube.com/iframe_api';
   document.head.appendChild(tag);
+
+  const tryUnmute = () => {
+    if (!ytPlayer || typeof ytPlayer.unMute !== 'function' || userStopped || !isMuted) return;
+    ytPlayer.setVolume(100);
+    ytPlayer.unMute();
+    ytPlayer.playVideo();
+    isMuted = false;
+    musicToggle.setAttribute('aria-pressed', 'true');
+  };
+
+  // Browsers block audio autoplay until the user has interacted with the
+  // page — so start silently, then unmute on the very first interaction
+  // instead of making the visitor find and press a play button.
+  ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach((evt) => {
+    window.addEventListener(evt, tryUnmute, { once: true, passive: true });
+  });
 
   window.onYouTubeIframeAPIReady = () => {
     ytPlayer = new YT.Player('bgMusicPlayer', {
@@ -55,9 +72,10 @@ if (musicToggle && musicPlayerEl) {
       },
       events: {
         onReady: (event) => {
-          event.target.setVolume(100);
           event.target.mute();
           event.target.playVideo();
+          // In case the user already interacted with the page before the player was ready.
+          tryUnmute();
         },
       },
     });
@@ -67,6 +85,7 @@ if (musicToggle && musicPlayerEl) {
   musicToggle.addEventListener('click', () => {
     if (!ytPlayer || typeof ytPlayer.unMute !== 'function') return;
     isMuted = !isMuted;
+    userStopped = isMuted;
     if (isMuted) {
       ytPlayer.mute();
     } else {

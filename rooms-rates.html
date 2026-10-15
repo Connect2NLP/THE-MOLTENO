@@ -19,6 +19,42 @@
   .page-hero .eyebrow { color: var(--color-gold); }
   .page-hero h1 { margin-bottom: 12px; }
   .page-hero p { color: #dbe4dc; max-width: 520px; margin: 0 auto; }
+
+  .rates-table-wrap { overflow-x: auto; }
+  .rates-table {
+    width: 100%;
+    min-width: 640px;
+    border-collapse: collapse;
+    background: var(--color-cream);
+    border: 1px solid var(--color-line);
+    font-family: var(--font-heading-dark);
+    text-align: center;
+  }
+  .rates-table th, .rates-table td {
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--color-line);
+    font-size: 0.95rem;
+  }
+  .rates-table thead tr:first-child th {
+    background: var(--color-green);
+    color: var(--color-cream);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .rates-table tbody th, .rates-table thead th[scope="row"] {
+    text-align: left;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+  .rates-table__dates th, .rates-table__dates td {
+    font-size: 0.82rem;
+    color: #6b6551;
+    padding: 10px 18px;
+  }
+  .rates-table tbody td { color: var(--color-gold-dark); font-weight: 600; }
+  .rates-table tbody tr:last-child th, .rates-table tbody tr:last-child td { border-bottom: 0; }
 </style>
 </head>
 <body>
@@ -121,6 +157,45 @@
       </article>
 
     </div>
+  </div>
+</section>
+
+<section class="section section--alt" id="seasonal-rates">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Annual Seasonal Rates</span>
+      <h2>Rates through the seasons</h2>
+      <p>Per room, per night, at single occupancy. Second person R200 per night.</p>
+    </div>
+    <div class="rates-table-wrap">
+      <table class="rates-table">
+        <thead>
+          <tr>
+            <th scope="col">Season</th>
+            <th scope="col">Fireside</th>
+            <th scope="col">Golden</th>
+            <th scope="col">Escape</th>
+            <th scope="col">Grand</th>
+          </tr>
+          <tr class="rates-table__dates">
+            <th scope="row">First day</th>
+            <td>16 Apr</td><td>16 Aug</td><td>16 Oct</td><td>16 Dec</td>
+          </tr>
+          <tr class="rates-table__dates">
+            <th scope="row">Last day</th>
+            <td>15 Jul</td><td>15 Oct</td><td>15 Dec</td><td>15 Mar</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">The Studio</th><td>R600</td><td>R800</td><td>R1050</td><td>R1450</td></tr>
+          <tr><th scope="row">Azura Haven</th><td>R750</td><td>R900</td><td>R1250</td><td>R1550</td></tr>
+          <tr><th scope="row">The Sanctuary</th><td>R750</td><td>R900</td><td>R1250</td><td>R1550</td></tr>
+          <tr><th scope="row">The Panorama Suite</th><td>R900</td><td>R1150</td><td>R1450</td><td>R1750</td></tr>
+          <tr><th scope="row">The Monarch Suite</th><td>R900</td><td>R1150</td><td>R1450</td><td>R1750</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rates-note">All rates are per room, per night, at single occupancy. 2nd person R200 per night. Rates include continental breakfast — à la carte optional.</p>
   </div>
 </section>
 

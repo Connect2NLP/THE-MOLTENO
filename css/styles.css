@@ -890,3 +890,20 @@ textarea:focus-visible {
 .promo .promo__head h2 { color: var(--color-cream); font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 400; }
 .promo .promo-card h3 { color: var(--color-cream); }
 .promo .promo-card .promo-card__nights { color: var(--color-gold); }
+
+/* Summer Escape — white background, gold headings, dark navy text */
+.promo { background: #fff; color: var(--color-navy-dark); }
+.promo .promo__head h2,
+.promo .promo-card h3,
+.promo .promo__terms h3 { color: var(--color-gold-dark); }
+.promo .promo__tagline { color: var(--color-gold); }
+.promo .eyebrow,
+.promo .promo-card .promo-card__nights { color: var(--color-gold-dark); }
+.promo .promo__head p,
+.promo .promo-card p,
+.promo .promo__cta p,
+.promo .promo__terms ol { color: var(--color-navy-dark); }
+.promo .promo__deadline { border-color: var(--color-gold); color: var(--color-navy-dark); }
+.promo .promo__deadline strong { color: var(--color-gold-dark); }
+.promo .promo-card { background: #fff; border: 1px solid var(--color-line); border-top: 3px solid var(--color-gold); }
+.promo .promo__terms { border-top-color: var(--color-line); }

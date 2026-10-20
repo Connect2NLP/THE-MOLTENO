@@ -30,69 +30,46 @@ if (navToggle && header) {
   });
 }
 
-const musicToggle = document.getElementById('musicToggle');
-const musicPlayerEl = document.getElementById('bgMusicPlayer');
+const musicToggle = document.getElementById("musicToggle");
+const bgMusic = document.getElementById("bgMusicPlayer");
 
-if (musicToggle && musicPlayerEl) {
-  const BG_MUSIC_VIDEO_ID = 'vZzbTdnbLmo';
-  let ytPlayer = null;
+if (musicToggle && bgMusic) {
   let userStopped = false;
-  let isMuted = true;
+  bgMusic.volume = 1;
 
-  const tag = document.createElement('script');
-  tag.src = 'https://www.youtube.com/iframe_api';
-  document.head.appendChild(tag);
-
-  const tryUnmute = () => {
-    if (!ytPlayer || typeof ytPlayer.unMute !== 'function' || userStopped || !isMuted) return;
-    ytPlayer.setVolume(100);
-    ytPlayer.unMute();
-    ytPlayer.playVideo();
-    isMuted = false;
-    musicToggle.setAttribute('aria-pressed', 'true');
+  const setState = (playing) => {
+    musicToggle.setAttribute("aria-pressed", String(playing));
   };
 
-  // Browsers block audio autoplay until the user has interacted with the
-  // page — so start silently, then unmute on the very first interaction
-  // instead of making the visitor find and press a play button.
-  ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach((evt) => {
-    window.addEventListener(evt, tryUnmute, { once: true, passive: true });
+  const start = () => {
+    if (userStopped) return;
+    const attempt = bgMusic.play();
+    if (attempt && typeof attempt.then === "function") {
+      attempt.then(() => setState(true)).catch(() => setState(false));
+    }
+  };
+
+  // Try to start straight away. Browsers often block sound until the visitor
+  // interacts with the page, so if that happens, start on the first interaction.
+  start();
+  ["pointerdown", "keydown", "touchstart", "scroll"].forEach((evt) => {
+    window.addEventListener(
+      evt,
+      () => {
+        if (bgMusic.paused) start();
+      },
+      { once: true, passive: true }
+    );
   });
 
-  window.onYouTubeIframeAPIReady = () => {
-    ytPlayer = new YT.Player('bgMusicPlayer', {
-      videoId: BG_MUSIC_VIDEO_ID,
-      playerVars: {
-        autoplay: 1,
-        mute: 1,
-        loop: 1,
-        controls: 0,
-        playsinline: 1,
-        playlist: BG_MUSIC_VIDEO_ID,
-      },
-      events: {
-        onReady: (event) => {
-          event.target.mute();
-          event.target.playVideo();
-          // In case the user already interacted with the page before the player was ready.
-          tryUnmute();
-        },
-      },
-    });
-    window.__ytPlayer = ytPlayer;
-  };
-
-  musicToggle.addEventListener('click', () => {
-    if (!ytPlayer || typeof ytPlayer.unMute !== 'function') return;
-    isMuted = !isMuted;
-    userStopped = isMuted;
-    if (isMuted) {
-      ytPlayer.mute();
+  musicToggle.addEventListener("click", () => {
+    if (bgMusic.paused) {
+      userStopped = false;
+      bgMusic.play().then(() => setState(true)).catch(() => setState(false));
     } else {
-      ytPlayer.setVolume(100);
-      ytPlayer.unMute();
-      ytPlayer.playVideo();
+      userStopped = true;
+      bgMusic.pause();
+      setState(false);
     }
-    musicToggle.setAttribute('aria-pressed', String(!isMuted));
   });
 }

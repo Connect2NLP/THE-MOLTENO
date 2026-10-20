@@ -49,18 +49,22 @@ if (musicToggle && bgMusic) {
     }
   };
 
-  // Try to start straight away. Browsers often block sound until the visitor
-  // interacts with the page, so if that happens, start on the first interaction.
+  // Try to start straight away. Browsers block sound until the visitor
+  // interacts with the page, so if that happens, keep trying on every real
+  // interaction (click, tap, key press) until playback actually starts.
+  const gestures = ["pointerdown", "pointerup", "click", "touchend", "keydown"];
+  const onGesture = () => {
+    if (userStopped) return;
+    if (!bgMusic.paused) return removeGestures();
+    bgMusic.play().then(() => {
+      setState(true);
+      removeGestures();
+    }).catch(() => {});
+  };
+  const removeGestures = () => gestures.forEach((e) => window.removeEventListener(e, onGesture));
+  gestures.forEach((e) => window.addEventListener(e, onGesture, { passive: true }));
+  bgMusic.addEventListener("canplay", start, { once: true });
   start();
-  ["pointerdown", "keydown", "touchstart", "scroll"].forEach((evt) => {
-    window.addEventListener(
-      evt,
-      () => {
-        if (bgMusic.paused) start();
-      },
-      { once: true, passive: true }
-    );
-  });
 
   musicToggle.addEventListener("click", () => {
     if (bgMusic.paused) {

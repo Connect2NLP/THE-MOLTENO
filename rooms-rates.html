@@ -61,6 +61,21 @@
     text-align: center;
     padding: 8px;
   }
+  /* Gallery that keeps every photo uncropped at its natural shape */
+  .room-feature__gallery--natural {
+    grid-template-columns: 3.12fr 1fr;
+    grid-template-rows: auto;
+    align-items: start;
+    gap: 14px;
+  }
+  .room-feature__gallery--natural .room-feature__main { grid-row: 1 / 3; }
+  .room-feature__thumb {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+    box-shadow: 0 10px 28px rgba(20, 38, 53, 0.18);
+  }
   .room-feature__name {
     font-family: var(--font-display);
     font-size: clamp(2.2rem, 4vw, 3.2rem);
@@ -96,6 +111,8 @@
     .room-feature--reverse .room-feature__gallery { grid-template-columns: 1fr 1fr; }
     .room-feature--reverse .room-ph { grid-column: auto; }
     .room-ph { aspect-ratio: 3 / 2; }
+    .room-feature__gallery--natural { grid-template-columns: 1fr 1fr; }
+    .room-feature__gallery--natural .room-feature__main { grid-row: 1; }
   }
 
   .rates-table-wrap { overflow-x: auto; }
@@ -168,10 +185,10 @@
 <section class="section">
   <div class="container room-features">
       <article class="room-feature">
-        <div class="room-feature__gallery">
+        <div class="room-feature__gallery room-feature__gallery--natural">
           <img class="room-feature__main" src="assets/images/room-studio-1-1.jpg" alt="Azura Haven" loading="lazy" decoding="async">
-          <div class="room-ph" role="img" aria-label="Photo coming soon"><span>Photo coming soon</span></div>
-          <div class="room-ph" role="img" aria-label="Photo coming soon"><span>Photo coming soon</span></div>
+          <img class="room-feature__thumb" src="assets/images/azura-haven-pool.webp" alt="Azura Haven private plunge pool with sun loungers" loading="lazy" decoding="async">
+          <img class="room-feature__thumb" src="assets/images/azura-haven-bathroom.jpg" alt="Azura Haven bathroom with walk-in rain shower" loading="lazy" decoding="async">
         </div>
         <div class="room-feature__text">
           <div class="room-feature__title">

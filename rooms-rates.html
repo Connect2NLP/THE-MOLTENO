@@ -8,7 +8,7 @@
 <link rel="icon" href="assets/logo/molteno-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=20261023">
+<link rel="stylesheet" href="css/styles.css?v=20261025">
 <style>
   .page-hero {
     background: var(--color-navy);
@@ -21,81 +21,85 @@
   .page-hero p { color: #dbe4dc; max-width: 520px; margin: 0 auto; }
 
 
-  .room-features { display: grid; gap: 96px; }
+  .room-features { display: grid; gap: 100px; }
   .room-feature {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 36px;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 56px;
+    align-items: center;
   }
-  .room-feature--reverse .room-feature__gallery { grid-template-columns: 1fr 1.7fr; }
-  .room-feature--reverse .room-feature__main { grid-column: 2; }
-  .room-feature--reverse .room-ph { grid-column: 1; }
-  .room-feature__text { display: grid; grid-template-columns: 1fr 1.2fr; gap: 56px; align-items: start; }
-  .room-feature__body p:first-child { margin-top: 0; }
-  .room-feature__gallery {
-    display: grid;
-    grid-template-columns: 1.7fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 14px;
-  }
-  .room-feature__main {
-    grid-column: 1;
-    grid-row: 1 / 3;
-    display: block;
-    width: 100%;
-    height: auto;
+  .room-feature--reverse .slideshow { order: 2; }
+
+  /* Elegant photo slideshow: slow cross-fade, click to hold */
+  .slideshow__frame {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
     border-radius: var(--radius);
     box-shadow: 0 18px 44px rgba(20, 38, 53, 0.22);
+    background: var(--color-navy-dark);
+    isolation: isolate;
   }
-  .room-ph {
+  [data-slideshow] .slideshow__frame { cursor: pointer; }
+  .slideshow__frame:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 4px; }
+  .slide {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .slide.is-active { opacity: 1; z-index: 1; }
+  .slide::before {
+    content: "";
+    position: absolute;
+    inset: -30px;
+    background: var(--bg) center / cover no-repeat;
+    filter: blur(26px) brightness(0.88) saturate(1.05);
+  }
+  .slide img {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform-origin: center;
+  }
+  .slideshow.is-playing .slide.is-active img { animation: slideDrift 10s ease-out both; }
+  @keyframes slideDrift {
+    from { transform: scale(1); }
+    to { transform: scale(1.045); }
+  }
+  .slideshow__bar {
     display: flex;
     align-items: center;
-    justify-content: center;
-    border: 1px dashed var(--color-gold);
-    border-radius: var(--radius);
-    background: rgba(173, 138, 78, 0.08);
-    color: var(--color-gold-dark);
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .slideshow__dots { display: flex; gap: 10px; align-items: center; }
+  .slideshow__dot {
+    width: 9px;
+    height: 9px;
+    padding: 0;
+    border: 1px solid var(--color-gold);
+    border-radius: 999px;
+    background: transparent;
+    cursor: pointer;
+    transition: width 0.5s ease, background 0.5s ease;
+  }
+  .slideshow__dot.is-active { width: 28px; background: var(--color-gold); }
+  .slideshow__status {
     font-size: 0.68rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    text-align: center;
-    padding: 8px;
+    color: var(--color-gold-dark);
   }
-  /* Gallery that keeps every photo uncropped at its natural shape */
-  .room-feature__gallery--natural {
-    grid-template-columns: 560.4fr 253.9fr 273.9fr;
-    grid-template-rows: auto;
-    align-items: start;
-    gap: 14px;
+  @media (prefers-reduced-motion: reduce) {
+    .slide { transition: opacity 0.4s linear; }
+    .slideshow.is-playing .slide.is-active img { animation: none; }
   }
-  .room-feature__gallery--natural .room-feature__main { grid-row: 1; }
-  .room-feature__stack { display: grid; gap: 14px; align-content: start; }
-  .room-feature__thumb {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius);
-    box-shadow: 0 10px 28px rgba(20, 38, 53, 0.18);
-  }
-  /* Sanctuary: bathroom + balcony beside the main photo, all uncropped at one height */
-  .room-feature__gallery--triple,
-  .room-feature--reverse .room-feature__gallery--triple {
-    grid-template-columns: 0.8003fr 0.5628fr 1.5fr;
-    grid-template-rows: auto;
-    align-items: start;
-  }
-  .room-feature--reverse .room-feature__gallery--triple .room-feature__thumb:nth-child(2) { grid-column: 1; grid-row: 1; }
-  .room-feature--reverse .room-feature__gallery--triple .room-feature__thumb:nth-child(3) { grid-column: 2; grid-row: 1; }
-  .room-feature--reverse .room-feature__gallery--triple .room-feature__main { grid-column: 3; grid-row: 1; }
-  /* Two landscape photos stacked beside the main photo, all uncropped */
-  .room-feature__gallery--pair {
-    grid-template-columns: var(--pair-cols, 2.185fr 1fr);
-    grid-template-rows: auto;
-    align-items: start;
-  }
-  .room-feature__gallery--pair .room-feature__main { grid-row: 1; }
-  .room-feature--reverse .room-feature__gallery--pair { grid-template-columns: var(--pair-cols, 2.185fr 1fr); }
-  .room-feature--reverse .room-feature__gallery--pair .room-feature__stack { grid-column: 1; grid-row: 1; }
+
   .room-feature__name {
     font-family: var(--font-display);
     font-size: clamp(2.2rem, 4vw, 3.2rem);
@@ -121,30 +125,12 @@
   }
   .room-feature__text p { color: #4b4536; }
   @media (max-width: 900px) {
-    .room-features { gap: 64px; }
+    .room-features { gap: 72px; }
     .room-feature { grid-template-columns: 1fr; gap: 28px; }
-    .room-feature__text { grid-template-columns: 1fr; gap: 8px; }
+    .room-feature--reverse .slideshow { order: 0; }
   }
   @media (max-width: 560px) {
-    .room-feature__gallery { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
-    .room-feature__main, .room-feature--reverse .room-feature__main { grid-column: 1 / 3; grid-row: 1; }
-    .room-feature--reverse .room-feature__gallery { grid-template-columns: 1fr 1fr; }
-    .room-feature--reverse .room-ph { grid-column: auto; }
-    .room-feature__gallery--triple,
-    .room-feature--reverse .room-feature__gallery--triple { grid-template-columns: 1fr 1fr; }
-    .room-feature--reverse .room-feature__gallery--triple .room-feature__main { grid-column: 1 / 3; grid-row: 1; }
-    .room-feature--reverse .room-feature__gallery--triple .room-feature__thumb:nth-child(2) { grid-column: 1; grid-row: 2; }
-    .room-feature--reverse .room-feature__gallery--triple .room-feature__thumb:nth-child(3) { grid-column: 2; grid-row: 2; }
-    .room-ph { aspect-ratio: 3 / 2; }
-    .room-feature__gallery--natural { grid-template-columns: 1fr 1fr; }
-    .room-feature__gallery--pair,
-    .room-feature--reverse .room-feature__gallery--pair { grid-template-columns: 1fr; }
-    .room-feature--reverse .room-feature__gallery--pair .room-feature__main { grid-column: 1; grid-row: 1; }
-    .room-feature--reverse .room-feature__gallery--pair .room-feature__stack { grid-column: 1; grid-row: 2; }
-    .room-feature__gallery--pair .room-feature__stack { grid-template-columns: 1fr 1fr; }
-    .room-feature__gallery--natural .room-feature__main { grid-row: 1; grid-column: 1 / 3; }
-    .room-feature__gallery--natural .room-feature__stack { grid-row: 2; grid-column: 1; }
-    .room-feature__gallery--natural > .room-feature__thumb { grid-row: 2; grid-column: 2; }
+    .slideshow__bar { flex-direction: column; align-items: flex-start; gap: 10px; }
   }
 
   .rates-table-wrap { overflow-x: auto; }
@@ -217,123 +203,121 @@
 <section class="section">
   <div class="container room-features">
       <article class="room-feature">
-        <div class="room-feature__gallery room-feature__gallery--natural">
-          <img class="room-feature__main" src="assets/images/room-studio-1-1.jpg" alt="Azura Haven" loading="lazy" decoding="async">
-          <div class="room-feature__stack">
-            <img class="room-feature__thumb" src="assets/images/azura-haven-pool.webp" alt="Azura Haven private plunge pool with sun loungers" loading="lazy" decoding="async">
-            <img class="room-feature__thumb" src="assets/images/azura-haven-basin.webp" alt="Azura Haven wash basin, with the bedroom seen through the doorway" loading="lazy" decoding="async">
+        <div class="slideshow" data-slideshow aria-label="Azura Haven photos">
+          <div class="slideshow__frame" role="button" tabindex="0" aria-label="Pause or play the Azura Haven photo slideshow">
+            <figure class="slide is-active" style="--bg:url('assets/images/room-studio-1-1.jpg')"><img src="assets/images/room-studio-1-1.jpg" alt="Azura Haven bedroom" decoding="async"></figure>
+            <figure class="slide" style="--bg:url('assets/images/azura-haven-pool.webp')"><img src="assets/images/azura-haven-pool.webp" alt="Azura Haven private plunge pool with sun loungers" loading="lazy" decoding="async"></figure>
+            <figure class="slide" style="--bg:url('assets/images/azura-haven-basin.webp')"><img src="assets/images/azura-haven-basin.webp" alt="Azura Haven wash basin, with the bedroom seen through the doorway" loading="lazy" decoding="async"></figure>
+            <figure class="slide" style="--bg:url('assets/images/azura-haven-bathroom.jpg')"><img src="assets/images/azura-haven-bathroom.jpg" alt="Azura Haven bathroom with walk-in rain shower" loading="lazy" decoding="async"></figure>
           </div>
-          <img class="room-feature__thumb" src="assets/images/azura-haven-bathroom.jpg" alt="Azura Haven bathroom with walk-in rain shower" loading="lazy" decoding="async">
+          <div class="slideshow__bar">
+            <div class="slideshow__dots"><button type="button" class="slideshow__dot is-active" aria-label="Show photo 1 of 4"></button><button type="button" class="slideshow__dot" aria-label="Show photo 2 of 4"></button><button type="button" class="slideshow__dot" aria-label="Show photo 3 of 4"></button><button type="button" class="slideshow__dot" aria-label="Show photo 4 of 4"></button></div>
+            <span class="slideshow__status" aria-live="polite">Click the photo to hold it</span>
+          </div>
         </div>
         <div class="room-feature__text">
-          <div class="room-feature__title">
           <span class="room-card__tag">Deluxe</span>
           <h2 class="room-feature__name">Azura Haven</h2>
           <p class="room-feature__headline">Poolside Calm, New York Style</p>
-          </div>
-          <div class="room-feature__body">
           <p>Step out of your door and straight to the pool. Azura Haven blends comfort and character with a sunny patio made for work or play, and a king-size bed dressed in 100% cotton percale linen.</p>
           <p>Modern, New York–inspired design and a ground-floor position make it effortlessly easy to settle into.</p>
           <div class="room-card__footer">
             <span class="room-card__price">R1550 <span>p/n</span></span>
             <a href="contact.html" class="room-card__cta">Reserve My Room</a>
           </div>
-          </div>
         </div>
       </article>
 
       <article class="room-feature room-feature--reverse">
-        <div class="room-feature__gallery room-feature__gallery--triple">
-          <img class="room-feature__main" src="assets/images/room-sanctuary-3-1.jpg" alt="The Sanctuary" loading="lazy" decoding="async">
-          <img class="room-feature__thumb" src="assets/images/sanctuary-bathroom.webp" alt="The Sanctuary bathroom with wall-mounted basin, plants and fresh towels" loading="lazy" decoding="async">
-          <img class="room-feature__thumb" src="assets/images/sanctuary-balcony.webp" alt="The Sanctuary private balcony with a table and chair among climbing jasmine" loading="lazy" decoding="async">
+        <div class="slideshow" data-slideshow aria-label="The Sanctuary photos">
+          <div class="slideshow__frame" role="button" tabindex="0" aria-label="Pause or play the The Sanctuary photo slideshow">
+            <figure class="slide is-active" style="--bg:url('assets/images/room-sanctuary-3-1.jpg')"><img src="assets/images/room-sanctuary-3-1.jpg" alt="The Sanctuary bedroom" decoding="async"></figure>
+            <figure class="slide" style="--bg:url('assets/images/sanctuary-bathroom.webp')"><img src="assets/images/sanctuary-bathroom.webp" alt="The Sanctuary bathroom with wall-mounted basin, plants and fresh towels" loading="lazy" decoding="async"></figure>
+            <figure class="slide" style="--bg:url('assets/images/sanctuary-balcony.webp')"><img src="assets/images/sanctuary-balcony.webp" alt="The Sanctuary private balcony with a table and chair among climbing jasmine" loading="lazy" decoding="async"></figure>
+          </div>
+          <div class="slideshow__bar">
+            <div class="slideshow__dots"><button type="button" class="slideshow__dot is-active" aria-label="Show photo 1 of 3"></button><button type="button" class="slideshow__dot" aria-label="Show photo 2 of 3"></button><button type="button" class="slideshow__dot" aria-label="Show photo 3 of 3"></button></div>
+            <span class="slideshow__status" aria-live="polite">Click the photo to hold it</span>
+          </div>
         </div>
         <div class="room-feature__text">
-          <div class="room-feature__title">
           <span class="room-card__tag">Deluxe</span>
           <h2 class="room-feature__name">The Sanctuary</h2>
           <p class="room-feature__headline">Lion&rsquo;s Head at Your Balcony</p>
-          </div>
-          <div class="room-feature__body">
           <p>A serene escape with a private balcony overlooking Lion&rsquo;s Head, and distant views of Signal Hill.</p>
           <p>This sun-filled, en-suite room offers a king bed with 100% cotton percale linen, elegant design and refined comfort for a truly tranquil Cape Town retreat.</p>
           <div class="room-card__footer">
             <span class="room-card__price">R1550 <span>p/n</span></span>
             <a href="contact.html" class="room-card__cta">Reserve My Room</a>
           </div>
-          </div>
         </div>
       </article>
 
       <article class="room-feature">
-        <div class="room-feature__gallery room-feature__gallery--pair">
-          <img class="room-feature__main" src="assets/images/monarch-suite-bedroom.webp" alt="The Monarch Suite" loading="lazy" decoding="async">
-          <div class="room-feature__stack">
-            <img class="room-feature__thumb" src="assets/images/monarch-suite-terrace.webp" alt="The Monarch Suite breakfast terrace with Table Mountain views" loading="lazy" decoding="async">
-            <img class="room-feature__thumb" src="assets/images/monarch-suite-bathroom.webp" alt="The Monarch Suite charcoal and taupe bathroom with walk-in shower" loading="lazy" decoding="async">
+        <div class="slideshow" data-slideshow aria-label="The Monarch Suite photos">
+          <div class="slideshow__frame" role="button" tabindex="0" aria-label="Pause or play the The Monarch Suite photo slideshow">
+            <figure class="slide is-active" style="--bg:url('assets/images/monarch-suite-bedroom.webp')"><img src="assets/images/monarch-suite-bedroom.webp" alt="The Monarch Suite bedroom" decoding="async"></figure>
+            <figure class="slide" style="--bg:url('assets/images/monarch-suite-terrace.webp')"><img src="assets/images/monarch-suite-terrace.webp" alt="The Monarch Suite breakfast terrace with Table Mountain views" loading="lazy" decoding="async"></figure>
+            <figure class="slide" style="--bg:url('assets/images/monarch-suite-bathroom.webp')"><img src="assets/images/monarch-suite-bathroom.webp" alt="The Monarch Suite charcoal and taupe bathroom with walk-in shower" loading="lazy" decoding="async"></figure>
+          </div>
+          <div class="slideshow__bar">
+            <div class="slideshow__dots"><button type="button" class="slideshow__dot is-active" aria-label="Show photo 1 of 3"></button><button type="button" class="slideshow__dot" aria-label="Show photo 2 of 3"></button><button type="button" class="slideshow__dot" aria-label="Show photo 3 of 3"></button></div>
+            <span class="slideshow__status" aria-live="polite">Click the photo to hold it</span>
           </div>
         </div>
         <div class="room-feature__text">
-          <div class="room-feature__title">
           <span class="room-card__tag">Superior</span>
           <h2 class="room-feature__name">The Monarch Suite</h2>
           <p class="room-feature__headline">Fireside Elegance Beneath the Mountain</p>
-          </div>
-          <div class="room-feature__body">
           <p>Timeless elegance with a king-size bed, an outdoor daybed, a private balcony with views of Table Mountain, a wood-burning fireplace and your morning Nespresso.</p>
           <p>Made for carefree mornings, romantic evenings and late-afternoon cocktails in the heart of the Mother City.</p>
           <div class="room-card__footer">
             <span class="room-card__price">R1950 <span>p/n</span></span>
             <a href="contact.html" class="room-card__cta">Reserve My Room</a>
           </div>
-          </div>
         </div>
       </article>
 
       <article class="room-feature room-feature--reverse">
-        <div class="room-feature__gallery room-feature__gallery--pair" style="--pair-cols: 1fr 2.052fr">
-          <img class="room-feature__main" src="assets/images/panorama-suite-bedroom.webp" alt="The Panorama Suite" loading="lazy" decoding="async">
-          <div class="room-feature__stack">
-            <img class="room-feature__thumb" src="assets/images/panorama-suite-bedroom-2.webp" alt="The Panorama Suite bedroom with sage walls, antique wardrobe and fireplace" loading="lazy" decoding="async">
-            <img class="room-feature__thumb" src="assets/images/panorama-suite-bathroom.webp" alt="The Panorama Suite moody modern bathroom with green accents" loading="lazy" decoding="async">
+        <div class="slideshow" data-slideshow aria-label="The Panorama Suite photos">
+          <div class="slideshow__frame" role="button" tabindex="0" aria-label="Pause or play the The Panorama Suite photo slideshow">
+            <figure class="slide is-active" style="--bg:url('assets/images/panorama-suite-bedroom.webp')"><img src="assets/images/panorama-suite-bedroom.webp" alt="The Panorama Suite bedroom" decoding="async"></figure>
+            <figure class="slide" style="--bg:url('assets/images/panorama-suite-bedroom-2.webp')"><img src="assets/images/panorama-suite-bedroom-2.webp" alt="The Panorama Suite bedroom with sage walls, antique wardrobe and fireplace" loading="lazy" decoding="async"></figure>
+            <figure class="slide" style="--bg:url('assets/images/panorama-suite-bathroom.webp')"><img src="assets/images/panorama-suite-bathroom.webp" alt="The Panorama Suite moody modern bathroom with green accents" loading="lazy" decoding="async"></figure>
+          </div>
+          <div class="slideshow__bar">
+            <div class="slideshow__dots"><button type="button" class="slideshow__dot is-active" aria-label="Show photo 1 of 3"></button><button type="button" class="slideshow__dot" aria-label="Show photo 2 of 3"></button><button type="button" class="slideshow__dot" aria-label="Show photo 3 of 3"></button></div>
+            <span class="slideshow__status" aria-live="polite">Click the photo to hold it</span>
           </div>
         </div>
         <div class="room-feature__text">
-          <div class="room-feature__title">
           <span class="room-card__tag">Superior</span>
           <h2 class="room-feature__name">The Panorama Suite</h2>
           <p class="room-feature__headline">Wake to a Golden Sunrise</p>
-          </div>
-          <div class="room-feature__body">
           <p>Wake to the magnificent Cape Town sunrise in an indulgent king-size suite, where golden light spills over Table Mountain.</p>
           <p>High ceilings, original wooden floors, a Nespresso, Bluetooth speakers and an outdoor daybed complete the escape. At nightfall, the lit mountain is a special touch.</p>
           <div class="room-card__footer">
             <span class="room-card__price">R1950 <span>p/n</span></span>
             <a href="contact.html" class="room-card__cta">Reserve My Room</a>
           </div>
-          </div>
         </div>
       </article>
 
       <article class="room-feature">
-        <div class="room-feature__gallery">
-          <img class="room-feature__main" src="assets/images/room-panorama-14-1.jpg" alt="The Studio" loading="lazy" decoding="async">
-          <div class="room-ph" role="img" aria-label="Photo coming soon"><span>Photo coming soon</span></div>
-          <div class="room-ph" role="img" aria-label="Photo coming soon"><span>Photo coming soon</span></div>
+        <div class="slideshow" aria-label="The Studio photos">
+          <div class="slideshow__frame">
+            <figure class="slide is-active" style="--bg:url('assets/images/room-panorama-14-1.jpg')"><img src="assets/images/room-panorama-14-1.jpg" alt="The Studio bedroom" decoding="async"></figure>
+          </div>
         </div>
         <div class="room-feature__text">
-          <div class="room-feature__title">
           <span class="room-card__tag">Standard</span>
           <h2 class="room-feature__name">The Studio</h2>
           <p class="room-feature__headline">Light-Filled &amp; Effortless</p>
-          </div>
-          <div class="room-feature__body">
           <p>A charming, light-filled en-suite room designed for easy living and restful stays, with a comfy queen bed and an oversized shower.</p>
           <p>A cosy retreat for solo travellers or couples exploring Cape Town, with full access to the beautiful shared spaces of The Molteno.</p>
           <div class="room-card__footer">
             <span class="room-card__price">R1350 <span>p/n</span></span>
             <a href="contact.html" class="room-card__cta">Reserve My Room</a>
-          </div>
           </div>
         </div>
       </article>

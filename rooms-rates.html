@@ -8,7 +8,7 @@
 <link rel="icon" href="assets/logo/molteno-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=20261025">
+<link rel="stylesheet" href="css/styles.css?v=20261026">
 <style>
   .page-hero {
     background: var(--color-navy);
@@ -21,23 +21,20 @@
   .page-hero p { color: #dbe4dc; max-width: 520px; margin: 0 auto; }
 
 
-  .room-features { display: grid; gap: 100px; }
+  .room-features { display: grid; gap: 100px; max-width: 1320px; }
   .room-feature {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 56px;
+    grid-template-columns: 1.95fr 1fr;
+    gap: 48px;
     align-items: center;
   }
+  .room-feature--reverse { grid-template-columns: 1fr 1.95fr; }
   .room-feature--reverse .slideshow { order: 2; }
 
-  /* Elegant photo slideshow: slow cross-fade, click to hold */
+  /* Elegant photo slideshow: slow cross-fade, click to hold. Photos show whole, with no frame or blur. */
   .slideshow__frame {
     position: relative;
     aspect-ratio: 4 / 3;
-    overflow: hidden;
-    border-radius: var(--radius);
-    box-shadow: 0 18px 44px rgba(20, 38, 53, 0.22);
-    background: var(--color-navy-dark);
     isolation: isolate;
   }
   [data-slideshow] .slideshow__frame { cursor: pointer; }
@@ -50,13 +47,6 @@
     transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .slide.is-active { opacity: 1; z-index: 1; }
-  .slide::before {
-    content: "";
-    position: absolute;
-    inset: -30px;
-    background: var(--bg) center / cover no-repeat;
-    filter: blur(26px) brightness(0.88) saturate(1.05);
-  }
   .slide img {
     position: relative;
     display: block;
@@ -64,8 +54,9 @@
     height: 100%;
     object-fit: contain;
     transform-origin: center;
+    filter: drop-shadow(0 14px 28px rgba(20, 38, 53, 0.25));
   }
-  .slideshow.is-playing .slide.is-active img { animation: slideDrift 10s ease-out both; }
+  .slideshow.is-playing .slide.is-active img { animation: slideDrift 5s ease-out both; }
   @keyframes slideDrift {
     from { transform: scale(1); }
     to { transform: scale(1.045); }
@@ -126,7 +117,8 @@
   .room-feature__text p { color: #4b4536; }
   @media (max-width: 900px) {
     .room-features { gap: 72px; }
-    .room-feature { grid-template-columns: 1fr; gap: 28px; }
+    .room-feature,
+    .room-feature--reverse { grid-template-columns: 1fr; gap: 28px; }
     .room-feature--reverse .slideshow { order: 0; }
   }
   @media (max-width: 560px) {
@@ -205,10 +197,10 @@
       <article class="room-feature">
         <div class="slideshow" data-slideshow aria-label="Azura Haven photos">
           <div class="slideshow__frame" role="button" tabindex="0" aria-label="Pause or play the Azura Haven photo slideshow">
-            <figure class="slide is-active" style="--bg:url('assets/images/room-studio-1-1.jpg')"><img src="assets/images/room-studio-1-1.jpg" alt="Azura Haven bedroom" decoding="async"></figure>
-            <figure class="slide" style="--bg:url('assets/images/azura-haven-pool.webp')"><img src="assets/images/azura-haven-pool.webp" alt="Azura Haven private plunge pool with sun loungers" loading="lazy" decoding="async"></figure>
-            <figure class="slide" style="--bg:url('assets/images/azura-haven-basin.webp')"><img src="assets/images/azura-haven-basin.webp" alt="Azura Haven wash basin, with the bedroom seen through the doorway" loading="lazy" decoding="async"></figure>
-            <figure class="slide" style="--bg:url('assets/images/azura-haven-bathroom.jpg')"><img src="assets/images/azura-haven-bathroom.jpg" alt="Azura Haven bathroom with walk-in rain shower" loading="lazy" decoding="async"></figure>
+            <figure class="slide is-active"><img src="assets/images/room-studio-1-1.jpg" alt="Azura Haven bedroom" decoding="async"></figure>
+            <figure class="slide"><img src="assets/images/azura-haven-pool.webp" alt="Azura Haven private plunge pool with sun loungers" loading="lazy" decoding="async"></figure>
+            <figure class="slide"><img src="assets/images/azura-haven-basin.webp" alt="Azura Haven wash basin, with the bedroom seen through the doorway" loading="lazy" decoding="async"></figure>
+            <figure class="slide"><img src="assets/images/azura-haven-bathroom.jpg" alt="Azura Haven bathroom with walk-in rain shower" loading="lazy" decoding="async"></figure>
           </div>
           <div class="slideshow__bar">
             <div class="slideshow__dots"><button type="button" class="slideshow__dot is-active" aria-label="Show photo 1 of 4"></button><button type="button" class="slideshow__dot" aria-label="Show photo 2 of 4"></button><button type="button" class="slideshow__dot" aria-label="Show photo 3 of 4"></button><button type="button" class="slideshow__dot" aria-label="Show photo 4 of 4"></button></div>
@@ -231,9 +223,9 @@
       <article class="room-feature room-feature--reverse">
         <div class="slideshow" data-slideshow aria-label="The Sanctuary photos">
           <div class="slideshow__frame" role="button" tabindex="0" aria-label="Pause or play the The Sanctuary photo slideshow">
-            <figure class="slide is-active" style="--bg:url('assets/images/room-sanctuary-3-1.jpg')"><img src="assets/images/room-sanctuary-3-1.jpg" alt="The Sanctuary bedroom" decoding="async"></figure>
-            <figure class="slide" style="--bg:url('assets/images/sanctuary-bathroom.webp')"><img src="assets/images/sanctuary-bathroom.webp" alt="The Sanctuary bathroom with wall-mounted basin, plants and fresh towels" loading="lazy" decoding="async"></figure>
-            <figure class="slide" style="--bg:url('assets/images/sanctuary-balcony.webp')"><img src="assets/images/sanctuary-balcony.webp" alt="The Sanctuary private balcony with a table and chair among climbing jasmine" loading="lazy" decoding="async"></figure>
+            <figure class="slide is-active"><img src="assets/images/sanctuary-bedroom.webp" alt="The Sanctuary bedroom" decoding="async"></figure>
+            <figure class="slide"><img src="assets/images/sanctuary-bathroom.webp" alt="The Sanctuary bathroom with wall-mounted basin, plants and fresh towels" loading="lazy" decoding="async"></figure>
+            <figure class="slide"><img src="assets/images/sanctuary-balcony.webp" alt="The Sanctuary private balcony with a table and chair among climbing jasmine" loading="lazy" decoding="async"></figure>
           </div>
           <div class="slideshow__bar">
             <div class="slideshow__dots"><button type="button" class="slideshow__dot is-active" aria-label="Show photo 1 of 3"></button><button type="button" class="slideshow__dot" aria-label="Show photo 2 of 3"></button><button type="button" class="slideshow__dot" aria-label="Show photo 3 of 3"></button></div>
@@ -256,9 +248,9 @@
       <article class="room-feature">
         <div class="slideshow" data-slideshow aria-label="The Monarch Suite photos">
           <div class="slideshow__frame" role="button" tabindex="0" aria-label="Pause or play the The Monarch Suite photo slideshow">
-            <figure class="slide is-active" style="--bg:url('assets/images/monarch-suite-bedroom.webp')"><img src="assets/images/monarch-suite-bedroom.webp" alt="The Monarch Suite bedroom" decoding="async"></figure>
-            <figure class="slide" style="--bg:url('assets/images/monarch-suite-terrace.webp')"><img src="assets/images/monarch-suite-terrace.webp" alt="The Monarch Suite breakfast terrace with Table Mountain views" loading="lazy" decoding="async"></figure>
-            <figure class="slide" style="--bg:url('assets/images/monarch-suite-bathroom.webp')"><img src="assets/images/monarch-suite-bathroom.webp" alt="The Monarch Suite charcoal and taupe bathroom with walk-in shower" loading="lazy" decoding="async"></figure>
+            <figure class="slide is-active"><img src="assets/images/monarch-suite-bedroom.webp" alt="The Monarch Suite bedroom" decoding="async"></figure>
+            <figure class="slide"><img src="assets/images/monarch-suite-terrace.webp" alt="The Monarch Suite breakfast terrace with Table Mountain views" loading="lazy" decoding="async"></figure>
+            <figure class="slide"><img src="assets/images/monarch-suite-bathroom.webp" alt="The Monarch Suite charcoal and taupe bathroom with walk-in shower" loading="lazy" decoding="async"></figure>
           </div>
           <div class="slideshow__bar">
             <div class="slideshow__dots"><button type="button" class="slideshow__dot is-active" aria-label="Show photo 1 of 3"></button><button type="button" class="slideshow__dot" aria-label="Show photo 2 of 3"></button><button type="button" class="slideshow__dot" aria-label="Show photo 3 of 3"></button></div>
@@ -281,9 +273,9 @@
       <article class="room-feature room-feature--reverse">
         <div class="slideshow" data-slideshow aria-label="The Panorama Suite photos">
           <div class="slideshow__frame" role="button" tabindex="0" aria-label="Pause or play the The Panorama Suite photo slideshow">
-            <figure class="slide is-active" style="--bg:url('assets/images/panorama-suite-bedroom.webp')"><img src="assets/images/panorama-suite-bedroom.webp" alt="The Panorama Suite bedroom" decoding="async"></figure>
-            <figure class="slide" style="--bg:url('assets/images/panorama-suite-bedroom-2.webp')"><img src="assets/images/panorama-suite-bedroom-2.webp" alt="The Panorama Suite bedroom with sage walls, antique wardrobe and fireplace" loading="lazy" decoding="async"></figure>
-            <figure class="slide" style="--bg:url('assets/images/panorama-suite-bathroom.webp')"><img src="assets/images/panorama-suite-bathroom.webp" alt="The Panorama Suite moody modern bathroom with green accents" loading="lazy" decoding="async"></figure>
+            <figure class="slide is-active"><img src="assets/images/panorama-suite-bedroom.webp" alt="The Panorama Suite bedroom" decoding="async"></figure>
+            <figure class="slide"><img src="assets/images/panorama-suite-bedroom-2.webp" alt="The Panorama Suite bedroom with sage walls, antique wardrobe and fireplace" loading="lazy" decoding="async"></figure>
+            <figure class="slide"><img src="assets/images/panorama-suite-bathroom.webp" alt="The Panorama Suite moody modern bathroom with green accents" loading="lazy" decoding="async"></figure>
           </div>
           <div class="slideshow__bar">
             <div class="slideshow__dots"><button type="button" class="slideshow__dot is-active" aria-label="Show photo 1 of 3"></button><button type="button" class="slideshow__dot" aria-label="Show photo 2 of 3"></button><button type="button" class="slideshow__dot" aria-label="Show photo 3 of 3"></button></div>
@@ -306,7 +298,7 @@
       <article class="room-feature">
         <div class="slideshow" aria-label="The Studio photos">
           <div class="slideshow__frame">
-            <figure class="slide is-active" style="--bg:url('assets/images/room-panorama-14-1.jpg')"><img src="assets/images/room-panorama-14-1.jpg" alt="The Studio bedroom" decoding="async"></figure>
+            <figure class="slide is-active"><img src="assets/images/room-panorama-14-1.jpg" alt="The Studio bedroom" decoding="async"></figure>
           </div>
         </div>
         <div class="room-feature__text">

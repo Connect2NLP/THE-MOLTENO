@@ -89,11 +89,13 @@
   .room-feature--reverse .room-feature__gallery--triple .room-feature__main { grid-column: 3; grid-row: 1; }
   /* Two landscape photos stacked beside the main photo, all uncropped */
   .room-feature__gallery--pair {
-    grid-template-columns: 2.185fr 1fr;
+    grid-template-columns: var(--pair-cols, 2.185fr 1fr);
     grid-template-rows: auto;
     align-items: start;
   }
   .room-feature__gallery--pair .room-feature__main { grid-row: 1; }
+  .room-feature--reverse .room-feature__gallery--pair { grid-template-columns: var(--pair-cols, 2.185fr 1fr); }
+  .room-feature--reverse .room-feature__gallery--pair .room-feature__stack { grid-column: 1; grid-row: 1; }
   .room-feature__name {
     font-family: var(--font-display);
     font-size: clamp(2.2rem, 4vw, 3.2rem);
@@ -135,7 +137,10 @@
     .room-feature--reverse .room-feature__gallery--triple .room-feature__thumb:nth-child(3) { grid-column: 2; grid-row: 2; }
     .room-ph { aspect-ratio: 3 / 2; }
     .room-feature__gallery--natural { grid-template-columns: 1fr 1fr; }
-    .room-feature__gallery--pair { grid-template-columns: 1fr; }
+    .room-feature__gallery--pair,
+    .room-feature--reverse .room-feature__gallery--pair { grid-template-columns: 1fr; }
+    .room-feature--reverse .room-feature__gallery--pair .room-feature__main { grid-column: 1; grid-row: 1; }
+    .room-feature--reverse .room-feature__gallery--pair .room-feature__stack { grid-column: 1; grid-row: 2; }
     .room-feature__gallery--pair .room-feature__stack { grid-template-columns: 1fr 1fr; }
     .room-feature__gallery--natural .room-feature__main { grid-row: 1; grid-column: 1 / 3; }
     .room-feature__gallery--natural .room-feature__stack { grid-row: 2; grid-column: 1; }
@@ -286,10 +291,12 @@
       </article>
 
       <article class="room-feature room-feature--reverse">
-        <div class="room-feature__gallery">
-          <img class="room-feature__main" src="assets/images/room-monarch-13-2.jpg" alt="The Panorama Suite" loading="lazy" decoding="async">
-          <div class="room-ph" role="img" aria-label="Photo coming soon"><span>Photo coming soon</span></div>
-          <div class="room-ph" role="img" aria-label="Photo coming soon"><span>Photo coming soon</span></div>
+        <div class="room-feature__gallery room-feature__gallery--pair" style="--pair-cols: 1fr 2.052fr">
+          <img class="room-feature__main" src="assets/images/panorama-suite-bedroom.webp" alt="The Panorama Suite" loading="lazy" decoding="async">
+          <div class="room-feature__stack">
+            <img class="room-feature__thumb" src="assets/images/panorama-suite-bedroom-2.webp" alt="The Panorama Suite bedroom with sage walls, antique wardrobe and fireplace" loading="lazy" decoding="async">
+            <img class="room-feature__thumb" src="assets/images/panorama-suite-bathroom.webp" alt="The Panorama Suite moody modern bathroom with green accents" loading="lazy" decoding="async">
+          </div>
         </div>
         <div class="room-feature__text">
           <div class="room-feature__title">

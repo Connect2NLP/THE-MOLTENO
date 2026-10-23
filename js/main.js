@@ -146,3 +146,83 @@ document.querySelectorAll("[data-slideshow]").forEach((root) => {
     else stop();
   }, { threshold: 0.35 }).observe(root);
 });
+
+// Life at The Molteno: gentle reveals and a photo viewer.
+(() => {
+  const reveals = document.querySelectorAll(".reveal");
+  if (reveals.length) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach((el) => {
+      const siblings = el.parentElement ? [...el.parentElement.children].filter((c) => c.classList.contains("reveal")) : [];
+      el.style.setProperty("--d", Math.min(siblings.indexOf(el), 5) * 110 + "ms");
+      io.observe(el);
+    });
+  }
+
+  const box = document.getElementById("lightbox");
+  if (!box) return;
+  const img = box.querySelector(".lightbox__img");
+  const cap = box.querySelector(".lightbox__caption");
+  let items = [];
+  let current = 0;
+  let lastFocus = null;
+
+  const render = (n, instant) => {
+    const fig = items[n];
+    const src = fig.querySelector("img");
+    const text = fig.querySelector("figcaption");
+    const apply = () => {
+      img.src = src.currentSrc || src.src;
+      img.alt = src.alt;
+      cap.textContent = text ? text.textContent : "";
+      img.classList.remove("is-fading");
+      cap.classList.remove("is-fading");
+    };
+    if (instant) return apply();
+    img.classList.add("is-fading");
+    cap.classList.add("is-fading");
+    setTimeout(apply, 380);
+  };
+  const open = (fig) => {
+    items = [...document.querySelectorAll(".life-item")].filter((f) => f.querySelector("img"));
+    current = items.indexOf(fig);
+    lastFocus = document.activeElement;
+    render(current, true);
+    box.classList.add("is-open");
+    box.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    box.querySelector(".lightbox__btn--close").focus();
+  };
+  const close = () => {
+    box.classList.remove("is-open");
+    box.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    if (lastFocus) lastFocus.focus();
+  };
+  const step = (d) => {
+    current = (current + d + items.length) % items.length;
+    render(current);
+  };
+
+  document.addEventListener("click", (e) => {
+    const fig = e.target.closest(".life-item");
+    if (fig && fig.querySelector("img") && e.target.tagName === "IMG") open(fig);
+  });
+  box.querySelector(".lightbox__btn--close").addEventListener("click", close);
+  box.querySelector(".lightbox__btn--prev").addEventListener("click", () => step(-1));
+  box.querySelector(".lightbox__btn--next").addEventListener("click", () => step(1));
+  box.addEventListener("click", (e) => { if (e.target === box) close(); });
+  document.addEventListener("keydown", (e) => {
+    if (!box.classList.contains("is-open")) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowLeft") step(-1);
+    if (e.key === "ArrowRight") step(1);
+  });
+})();

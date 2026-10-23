@@ -8,7 +8,7 @@
 <link rel="icon" href="assets/logo/molteno-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=20261106">
+<link rel="stylesheet" href="css/styles.css?v=20261107">
 <style>
   /* ---------- Cover with one big photo ---------- */
   .tourhero {
@@ -157,8 +157,8 @@
     position: absolute;
     top: 10vh;
     bottom: 10vh;
-    left: 0;
-    right: 0;
+    left: 3vw;
+    right: calc(min(27vw, 400px) + 7vw);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -174,23 +174,45 @@
   .tour.is-paused .tour__slide img, .tour.is-paused .tour__seg i { animation-play-state: paused; }
   .tour__caption {
     position: absolute;
-    left: 50%;
-    bottom: calc(10vh + 28px);
-    transform: translateX(-50%);
+    top: 10vh;
+    bottom: 10vh;
+    right: 4vw;
+    width: min(27vw, 400px);
     z-index: 4;
-    width: min(860px, 88vw);
-    text-align: center;
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: clamp(1.2rem, 2.3vw, 1.8rem);
-    line-height: 1.45;
-    color: #fbf5e6;
-    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.85), 0 0 3px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    color: #d3b06b;
     opacity: 0;
     transition: opacity 1s ease;
     pointer-events: none;
   }
   .tour__caption.is-on { opacity: 1; }
+  .tour__no {
+    font-family: var(--font-body);
+    font-style: normal;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #d3b06b;
+    margin-bottom: 18px;
+  }
+  .tour__no::after {
+    content: "";
+    display: block;
+    width: 56px;
+    height: 2px;
+    background: #d3b06b;
+    margin-top: 16px;
+  }
+  .tour__text {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1.3rem, 2.1vw, 1.95rem);
+    line-height: 1.45;
+    color: #d3b06b;
+  }
   .tour__card {
     position: absolute;
     inset: 0;
@@ -235,6 +257,11 @@
   .tour__seg.is-active i { animation: segFill var(--ms, 6200ms) linear forwards; }
   @keyframes segFill { from { width: 0; } to { width: 100%; } }
   @media (max-width: 700px) {
+    .tour__slide { left: 5vw; right: 5vw; bottom: calc(10vh + 170px); }
+    .tour__caption { top: auto; bottom: calc(10vh + 10px); left: 22px; right: 22px; width: auto; height: 150px; text-align: left; }
+    .tour__no { margin-bottom: 10px; }
+    .tour__no::after { margin-top: 10px; }
+    .tour__text { font-size: 1.2rem; line-height: 1.4; }
     .tour__bar--top { padding: 0 16px; }
     .tour__label { display: none; }
     .tour__nav { display: none; }
@@ -355,7 +382,7 @@
       <button type="button" class="btn btn--light" id="tourAgain">Watch again</button>
     </div>
   </div>
-  <p class="tour__caption" id="tourCaption" aria-live="polite"></p>
+  <div class="tour__caption" id="tourCaption" aria-live="polite"><span class="tour__no" id="tourNo"></span><p class="tour__text" id="tourText"></p></div>
   <button type="button" class="tour__btn tour__nav tour__nav--prev" id="tourPrev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 4l-8 8 8 8"/></svg></button>
   <button type="button" class="tour__btn tour__nav tour__nav--next" id="tourNext" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 4l8 8-8 8"/></svg></button>
   <div class="tour__segments" id="tourSegs"></div>

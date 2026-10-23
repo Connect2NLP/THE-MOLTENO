@@ -8,6 +8,8 @@
   const data = JSON.parse(dataEl.textContent);
   const stage = document.getElementById("tourStage");
   const caption = document.getElementById("tourCaption");
+  const captionNo = document.getElementById("tourNo");
+  const captionText = document.getElementById("tourText");
   const segsWrap = document.getElementById("tourSegs");
   const titleCard = document.getElementById("tourTitle");
   const endCard = document.getElementById("tourEnd");
@@ -82,7 +84,8 @@
       load(s.i + 1);
       setTimeout(() => {
         if (token !== captionToken) return;
-        caption.textContent = data[s.i].cap;
+        captionNo.textContent = "No. " + String(s.i + 1).padStart(2, "0") + " / " + String(data.length).padStart(2, "0");
+        captionText.textContent = data[s.i].cap;
         caption.classList.add("is-on");
       }, 900);
     }

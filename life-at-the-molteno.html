@@ -8,23 +8,61 @@
 <link rel="icon" href="assets/logo/molteno-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=20261103">
+<link rel="stylesheet" href="css/styles.css?v=20261105">
 <style>
-  .page-hero {
-    background: var(--color-navy);
+  /* ---------- Magazine cover ---------- */
+  .cover {
+    background:
+      radial-gradient(ellipse 60% 70% at 15% 20%, rgba(173, 138, 78, 0.16), transparent 70%),
+      var(--color-navy-dark);
     color: var(--color-cream);
-    padding: 206px 0 90px;
+    padding: 200px 0 96px;
     text-align: center;
   }
-  .page-hero .eyebrow { color: var(--color-gold); }
-  .page-hero h1 { margin-bottom: 14px; }
-  .page-hero p { color: #dbe4dc; max-width: 640px; margin: 0 auto; }
+  .cover__kicker {
+    font-size: 0.72rem;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    margin: 0 0 22px;
+  }
+  .cover__title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(3.2rem, 9vw, 7rem);
+    line-height: 0.98;
+    letter-spacing: -0.01em;
+    color: var(--color-cream);
+    margin: 0;
+  }
+  .cover__rule { display: block; width: 84px; height: 2px; background: var(--color-gold); margin: 34px auto; }
+  .cover__lede {
+    max-width: 640px;
+    margin: 0 auto 44px;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    line-height: 1.6;
+    font-style: italic;
+    color: #dbe4dc;
+  }
+  .cover__index { display: flex; flex-wrap: wrap; gap: 14px 40px; justify-content: center; }
+  .cover__index a {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-cream);
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(173, 138, 78, 0.5);
+    transition: color 0.4s ease, border-color 0.4s ease;
+  }
+  .cover__index a span { color: var(--color-gold); margin-right: 8px; font-family: var(--font-display); font-size: 1rem; letter-spacing: 0.05em; }
+  .cover__index a:hover { color: var(--color-gold); border-color: var(--color-gold); }
 
-  /* Gentle reveal as photos and text scroll into view */
+  /* ---------- Gentle reveal ---------- */
   .reveal {
     opacity: 0;
-    transform: translateY(26px);
-    transition: opacity 1.1s cubic-bezier(0.22, 0.61, 0.36, 1), transform 1.1s cubic-bezier(0.22, 0.61, 0.36, 1);
+    transform: translateY(30px);
+    transition: opacity 1.2s cubic-bezier(0.22, 0.61, 0.36, 1), transform 1.2s cubic-bezier(0.22, 0.61, 0.36, 1);
     transition-delay: var(--d, 0ms);
   }
   .reveal.is-visible { opacity: 1; transform: none; }
@@ -32,41 +70,137 @@
     .reveal { opacity: 1; transform: none; transition: none; }
   }
 
-  /* Magazine-style grid: photos keep their own shape, nothing is cropped */
-  .life-grid { column-count: 3; column-gap: 20px; }
-  .life-item { break-inside: avoid; margin: 0 0 20px; }
+  /* ---------- Issue (section) ---------- */
+  .issue { padding: 120px 0 130px; counter-reset: plate; }
+  .issue--alt {
+    background-color: var(--color-sand-deep);
+    background-image:
+      radial-gradient(ellipse 55% 45% at 20% 25%, rgba(212, 175, 105, 0.2), transparent 65%),
+      radial-gradient(ellipse 50% 40% at 80% 75%, rgba(173, 138, 78, 0.18), transparent 65%);
+  }
+  .issue__head {
+    display: grid;
+    grid-template-columns: minmax(110px, 0.9fr) 4fr;
+    gap: 40px;
+    align-items: start;
+    max-width: 1020px;
+    margin: 0 auto 72px;
+  }
+  .issue__no {
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 11vw, 9rem);
+    line-height: 0.8;
+    color: var(--color-gold);
+    opacity: 0.55;
+    text-align: right;
+  }
+  .issue__head h2 { font-size: clamp(1.9rem, 3.6vw, 2.8rem); margin: 0 0 18px; }
+  .life-intro { max-width: 560px; color: #4b4536; }
+  .life-intro::first-letter {
+    float: left;
+    font-family: var(--font-display);
+    font-size: 4.2rem;
+    line-height: 0.8;
+    padding: 8px 12px 0 0;
+    color: var(--color-gold-dark);
+  }
+
+  /* ---------- Magazine spread: staggered, uncropped photos ---------- */
+  .spread {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 26px;
+    row-gap: 54px;
+    align-items: start;
+  }
+  .life-item { margin: 0; }
   .life-item img {
     display: block;
     width: 100%;
     height: auto;
     border-radius: var(--radius);
-    box-shadow: 0 12px 30px rgba(20, 38, 53, 0.18);
+    box-shadow: 0 18px 44px rgba(20, 38, 53, 0.22);
     cursor: zoom-in;
-    transition: transform 0.7s ease, box-shadow 0.7s ease;
+    transition: transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.9s ease;
   }
-  .life-item img:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(20, 38, 53, 0.26); }
+  .life-item img:hover { transform: translateY(-5px); box-shadow: 0 26px 56px rgba(20, 38, 53, 0.3); }
   .life-item figcaption {
-    margin-top: 12px;
+    counter-increment: plate;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(173, 138, 78, 0.55);
     font-family: var(--font-display);
     font-style: italic;
     font-size: 1.12rem;
-    line-height: 1.45;
-    color: var(--color-gold-dark);
+    line-height: 1.5;
+    color: #4b4536;
   }
-  .life-ph {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px dashed var(--color-gold);
-    border-radius: var(--radius);
-    background: rgba(173, 138, 78, 0.08);
-    color: var(--color-gold-dark);
-    font-size: 0.68rem;
-    letter-spacing: 0.18em;
+  .life-item figcaption::before {
+    content: "No. " counter(plate, decimal-leading-zero);
+    display: block;
+    margin-bottom: 4px;
+    font-family: var(--font-body);
+    font-style: normal;
+    font-size: 0.64rem;
+    letter-spacing: 0.26em;
     text-transform: uppercase;
+    color: var(--color-gold-dark);
   }
-  @media (max-width: 900px) { .life-grid { column-count: 2; } }
-  @media (max-width: 560px) { .life-grid { column-count: 1; } }
+  .c1-9 { grid-column: 1 / 9; }
+  .c9-13 { grid-column: 9 / 13; }
+  .c4-13 { grid-column: 4 / 13; }
+  .c1-5 { grid-column: 1 / 5; }
+  .c5-9 { grid-column: 5 / 9; }
+  .c5-13 { grid-column: 5 / 13; }
+  .m0 { margin-top: 0px; }
+  .m110 { margin-top: 110px; }
+  .m80 { margin-top: 80px; }
+  .m60 { margin-top: 60px; }
+  .m20 { margin-top: 20px; }
+  .m90 { margin-top: 90px; }
+
+  /* ---------- Pull quote ---------- */
+  .pullquote-band { background: var(--color-navy); padding: 110px 0; text-align: center; }
+  .pullquote { margin: 0 auto; max-width: 860px; }
+  .pullquote p {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.9rem, 4vw, 3rem);
+    line-height: 1.25;
+    color: var(--color-cream);
+    margin: 0 0 24px;
+  }
+  .pullquote p::before {
+    content: "";
+    display: block;
+    width: 64px;
+    height: 2px;
+    background: var(--color-gold);
+    margin: 0 auto 30px;
+  }
+  .pullquote cite {
+    font-style: normal;
+    font-size: 0.72rem;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+  }
+
+  /* ---------- Phones and tablets ---------- */
+  @media (max-width: 900px) {
+    .issue { padding: 84px 0 90px; }
+    .issue__head { grid-template-columns: 1fr; gap: 6px; margin-bottom: 48px; }
+    .issue__no { text-align: left; font-size: 5rem; }
+    .spread { grid-template-columns: 1fr 1fr; column-gap: 18px; row-gap: 38px; }
+    .spread .life-item { grid-column: auto; margin-top: 0; }
+    .spread .life-item:nth-child(3n + 1) { grid-column: 1 / -1; }
+  }
+  @media (max-width: 560px) {
+    .spread { grid-template-columns: 1fr; }
+    .spread .life-item:nth-child(n) { grid-column: 1 / -1; }
+    .cover { padding: 170px 0 70px; }
+  }
 
   /* Large view */
   .lightbox {
@@ -149,62 +283,80 @@
   </div>
 </header>
 
-<section class="page-hero">
+<section class="cover">
   <div class="container">
-    <span class="eyebrow">Gallery</span>
-    <h1>Life at The Molteno</h1>
-    <p>Beneath the slopes of Table Mountain, The Molteno is more than a place to sleep. It is a house with a rhythm of its own: slow mornings by the pool, long conversations in the garden and dinners that stretch late into the evening. Here is a glimpse of life at The Molteno.</p>
+    <p class="cover__kicker reveal">The Molteno &nbsp;&middot;&nbsp; Gardens, Cape Town</p>
+    <h1 class="cover__title reveal">Life at<br>The Molteno</h1>
+    <span class="cover__rule reveal" aria-hidden="true"></span>
+    <p class="cover__lede reveal">Beneath the slopes of Table Mountain, The Molteno is more than a place to sleep. It is a house with a rhythm of its own: slow mornings by the pool, long conversations in the garden and dinners that stretch late into the evening.</p>
+    <nav class="cover__index reveal" aria-label="In this gallery">
+      <a href="#pool"><span>I</span> The Pool &amp; Garden</a>
+      <a href="#guests"><span>II</span> Our Guests</a>
+      <a href="#events"><span>III</span> Events &amp; Gatherings</a>
+    </nav>
   </div>
 </section>
 
-<section class="section life-section" id="pool">
+<section class="issue" id="pool">
   <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow">The Pool &amp; Garden</span>
-      <h2>Sunlit, leafy and made for doing very little</h2>
-      <p>Morning swims, afternoon reading and a dip in the plunge pool at cocktail hour. The pool area is the heart of the house, and the best place to slow down.</p>
-    </div>
-    <div class="life-grid">
-      <figure class="life-item reveal"><img src="assets/images/life/poolside-cocktails.webp" width="2400" height="1600" alt="Two friends toasting with cocktails beside the pool" loading="lazy" decoding="async"><figcaption>Cheers to long afternoons by the pool.</figcaption></figure>
-      <figure class="life-item reveal"><img src="assets/images/life/garden-dining.webp" width="1920" height="2398" alt="A garden dining table for eight beneath a pergola with lanterns" loading="lazy" decoding="async"><figcaption>A table for eight beneath the pergola, lanterns lit and nowhere to be.</figcaption></figure>
-      <figure class="life-item reveal"><img src="assets/images/life/sunset-tennis.webp" width="2398" height="1774" alt="Two people playing tennis at sunset with Table Mountain behind" loading="lazy" decoding="async"><figcaption>Match point beneath a Table Mountain sunset.</figcaption></figure>
-    </div>
-  </div>
-</section>
-
-<section class="section life-section section--alt" id="guests">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow">Our Guests</span>
-      <h2>Guests who arrive from everywhere and leave as friends</h2>
-      <p>Some stay a weekend, some stay for months, and many return. These are a few of the faces and moments that make the house what it is.</p>
-    </div>
-    <div class="life-grid">
-      <figure class="life-item reveal"><img src="assets/images/life/dinner-wesley-and-noel.webp" width="2400" height="1800" alt="Wesley and Noel at a candlelit dinner table in the garden room, with the pool behind them" loading="lazy" decoding="async"><figcaption>Dinner at The Molteno is always a special time, with your host Julian as your personal chef. Wesley and Noel met and became great friends during their stay at The Molteno Guesthouse, and they remain mates to this day.</figcaption></figure>
-      <figure class="life-item reveal"><img src="assets/images/life/balcony-friends.webp" width="2400" height="1600" alt="Two friends laughing over a laptop and fruit on a sunny balcony" loading="lazy" decoding="async"><figcaption>Good company and a sunny balcony.</figcaption></figure>
-      
-      
-      <figure class="life-item reveal"><img src="assets/images/life/jack-russells.webp" width="2074" height="2400" alt="Two Jack Russells wrapped in cosy blankets" loading="lazy" decoding="async"><figcaption>Cosy corners, soft blankets and good company.</figcaption></figure>
-      <figure class="life-item reveal"><img src="assets/images/life/guest-photo-c.webp" width="1800" height="2400" alt="A guest relaxing on a daybed with a Jack Russell" loading="lazy" decoding="async"><figcaption>New friends come in all shapes and sizes.</figcaption></figure>
-      <figure class="life-item reveal"><img src="assets/images/life/guest-photo-d.webp" width="1800" height="2400" alt="A guest smiling on a daybed with a Jack Russell on his lap" loading="lazy" decoding="async"><figcaption>Settling in, Molteno style.</figcaption></figure>
+    <header class="issue__head reveal">
+      <span class="issue__no" aria-hidden="true">I</span>
+      <div>
+        <span class="eyebrow">The Pool &amp; Garden</span>
+        <h2>Sunlit, leafy and made for doing very little</h2>
+        <p class="life-intro">Morning swims, afternoon reading and a dip in the plunge pool at cocktail hour. The pool area is the heart of the house, and the best place to slow down.</p>
+      </div>
+    </header>
+    <div class="spread">
+      <figure class="life-item c1-9 m0 reveal"><img src="assets/images/life/poolside-cocktails.webp" width="2400" height="1600" alt="Two friends toasting with cocktails beside the pool" loading="lazy" decoding="async"><figcaption>Cheers to long afternoons by the pool.</figcaption></figure>
+      <figure class="life-item c9-13 m110 reveal"><img src="assets/images/life/garden-dining.webp" width="1920" height="2398" alt="A garden dining table for eight beneath a pergola with lanterns" loading="lazy" decoding="async"><figcaption>A table for eight beneath the pergola, lanterns lit and nowhere to be.</figcaption></figure>
+      <figure class="life-item c4-13 m0 reveal"><img src="assets/images/life/sunset-tennis.webp" width="2398" height="1774" alt="Two people playing tennis at sunset with Table Mountain behind" loading="lazy" decoding="async"><figcaption>Match point beneath a Table Mountain sunset.</figcaption></figure>
     </div>
   </div>
 </section>
 
-<section class="section life-section" id="events">
+<section class="pullquote-band">
   <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow">Events &amp; Gatherings</span>
-      <h2>Where an occasion becomes a memory</h2>
-      <p>From birthday celebrations to long, hosted dinners around the table, The Molteno has a way of turning a gathering into something unforgettable. Ask us about hosting yours.</p>
+    <blockquote class="pullquote reveal">
+      <p>&ldquo;The Molteno is much more than a guest house. It&rsquo;s a home away from home.&rdquo;</p>
+      <cite>Henrik D, guest</cite>
+    </blockquote>
+  </div>
+</section>
+<section class="issue issue--alt" id="guests">
+  <div class="container">
+    <header class="issue__head reveal">
+      <span class="issue__no" aria-hidden="true">II</span>
+      <div>
+        <span class="eyebrow">Our Guests</span>
+        <h2>Guests who arrive from everywhere and leave as friends</h2>
+        <p class="life-intro">Some stay a weekend, some stay for months, and many return. These are a few of the faces and moments that make the house what it is.</p>
+      </div>
+    </header>
+    <div class="spread">
+      <figure class="life-item c1-9 m0 reveal"><img src="assets/images/life/dinner-wesley-and-noel.webp" width="2400" height="1800" alt="Wesley and Noel at a candlelit dinner table in the garden room, with the pool behind them" loading="lazy" decoding="async"><figcaption>Dinner at The Molteno is always a special time, with your host Julian as your personal chef. Wesley and Noel met and became great friends during their stay at The Molteno Guesthouse, and they remain mates to this day.</figcaption></figure>
+      <figure class="life-item c9-13 m80 reveal"><img src="assets/images/life/balcony-friends.webp" width="2400" height="1600" alt="Two friends laughing over a laptop and fruit on a sunny balcony" loading="lazy" decoding="async"><figcaption>Good company and a sunny balcony.</figcaption></figure>
+      <figure class="life-item c1-5 m0 reveal"><img src="assets/images/life/jack-russells.webp" width="2074" height="2400" alt="Two Jack Russells wrapped in cosy blankets" loading="lazy" decoding="async"><figcaption>Cosy corners, soft blankets and good company.</figcaption></figure>
+      <figure class="life-item c5-9 m60 reveal"><img src="assets/images/life/guest-photo-c.webp" width="1800" height="2400" alt="A guest relaxing on a daybed with a Jack Russell" loading="lazy" decoding="async"><figcaption>New friends come in all shapes and sizes.</figcaption></figure>
+      <figure class="life-item c9-13 m20 reveal"><img src="assets/images/life/guest-photo-d.webp" width="1800" height="2400" alt="A guest smiling on a daybed with a Jack Russell on his lap" loading="lazy" decoding="async"><figcaption>Settling in, Molteno style.</figcaption></figure>
     </div>
-    <div class="life-grid">
-      <figure class="life-item reveal"><img src="assets/images/life/guest-photo-b.webp" width="2400" height="1800" alt="A long table of friends raising their glasses together" loading="lazy" decoding="async"><figcaption>A long table, raised glasses and the best kind of noise.</figcaption></figure>
-      <figure class="life-item reveal"><img src="assets/images/life/aleksa-and-jules.webp" width="1920" height="2400" alt="Two guests smiling at an evening party beside a lit fountain" loading="lazy" decoding="async"><figcaption>An evening under fairy lights.</figcaption></figure>
-      <figure class="life-item reveal"><img src="assets/images/life/sasha-3.webp" width="1920" height="2400" alt="Two guests posing under colourful party lights" loading="lazy" decoding="async"><figcaption>When the evening turns to dancing.</figcaption></figure>
-      
-      
-      
+  </div>
+</section>
+<section class="issue" id="events">
+  <div class="container">
+    <header class="issue__head reveal">
+      <span class="issue__no" aria-hidden="true">III</span>
+      <div>
+        <span class="eyebrow">Events &amp; Gatherings</span>
+        <h2>Where an occasion becomes a memory</h2>
+        <p class="life-intro">From birthday celebrations to long, hosted dinners around the table, The Molteno has a way of turning a gathering into something unforgettable. Ask us about hosting yours.</p>
+      </div>
+    </header>
+    <div class="spread">
+      <figure class="life-item c5-13 m0 reveal"><img src="assets/images/life/dinner-long-table.webp" width="2400" height="1758" alt="Guests raising their glasses around a long candlelit dinner table beside the pool" loading="lazy" decoding="async"><figcaption>Dinner at The Molteno is always a special time, with your host Julian as your personal chef. The occasions at The Molteno build quality connections that last a lifetime.</figcaption></figure>
+      <figure class="life-item c1-5 m90 reveal"><img src="assets/images/life/aleksa-and-jules.webp" width="1920" height="2400" alt="Two guests smiling at an evening party beside a lit fountain" loading="lazy" decoding="async"><figcaption>An evening under fairy lights.</figcaption></figure>
+      <figure class="life-item c1-9 m0 reveal"><img src="assets/images/life/guest-photo-b.webp" width="2400" height="1800" alt="A long table of friends raising their glasses together" loading="lazy" decoding="async"><figcaption>A long table, raised glasses and the best kind of noise.</figcaption></figure>
+      <figure class="life-item c9-13 m80 reveal"><img src="assets/images/life/sasha-3.webp" width="1920" height="2400" alt="Two guests posing under colourful party lights" loading="lazy" decoding="async"><figcaption>When the evening turns to dancing.</figcaption></figure>
     </div>
   </div>
 </section>

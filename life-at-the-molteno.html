@@ -4,259 +4,244 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Life at The Molteno</title>
-<meta name="description" content="A glimpse of life at The Molteno, Cape Town's Victorian Gem — the pool and garden, our guests and the gatherings that make the house.">
+<meta name="description" content="Take a tour to a time where spectacular memories are made at The Molteno Boutique Guesthouse in Gardens, Cape Town.">
 <link rel="icon" href="assets/logo/molteno-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=20261105">
+<link rel="stylesheet" href="css/styles.css?v=20261106">
 <style>
-  /* ---------- Magazine cover ---------- */
-  .cover {
-    background:
-      radial-gradient(ellipse 60% 70% at 15% 20%, rgba(173, 138, 78, 0.16), transparent 70%),
-      var(--color-navy-dark);
+  /* ---------- Cover with one big photo ---------- */
+  .tourhero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: #0c161f;
     color: var(--color-cream);
-    padding: 200px 0 96px;
-    text-align: center;
   }
-  .cover__kicker {
+  .tourhero__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 68% 50%;
+    animation: heroDrift 26s ease-in-out infinite alternate;
+  }
+  @keyframes heroDrift { from { transform: scale(1); } to { transform: scale(1.06); } }
+  .tourhero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top, rgba(12, 22, 31, 0.92) 0%, rgba(12, 22, 31, 0.5) 38%, rgba(12, 22, 31, 0.08) 75%),
+      linear-gradient(to right, rgba(12, 22, 31, 0.55) 0%, transparent 55%);
+  }
+  .tourhero__content { position: relative; z-index: 2; padding-bottom: 96px; padding-top: 220px; max-width: 760px; margin-left: max(32px, calc((100vw - var(--container)) / 2 + 32px)); }
+  .tourhero__kicker {
     font-size: 0.72rem;
     letter-spacing: 0.34em;
     text-transform: uppercase;
     color: var(--color-gold);
+    margin: 0 0 18px;
+  }
+  .tourhero h1 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(3rem, 8vw, 6.4rem);
+    line-height: 0.98;
+    color: var(--color-cream);
     margin: 0 0 22px;
   }
-  .cover__title {
+  .tourhero__lede {
+    max-width: 560px;
     font-family: var(--font-display);
-    font-weight: 500;
-    font-size: clamp(3.2rem, 9vw, 7rem);
-    line-height: 0.98;
-    letter-spacing: -0.01em;
-    color: var(--color-cream);
-    margin: 0;
-  }
-  .cover__rule { display: block; width: 84px; height: 2px; background: var(--color-gold); margin: 34px auto; }
-  .cover__lede {
-    max-width: 640px;
-    margin: 0 auto 44px;
-    font-family: var(--font-display);
-    font-size: 1.3rem;
+    font-style: italic;
+    font-size: 1.28rem;
     line-height: 1.6;
-    font-style: italic;
-    color: #dbe4dc;
+    color: #e6ece8;
+    margin: 0 0 38px;
   }
-  .cover__index { display: flex; flex-wrap: wrap; gap: 14px 40px; justify-content: center; }
-  .cover__index a {
-    font-size: 0.72rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--color-cream);
-    padding-bottom: 6px;
-    border-bottom: 1px solid rgba(173, 138, 78, 0.5);
-    transition: color 0.4s ease, border-color 0.4s ease;
-  }
-  .cover__index a span { color: var(--color-gold); margin-right: 8px; font-family: var(--font-display); font-size: 1rem; letter-spacing: 0.05em; }
-  .cover__index a:hover { color: var(--color-gold); border-color: var(--color-gold); }
-
-  /* ---------- Gentle reveal ---------- */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 1.2s cubic-bezier(0.22, 0.61, 0.36, 1), transform 1.2s cubic-bezier(0.22, 0.61, 0.36, 1);
-    transition-delay: var(--d, 0ms);
-  }
-  .reveal.is-visible { opacity: 1; transform: none; }
-  @media (prefers-reduced-motion: reduce) {
-    .reveal { opacity: 1; transform: none; transition: none; }
-  }
-
-  /* ---------- Issue (section) ---------- */
-  .issue { padding: 120px 0 130px; counter-reset: plate; }
-  .issue--alt {
-    background-color: var(--color-sand-deep);
-    background-image:
-      radial-gradient(ellipse 55% 45% at 20% 25%, rgba(212, 175, 105, 0.2), transparent 65%),
-      radial-gradient(ellipse 50% 40% at 80% 75%, rgba(173, 138, 78, 0.18), transparent 65%);
-  }
-  .issue__head {
-    display: grid;
-    grid-template-columns: minmax(110px, 0.9fr) 4fr;
-    gap: 40px;
-    align-items: start;
-    max-width: 1020px;
-    margin: 0 auto 72px;
-  }
-  .issue__no {
-    font-family: var(--font-display);
-    font-size: clamp(5rem, 11vw, 9rem);
-    line-height: 0.8;
-    color: var(--color-gold);
-    opacity: 0.55;
-    text-align: right;
-  }
-  .issue__head h2 { font-size: clamp(1.9rem, 3.6vw, 2.8rem); margin: 0 0 18px; }
-  .life-intro { max-width: 560px; color: #4b4536; }
-  .life-intro::first-letter {
-    float: left;
-    font-family: var(--font-display);
-    font-size: 4.2rem;
-    line-height: 0.8;
-    padding: 8px 12px 0 0;
-    color: var(--color-gold-dark);
-  }
-
-  /* ---------- Magazine spread: staggered, uncropped photos ---------- */
-  .spread {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    column-gap: 26px;
-    row-gap: 54px;
-    align-items: start;
-  }
-  .life-item { margin: 0; }
-  .life-item img {
-    display: block;
-    width: 100%;
-    height: auto;
+  .tour-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    max-width: 560px;
+    padding: 18px 28px 18px 20px;
+    border: 1px solid var(--color-gold);
     border-radius: var(--radius);
-    box-shadow: 0 18px 44px rgba(20, 38, 53, 0.22);
-    cursor: zoom-in;
-    transition: transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.9s ease;
-  }
-  .life-item img:hover { transform: translateY(-5px); box-shadow: 0 26px 56px rgba(20, 38, 53, 0.3); }
-  .life-item figcaption {
-    counter-increment: plate;
-    margin-top: 16px;
-    padding-top: 12px;
-    border-top: 1px solid rgba(173, 138, 78, 0.55);
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 1.12rem;
-    line-height: 1.5;
-    color: #4b4536;
-  }
-  .life-item figcaption::before {
-    content: "No. " counter(plate, decimal-leading-zero);
-    display: block;
-    margin-bottom: 4px;
-    font-family: var(--font-body);
-    font-style: normal;
-    font-size: 0.64rem;
-    letter-spacing: 0.26em;
-    text-transform: uppercase;
-    color: var(--color-gold-dark);
-  }
-  .c1-9 { grid-column: 1 / 9; }
-  .c9-13 { grid-column: 9 / 13; }
-  .c4-13 { grid-column: 4 / 13; }
-  .c1-5 { grid-column: 1 / 5; }
-  .c5-9 { grid-column: 5 / 9; }
-  .c5-13 { grid-column: 5 / 13; }
-  .m0 { margin-top: 0px; }
-  .m110 { margin-top: 110px; }
-  .m80 { margin-top: 80px; }
-  .m60 { margin-top: 60px; }
-  .m20 { margin-top: 20px; }
-  .m90 { margin-top: 90px; }
-
-  /* ---------- Pull quote ---------- */
-  .pullquote-band { background: var(--color-navy); padding: 110px 0; text-align: center; }
-  .pullquote { margin: 0 auto; max-width: 860px; }
-  .pullquote p {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 500;
-    font-size: clamp(1.9rem, 4vw, 3rem);
-    line-height: 1.25;
+    background: rgba(12, 22, 31, 0.55);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
     color: var(--color-cream);
-    margin: 0 0 24px;
-  }
-  .pullquote p::before {
-    content: "";
-    display: block;
-    width: 64px;
-    height: 2px;
-    background: var(--color-gold);
-    margin: 0 auto 30px;
-  }
-  .pullquote cite {
-    font-style: normal;
-    font-size: 0.72rem;
-    letter-spacing: 0.26em;
+    font-family: var(--font-body);
+    font-size: 0.76rem;
+    letter-spacing: 0.17em;
+    line-height: 1.7;
+    text-align: left;
     text-transform: uppercase;
-    color: var(--color-gold);
+    cursor: pointer;
+    transition: background 0.5s ease, color 0.5s ease, transform 0.5s ease;
+  }
+  .tour-btn__icon {
+    flex: none;
+    width: 54px;
+    height: 54px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--color-gold);
+    color: var(--color-navy-dark);
+    transition: transform 0.5s ease;
+  }
+  .tour-btn__icon svg { width: 20px; height: 20px; margin-left: 3px; }
+  .tour-btn:hover { background: rgba(173, 138, 78, 0.95); color: var(--color-navy-dark); transform: translateY(-3px); }
+  .tour-btn:hover .tour-btn__icon { transform: scale(1.08); background: var(--color-navy-dark); color: var(--color-gold); }
+  @media (max-width: 700px) {
+    .tourhero__content { margin-left: 0; padding: 200px 24px 64px; }
+    .tour-btn { padding: 14px 18px 14px 14px; gap: 14px; letter-spacing: 0.12em; font-size: 0.7rem; }
+    .tour-btn__icon { width: 46px; height: 46px; }
   }
 
-  /* ---------- Phones and tablets ---------- */
-  @media (max-width: 900px) {
-    .issue { padding: 84px 0 90px; }
-    .issue__head { grid-template-columns: 1fr; gap: 6px; margin-bottom: 48px; }
-    .issue__no { text-align: left; font-size: 5rem; }
-    .spread { grid-template-columns: 1fr 1fr; column-gap: 18px; row-gap: 38px; }
-    .spread .life-item { grid-column: auto; margin-top: 0; }
-    .spread .life-item:nth-child(3n + 1) { grid-column: 1 / -1; }
-  }
-  @media (max-width: 560px) {
-    .spread { grid-template-columns: 1fr; }
-    .spread .life-item:nth-child(n) { grid-column: 1 / -1; }
-    .cover { padding: 170px 0 70px; }
-  }
-
-  /* Large view */
-  .lightbox {
+  /* ---------- Cinematic tour ---------- */
+  .tour {
     position: fixed;
     inset: 0;
-    z-index: 1000;
+    z-index: 1200;
+    background: #000;
+    color: #f3ead6;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.9s ease, visibility 0.9s;
+  }
+  .tour.is-open { opacity: 1; visibility: visible; }
+  .tour.is-idle { cursor: none; }
+  .tour__bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 10vh;
+    min-height: 56px;
+    background: #000;
+    z-index: 6;
+    transition: transform 1.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .tour__bar--top { top: 0; transform: translateY(-100%); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; }
+  .tour__bar--bottom { bottom: 0; transform: translateY(100%); }
+  .tour.is-open .tour__bar { transform: none; }
+  .tour__label {
+    font-size: 0.68rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+  }
+  .tour__controls { display: flex; gap: 12px; transition: opacity 0.6s ease; }
+  .tour.is-idle .tour__controls, .tour.is-idle .tour__nav { opacity: 0; }
+  .tour__btn {
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(243, 234, 214, 0.45);
+    border-radius: 50%;
+    background: transparent;
+    color: #f3ead6;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  }
+  .tour__btn:hover { background: var(--color-gold); border-color: var(--color-gold); color: #0c161f; }
+  .tour__btn svg { width: 16px; height: 16px; }
+  .tour__stage { position: absolute; inset: 0; }
+  .tour__slide {
+    position: absolute;
+    top: 10vh;
+    bottom: 10vh;
+    left: 0;
+    right: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(12, 22, 31, 0.94);
     opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s ease, visibility 0.5s;
+    transition: opacity 1.7s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  .lightbox.is-open { opacity: 1; visibility: visible; }
-  .lightbox__figure { margin: 0; max-width: min(92vw, 1400px); text-align: center; }
-  .lightbox__img {
-    display: block;
-    max-width: 100%;
-    max-height: 78vh;
-    margin: 0 auto;
-    border-radius: var(--radius);
-    transition: opacity 0.45s ease;
-  }
-  .lightbox__img.is-fading { opacity: 0; }
-  .lightbox__caption {
-    margin-top: 18px;
-    min-height: 1.6em;
+  .tour__slide.is-active { opacity: 1; }
+  .tour__slide img { max-width: 100%; max-height: 100%; object-fit: contain; transform-origin: center; }
+  .tour__slide.is-active img { animation: kenA var(--ms, 6200ms) ease-out both; }
+  .tour__slide.is-alt.is-active img { animation-name: kenB; }
+  @keyframes kenA { from { transform: scale(1); } to { transform: scale(1.07); } }
+  @keyframes kenB { from { transform: scale(1.07); } to { transform: scale(1); } }
+  .tour.is-paused .tour__slide img, .tour.is-paused .tour__seg i { animation-play-state: paused; }
+  .tour__caption {
+    position: absolute;
+    left: 50%;
+    bottom: calc(10vh + 28px);
+    transform: translateX(-50%);
+    z-index: 4;
+    width: min(860px, 88vw);
+    text-align: center;
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 1.3rem;
-    color: #eadfc3;
-    transition: opacity 0.45s ease;
+    font-size: clamp(1.2rem, 2.3vw, 1.8rem);
+    line-height: 1.45;
+    color: #fbf5e6;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.85), 0 0 3px rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: opacity 1s ease;
+    pointer-events: none;
   }
-  .lightbox__caption.is-fading { opacity: 0; }
-  .lightbox__btn {
+  .tour__caption.is-on { opacity: 1; }
+  .tour__card {
     position: absolute;
-    width: 52px;
-    height: 52px;
-    border: 1px solid rgba(234, 223, 195, 0.5);
-    border-radius: 50%;
-    background: transparent;
-    color: #eadfc3;
-    font-size: 1.5rem;
-    line-height: 1;
-    cursor: pointer;
-    transition: background 0.3s ease, color 0.3s ease;
+    inset: 0;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 24px;
+    text-align: center;
+    background: #000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1.4s ease, visibility 1.4s;
   }
-  .lightbox__btn:hover { background: var(--color-gold); color: var(--color-navy-dark); }
-  .lightbox__btn--close { top: 22px; right: 22px; }
-  .lightbox__btn--prev { left: 22px; top: 50%; transform: translateY(-50%); }
-  .lightbox__btn--next { right: 22px; top: 50%; transform: translateY(-50%); }
-  @media (max-width: 640px) {
-    .lightbox__btn--prev, .lightbox__btn--next { top: auto; bottom: 22px; transform: none; }
-    .lightbox__btn--prev { left: calc(50% - 64px); }
-    .lightbox__btn--next { right: calc(50% - 64px); }
+  .tour__card.is-on { opacity: 1; visibility: visible; }
+  .tour__card .eyebrow { color: var(--color-gold); letter-spacing: 0.34em; }
+  .tour__card h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(2.6rem, 7vw, 5.4rem);
+    line-height: 1.02;
+    color: #fbf5e6;
+    margin: 6px 0 22px;
+  }
+  .tour__card .rule { width: 72px; height: 2px; background: var(--color-gold); margin: 0 auto 22px; }
+  .tour__card p { font-family: var(--font-display); font-style: italic; font-size: 1.3rem; color: #dbe4dc; margin: 0 0 30px; max-width: 560px; }
+  .tour__card-actions { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+  .tour__nav {
+    position: absolute;
+    top: 50%;
+    z-index: 7;
+    transform: translateY(-50%);
+    transition: opacity 0.6s ease;
+  }
+  .tour__nav--prev { left: 22px; }
+  .tour__nav--next { right: 22px; }
+  .tour__segments { position: absolute; left: 28px; right: 28px; bottom: 3.2vh; display: flex; gap: 6px; z-index: 7; }
+  .tour__seg { flex: 1; height: 2px; background: rgba(243, 234, 214, 0.22); overflow: hidden; }
+  .tour__seg i { display: block; height: 100%; width: 0; background: var(--color-gold); }
+  .tour__seg.is-done i { width: 100%; }
+  .tour__seg.is-active i { animation: segFill var(--ms, 6200ms) linear forwards; }
+  @keyframes segFill { from { width: 0; } to { width: 100%; } }
+  @media (max-width: 700px) {
+    .tour__bar--top { padding: 0 16px; }
+    .tour__label { display: none; }
+    .tour__nav { display: none; }
+    .tour__segments { left: 16px; right: 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tourhero__img, .tour__slide.is-active img { animation: none; }
   }
 </style>
 </head>
@@ -283,83 +268,20 @@
   </div>
 </header>
 
-<section class="cover">
-  <div class="container">
-    <p class="cover__kicker reveal">The Molteno &nbsp;&middot;&nbsp; Gardens, Cape Town</p>
-    <h1 class="cover__title reveal">Life at<br>The Molteno</h1>
-    <span class="cover__rule reveal" aria-hidden="true"></span>
-    <p class="cover__lede reveal">Beneath the slopes of Table Mountain, The Molteno is more than a place to sleep. It is a house with a rhythm of its own: slow mornings by the pool, long conversations in the garden and dinners that stretch late into the evening.</p>
-    <nav class="cover__index reveal" aria-label="In this gallery">
-      <a href="#pool"><span>I</span> The Pool &amp; Garden</a>
-      <a href="#guests"><span>II</span> Our Guests</a>
-      <a href="#events"><span>III</span> Events &amp; Gatherings</a>
-    </nav>
+<section class="tourhero">
+  <img class="tourhero__img" src="assets/images/life/hero-poolside.webp" alt="Two friends laughing with cocktails beside the pool, with bougainvillea above" fetchpriority="high" decoding="async">
+  <div class="tourhero__content">
+    <p class="tourhero__kicker">The Molteno &nbsp;&middot;&nbsp; Gardens, Cape Town</p>
+    <h1>Life at<br>The Molteno</h1>
+    <p class="tourhero__lede">Slow mornings by the pool, long conversations in the garden and dinners that stretch late into the evening.</p>
+    <button type="button" class="tour-btn" id="tourOpen" aria-haspopup="dialog">
+      <span class="tour-btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8z"/></svg></span>
+      <span>Take a tour to a time where spectacular memories are made at The Molteno Boutique Guesthouse</span>
+    </button>
   </div>
 </section>
 
-<section class="issue" id="pool">
-  <div class="container">
-    <header class="issue__head reveal">
-      <span class="issue__no" aria-hidden="true">I</span>
-      <div>
-        <span class="eyebrow">The Pool &amp; Garden</span>
-        <h2>Sunlit, leafy and made for doing very little</h2>
-        <p class="life-intro">Morning swims, afternoon reading and a dip in the plunge pool at cocktail hour. The pool area is the heart of the house, and the best place to slow down.</p>
-      </div>
-    </header>
-    <div class="spread">
-      <figure class="life-item c1-9 m0 reveal"><img src="assets/images/life/poolside-cocktails.webp" width="2400" height="1600" alt="Two friends toasting with cocktails beside the pool" loading="lazy" decoding="async"><figcaption>Cheers to long afternoons by the pool.</figcaption></figure>
-      <figure class="life-item c9-13 m110 reveal"><img src="assets/images/life/garden-dining.webp" width="1920" height="2398" alt="A garden dining table for eight beneath a pergola with lanterns" loading="lazy" decoding="async"><figcaption>A table for eight beneath the pergola, lanterns lit and nowhere to be.</figcaption></figure>
-      <figure class="life-item c4-13 m0 reveal"><img src="assets/images/life/sunset-tennis.webp" width="2398" height="1774" alt="Two people playing tennis at sunset with Table Mountain behind" loading="lazy" decoding="async"><figcaption>Match point beneath a Table Mountain sunset.</figcaption></figure>
-    </div>
-  </div>
-</section>
-
-<section class="pullquote-band">
-  <div class="container">
-    <blockquote class="pullquote reveal">
-      <p>&ldquo;The Molteno is much more than a guest house. It&rsquo;s a home away from home.&rdquo;</p>
-      <cite>Henrik D, guest</cite>
-    </blockquote>
-  </div>
-</section>
-<section class="issue issue--alt" id="guests">
-  <div class="container">
-    <header class="issue__head reveal">
-      <span class="issue__no" aria-hidden="true">II</span>
-      <div>
-        <span class="eyebrow">Our Guests</span>
-        <h2>Guests who arrive from everywhere and leave as friends</h2>
-        <p class="life-intro">Some stay a weekend, some stay for months, and many return. These are a few of the faces and moments that make the house what it is.</p>
-      </div>
-    </header>
-    <div class="spread">
-      <figure class="life-item c1-9 m0 reveal"><img src="assets/images/life/dinner-wesley-and-noel.webp" width="2400" height="1800" alt="Wesley and Noel at a candlelit dinner table in the garden room, with the pool behind them" loading="lazy" decoding="async"><figcaption>Dinner at The Molteno is always a special time, with your host Julian as your personal chef. Wesley and Noel met and became great friends during their stay at The Molteno Guesthouse, and they remain mates to this day.</figcaption></figure>
-      <figure class="life-item c9-13 m80 reveal"><img src="assets/images/life/balcony-friends.webp" width="2400" height="1600" alt="Two friends laughing over a laptop and fruit on a sunny balcony" loading="lazy" decoding="async"><figcaption>Good company and a sunny balcony.</figcaption></figure>
-      <figure class="life-item c1-5 m0 reveal"><img src="assets/images/life/jack-russells.webp" width="2074" height="2400" alt="Two Jack Russells wrapped in cosy blankets" loading="lazy" decoding="async"><figcaption>Cosy corners, soft blankets and good company.</figcaption></figure>
-      <figure class="life-item c5-9 m60 reveal"><img src="assets/images/life/guest-photo-c.webp" width="1800" height="2400" alt="A guest relaxing on a daybed with a Jack Russell" loading="lazy" decoding="async"><figcaption>New friends come in all shapes and sizes.</figcaption></figure>
-      <figure class="life-item c9-13 m20 reveal"><img src="assets/images/life/guest-photo-d.webp" width="1800" height="2400" alt="A guest smiling on a daybed with a Jack Russell on his lap" loading="lazy" decoding="async"><figcaption>Settling in, Molteno style.</figcaption></figure>
-    </div>
-  </div>
-</section>
-<section class="issue" id="events">
-  <div class="container">
-    <header class="issue__head reveal">
-      <span class="issue__no" aria-hidden="true">III</span>
-      <div>
-        <span class="eyebrow">Events &amp; Gatherings</span>
-        <h2>Where an occasion becomes a memory</h2>
-        <p class="life-intro">From birthday celebrations to long, hosted dinners around the table, The Molteno has a way of turning a gathering into something unforgettable. Ask us about hosting yours.</p>
-      </div>
-    </header>
-    <div class="spread">
-      <figure class="life-item c5-13 m0 reveal"><img src="assets/images/life/dinner-long-table.webp" width="2400" height="1758" alt="Guests raising their glasses around a long candlelit dinner table beside the pool" loading="lazy" decoding="async"><figcaption>Dinner at The Molteno is always a special time, with your host Julian as your personal chef. The occasions at The Molteno build quality connections that last a lifetime.</figcaption></figure>
-      <figure class="life-item c1-5 m90 reveal"><img src="assets/images/life/aleksa-and-jules.webp" width="1920" height="2400" alt="Two guests smiling at an evening party beside a lit fountain" loading="lazy" decoding="async"><figcaption>An evening under fairy lights.</figcaption></figure>
-      <figure class="life-item c1-9 m0 reveal"><img src="assets/images/life/guest-photo-b.webp" width="2400" height="1800" alt="A long table of friends raising their glasses together" loading="lazy" decoding="async"><figcaption>A long table, raised glasses and the best kind of noise.</figcaption></figure>
-      <figure class="life-item c9-13 m80 reveal"><img src="assets/images/life/sasha-3.webp" width="1920" height="2400" alt="Two guests posing under colourful party lights" loading="lazy" decoding="async"><figcaption>When the evening turns to dancing.</figcaption></figure>
-    </div>
-  </div>
-</section>
+<script type="application/json" id="tourData">[{"src":"assets/images/life/hero-poolside.webp","alt":"Two friends laughing with cocktails beside the pool, bougainvillea above","cap":"Cheers to long afternoons by the pool."},{"src":"assets/images/life/garden-dining.webp","alt":"A garden dining table for eight beneath a pergola with lanterns","cap":"A table for eight beneath the pergola, lanterns lit and nowhere to be."},{"src":"assets/images/life/sunset-tennis.webp","alt":"Two people playing tennis at sunset with Table Mountain behind","cap":"Match point beneath a Table Mountain sunset."},{"src":"assets/images/life/dinner-wesley-and-noel.webp","alt":"Wesley and Noel at a candlelit dinner table in the garden room, with the pool behind them","cap":"Dinner at The Molteno is always a special time, with your host Julian as your personal chef. Wesley and Noel met and became great friends during their stay at The Molteno Guesthouse, and they remain mates to this day."},{"src":"assets/images/life/balcony-friends.webp","alt":"Two friends laughing over a laptop and fruit on a sunny balcony","cap":"Good company and a sunny balcony."},{"src":"assets/images/life/jack-russells.webp","alt":"Two Jack Russells wrapped in cosy blankets","cap":"Cosy corners, soft blankets and good company."},{"src":"assets/images/life/guest-photo-c.webp","alt":"A guest relaxing on a daybed with a Jack Russell","cap":"New friends come in all shapes and sizes."},{"src":"assets/images/life/guest-photo-d.webp","alt":"A guest smiling on a daybed with a Jack Russell on his lap","cap":"Settling in, Molteno style."},{"src":"assets/images/life/dinner-long-table.webp","alt":"Guests raising their glasses around a long candlelit dinner table beside the pool","cap":"Dinner at The Molteno is always a special time, with your host Julian as your personal chef. The occasions at The Molteno build quality connections that last a lifetime."},{"src":"assets/images/life/guest-photo-b.webp","alt":"A long table of friends raising their glasses together","cap":"A long table, raised glasses and the best kind of noise."},{"src":"assets/images/life/aleksa-and-jules.webp","alt":"Two guests smiling at an evening party beside a lit fountain","cap":"An evening under fairy lights."},{"src":"assets/images/life/sasha-3.webp","alt":"Two guests posing under colourful party lights","cap":"When the evening turns to dancing."}]</script>
 
 <section class="section cta-band">
   <div class="container">
@@ -407,16 +329,40 @@
   </div>
 </footer>
 
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" aria-hidden="true">
-  <button type="button" class="lightbox__btn lightbox__btn--close" aria-label="Close">&times;</button>
-  <button type="button" class="lightbox__btn lightbox__btn--prev" aria-label="Previous photo">&#8249;</button>
-  <figure class="lightbox__figure">
-    <img class="lightbox__img" alt="">
-    <figcaption class="lightbox__caption"></figcaption>
-  </figure>
-  <button type="button" class="lightbox__btn lightbox__btn--next" aria-label="Next photo">&#8250;</button>
+<div class="tour" id="tour" role="dialog" aria-modal="true" aria-label="Life at The Molteno: photo tour" aria-hidden="true">
+  <div class="tour__bar tour__bar--top">
+    <span class="tour__label">The Molteno &nbsp;&middot;&nbsp; Life</span>
+    <div class="tour__controls">
+      <button type="button" class="tour__btn" id="tourPlay" aria-label="Pause"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></button>
+      <button type="button" class="tour__btn" id="tourFs" aria-label="Full screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+      <button type="button" class="tour__btn" id="tourClose" aria-label="Close tour"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+    </div>
+  </div>
+  <div class="tour__stage" id="tourStage"></div>
+  <div class="tour__card tour__card--title" id="tourTitle">
+    <span class="eyebrow">The Molteno Boutique Guesthouse</span>
+    <h2>Life at<br>The Molteno</h2>
+    <span class="rule"></span>
+    <p>A time where spectacular memories are made.</p>
+  </div>
+  <div class="tour__card tour__card--end" id="tourEnd">
+    <span class="eyebrow">Gardens &middot; Cape Town</span>
+    <h2>Your story<br>begins here</h2>
+    <span class="rule"></span>
+    <p>Come and make a few memories of your own.</p>
+    <div class="tour__card-actions">
+      <a href="contact.html" class="btn btn--light">Reserve My Room</a>
+      <button type="button" class="btn btn--light" id="tourAgain">Watch again</button>
+    </div>
+  </div>
+  <p class="tour__caption" id="tourCaption" aria-live="polite"></p>
+  <button type="button" class="tour__btn tour__nav tour__nav--prev" id="tourPrev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 4l-8 8 8 8"/></svg></button>
+  <button type="button" class="tour__btn tour__nav tour__nav--next" id="tourNext" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 4l8 8-8 8"/></svg></button>
+  <div class="tour__segments" id="tourSegs"></div>
+  <div class="tour__bar tour__bar--bottom"></div>
 </div>
 
 <script src="js/main.js"></script>
+<script src="js/life-tour.js"></script>
 </body>
 </html>

@@ -42,6 +42,16 @@
       grid.className = "tour__spread";
       img.className = "tour__main";
       grid.appendChild(img);
+      (d.photos || []).forEach((p) => {
+        const cell = document.createElement("div");
+        cell.className = "tour__ph has-photo";
+        const pi = new Image();
+        pi.alt = p.alt;
+        pi.decoding = "async";
+        pi.dataset.src = p.src;
+        cell.appendChild(pi);
+        grid.appendChild(cell);
+      });
       for (let k = 0; k < (d.extras || 0); k++) {
         const ph = document.createElement("div");
         ph.className = "tour__ph";
@@ -76,8 +86,10 @@
   let lastFocus = null;
 
   const load = (i) => {
-    const img = slideEls[i] && slideEls[i].querySelector("img");
-    if (img && !img.getAttribute("src")) img.src = img.dataset.src;
+    if (!slideEls[i]) return;
+    slideEls[i].querySelectorAll("img").forEach((img) => {
+      if (!img.getAttribute("src")) img.src = img.dataset.src;
+    });
   };
 
   const run = () => {

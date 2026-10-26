@@ -35,13 +35,32 @@
     img.alt = d.alt;
     img.decoding = "async";
     img.dataset.src = d.src;
-    el.appendChild(img);
+    el.style.setProperty("--ms", (d.ms || SLIDE_MS) + "ms");
+    if (d.layout === "spread") {
+      el.classList.add("is-spread");
+      const grid = document.createElement("div");
+      grid.className = "tour__spread";
+      img.className = "tour__main";
+      grid.appendChild(img);
+      for (let k = 0; k < (d.extras || 0); k++) {
+        const ph = document.createElement("div");
+        ph.className = "tour__ph";
+        ph.setAttribute("role", "img");
+        ph.setAttribute("aria-label", "Photo coming soon");
+        ph.textContent = "Photo coming soon";
+        grid.appendChild(ph);
+      }
+      el.appendChild(grid);
+    } else {
+      el.appendChild(img);
+    }
     stage.appendChild(el);
     return el;
   });
-  const segEls = data.map(() => {
+  const segEls = data.map((d) => {
     const s = document.createElement("span");
     s.className = "tour__seg";
+    s.style.setProperty("--ms", (d.ms || SLIDE_MS) + "ms");
     s.appendChild(document.createElement("i"));
     segsWrap.appendChild(s);
     return s;
@@ -74,6 +93,7 @@
     clearTimeout(timer);
 
     slideEls.forEach((el, i) => el.classList.toggle("is-active", s.t === "slide" && s.i === i));
+    tour.classList.toggle("has-long", s.t === "slide" && !!data[s.i].title);
     titleCard.classList.toggle("is-on", s.t === "title");
     endCard.classList.toggle("is-on", s.t === "end");
 
@@ -85,7 +105,27 @@
       setTimeout(() => {
         if (token !== captionToken) return;
         captionNo.textContent = "No. " + String(s.i + 1).padStart(2, "0") + " / " + String(data.length).padStart(2, "0");
-        captionText.textContent = data[s.i].cap;
+        const d = data[s.i];
+        captionText.textContent = "";
+        caption.classList.toggle("is-long", !!d.title);
+        if (d.title) {
+          const hd = document.createElement("span");
+          hd.className = "tour__h";
+          hd.textContent = d.title;
+          captionText.appendChild(hd);
+          if (d.subtitle) {
+            const sb = document.createElement("span");
+            sb.className = "tour__sub";
+            sb.textContent = d.subtitle;
+            captionText.appendChild(sb);
+          }
+          const bd = document.createElement("span");
+          bd.className = "tour__body";
+          bd.textContent = d.cap;
+          captionText.appendChild(bd);
+        } else {
+          captionText.textContent = d.cap;
+        }
         caption.classList.add("is-on");
       }, 900);
     }
@@ -102,7 +142,7 @@
     prevBtn.style.visibility = cur <= 1 ? "hidden" : "visible";
     nextBtn.style.visibility = s.t === "end" ? "hidden" : "visible";
 
-    remaining = s.t === "title" ? TITLE_MS : s.t === "slide" ? SLIDE_MS : 0;
+    remaining = s.t === "title" ? TITLE_MS : s.t === "slide" ? data[s.i].ms || SLIDE_MS : 0;
     if (!paused) run();
   };
 
@@ -153,7 +193,8 @@
       slideEls.forEach((el) => el.classList.remove("is-active"));
       titleCard.classList.remove("is-on");
       endCard.classList.remove("is-on");
-      caption.classList.remove("is-on");
+      caption.classList.remove("is-on", "is-long");
+      tour.classList.remove("has-long");
     }, 900);
     if (lastFocus) lastFocus.focus();
   };

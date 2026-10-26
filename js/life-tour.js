@@ -44,8 +44,8 @@
   const barsFor = (d) => {
     if (d.bars) return d.bars;
     const chars = (d.title || "").length + (d.subtitle || "").length + (d.cap || "").length;
-    const seconds = 2.2 + chars / 20;
-    const bars = Math.max(3, Math.ceil(seconds / (4 * BEAT)));
+    const seconds = 1.2 + chars / 22;
+    const bars = Math.max(2, Math.ceil(seconds / (4 * BEAT)));
     return d.layout === "spread" ? Math.min(bars, 12) : bars;
   };
   const steps = [{ t: "title", start: 0, beats: 8 }];
@@ -60,6 +60,69 @@
 
   const iconPause = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>';
   const iconPlay = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8z"/></svg>';
+
+  // ---- mosaic: choose the order and row breaks that make the photos as large as possible ----
+  const bestMosaic = (ratios, W, H, gap) => {
+    const n = ratios.length;
+    const perms = [];
+    const permute = (arr, used, cur) => {
+      if (cur.length === arr.length) { perms.push(cur.slice()); return; }
+      for (let i = 0; i < arr.length; i++) {
+        if (used[i]) continue;
+        used[i] = true; cur.push(arr[i]);
+        permute(arr, used, cur);
+        cur.pop(); used[i] = false;
+      }
+    };
+    permute([...ratios.keys()], [], []);
+    let best = null;
+    perms.forEach((p) => {
+      for (let mask = 0; mask < (1 << (n - 1)); mask++) {
+        const rows = [];
+        let row = [p[0]];
+        for (let i = 1; i < n; i++) {
+          if ((mask >> (i - 1)) & 1) { rows.push(row); row = [p[i]]; } else row.push(p[i]);
+        }
+        rows.push(row);
+        const invS = rows.map((r) => 1 / r.reduce((s, i) => s + ratios[i], 0));
+        const A = invS.reduce((a, b) => a + b, 0);
+        const Bv = H - gap * (rows.length - 1) + gap * rows.reduce((s, r, k) => s + (r.length - 1) * invS[k], 0);
+        let Wt = Bv / A;
+        if (Wt > W) Wt = W;
+        const hs = rows.map((r, k) => (Wt - gap * (r.length - 1)) * invS[k]);
+        if (hs.some((v) => v < 20)) continue;
+        // Favour balanced layouts: the sum of log-areas punishes tiny tiles far more than a plain total.
+        let area = 0;
+        rows.forEach((r, k) => r.forEach((i) => { area += Math.log(hs[k] * hs[k] * ratios[i]); }));
+        if (p[0] === 0) area += 0.02; // prefer the original photo first
+        if (!best || area > best.area) best = { area, rows, hs };
+      }
+    });
+    return best;
+  };
+  const layoutMosaic = (el) => {
+    const m = el._mosaic;
+    if (!m) return;
+    const box = m.root;
+    const W = box.clientWidth;
+    const H = box.clientHeight;
+    if (!W || !H) return;
+    const gap = parseFloat(getComputedStyle(box).rowGap) || 22;
+    const best = bestMosaic(m.ratios, W, H, gap);
+    if (!best) return;
+    box.textContent = "";
+    best.rows.forEach((r, k) => {
+      const rowEl = document.createElement("div");
+      rowEl.className = "tour__row";
+      r.forEach((i) => {
+        const tile = m.tiles[i];
+        tile.style.width = Math.floor(best.hs[k] * m.ratios[i]) + "px";
+        tile.style.height = Math.floor(best.hs[k]) + "px";
+        rowEl.appendChild(tile);
+      });
+      box.appendChild(rowEl);
+    });
+  };
 
   // ---- build slides and progress segments ----
   const slideEls = data.map((d, i) => {
@@ -101,6 +164,28 @@
         grid.appendChild(ph);
       }
       el.appendChild(grid);
+    } else if (d.layout === "mosaic") {
+      el.classList.add("is-mosaic");
+      const rootEl = document.createElement("div");
+      rootEl.className = "tour__mosaic";
+      const items = [{ img, ratio: d.ratio }];
+      (d.photos || []).forEach((p) => {
+        const pi = new Image();
+        pi.alt = p.alt;
+        pi.decoding = "async";
+        pi.dataset.src = p.src;
+        items.push({ img: pi, ratio: p.ratio });
+      });
+      const tiles = items.map((it, k) => {
+        const tile = document.createElement("div");
+        tile.className = "tour__tile";
+        tile.style.setProperty("--k", k);
+        tile.appendChild(it.img);
+        return tile;
+      });
+      tiles.forEach((t) => rootEl.appendChild(t));
+      el.appendChild(rootEl);
+      el._mosaic = { root: rootEl, tiles, ratios: items.map((it) => it.ratio) };
     } else {
       el.appendChild(img);
     }
@@ -198,21 +283,11 @@
   let paused = false;
   let F = 0;                // film time in seconds
   let cur = -1;
-  let lastBeat = -1;
   let lastTs = 0;
   let raf = null;
   let idleTimer = null;
   let captionToken = 0;
   let lastFocus = null;
-
-  const pulse = (bi) => {
-    if (reduceMotion || paused || !stage.animate) return;
-    const strong = bi % 4 === 0;
-    stage.animate(
-      [{ transform: "scale(" + (strong ? 1.016 : 1.006) + ")" }, { transform: "scale(1)" }],
-      { duration: strong ? 460 : 320, easing: "cubic-bezier(0.2, 0.7, 0.2, 1)" }
-    );
-  };
 
   const show = (n) => {
     cur = n;
@@ -224,15 +299,16 @@
       const was = el.classList.contains("is-active");
       if (on && !was) {
         el.classList.add("tr-" + tr);
-        setTimeout(() => el.classList.remove("tr-" + tr), 1100);
+        setTimeout(() => el.classList.remove("tr-" + tr), 900);
       } else if (!on && was) {
         el.classList.add("is-leaving", "lv-" + tr);
-        setTimeout(() => el.classList.remove("is-leaving", "lv-" + tr), 1100);
+        setTimeout(() => el.classList.remove("is-leaving", "lv-" + tr), 900);
       }
       el.classList.toggle("is-active", on);
     });
     tour.classList.toggle("has-long", s.t === "slide" && !!data[s.i].title);
     tour.classList.toggle("has-xlong", s.t === "slide" && !!data[s.i].title && data[s.i].cap.length > 450);
+    if (s.t === "slide" && slideEls[s.i]._mosaic) layoutMosaic(slideEls[s.i]);
     titleCard.classList.toggle("is-on", s.t === "title");
     endCard.classList.toggle("is-on", s.t === "end");
 
@@ -295,7 +371,6 @@
   const seekToStep = (n) => {
     n = Math.max(0, Math.min(steps.length - 1, n));
     F = stepStart(n);
-    lastBeat = Math.floor((F - B0) / BEAT);
     if (ctx && buffer && isOpen) startSource(F);
     show(n);
   };
@@ -308,12 +383,6 @@
 
     if (audioClock && ctx && ctx.state === "running") F = F0 + (ctx.currentTime - c0);
     else if (!audioClock) F += dt;
-
-    const bi = Math.floor((F - B0) / BEAT);
-    if (bi > lastBeat) {
-      lastBeat = bi;
-      pulse(bi);
-    }
 
     let idx = 0;
     for (let i = steps.length - 1; i >= 0; i--) {
@@ -355,7 +424,6 @@
     isOpen = true;
     F = 0;
     cur = -1;
-    lastBeat = -1;
     lastTs = performance.now();
     cancelAnimationFrame(raf);
     raf = requestAnimationFrame(tick);
@@ -427,6 +495,9 @@
   fsBtn.addEventListener("click", () => {
     if (document.fullscreenElement) document.exitFullscreen();
     else if (tour.requestFullscreen) tour.requestFullscreen();
+  });
+  window.addEventListener("resize", () => {
+    slideEls.forEach((el) => { if (el._mosaic && el.classList.contains("is-active")) layoutMosaic(el); });
   });
   tour.addEventListener("mousemove", wake);
   tour.addEventListener("touchstart", wake, { passive: true });

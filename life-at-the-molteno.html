@@ -8,7 +8,7 @@
 <link rel="icon" href="assets/logo/molteno-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=20261113">
+<link rel="stylesheet" href="css/styles.css?v=20261117">
 <style>
   /* ---------- Cover with one big photo ---------- */
   .tourhero {
@@ -152,6 +152,9 @@
   }
   .tour__btn:hover { background: var(--color-gold); border-color: var(--color-gold); color: #0c161f; }
   .tour__btn svg { width: 16px; height: 16px; }
+  #tourSound .ico-off { display: none; }
+  #tourSound[aria-pressed="true"] .ico-on { display: none; }
+  #tourSound[aria-pressed="true"] .ico-off { display: block; }
   .tour__stage { position: absolute; inset: 0; }
   .tour__slide {
     position: absolute;
@@ -163,7 +166,7 @@
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: opacity 1.7s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.96s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .tour__slide.is-active { opacity: 1; }
   .tour__slide img { max-width: 100%; max-height: 100%; object-fit: contain; transform-origin: center; }
@@ -185,7 +188,7 @@
     text-align: left;
     color: #d3b06b;
     opacity: 0;
-    transition: opacity 1s ease;
+    transition: opacity 0.5s ease;
     pointer-events: none;
   }
   .tour__caption.is-on { opacity: 1; }
@@ -226,7 +229,7 @@
     background: #000;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 1.4s ease, visibility 1.4s;
+    transition: opacity 0.96s ease, visibility 0.96s;
   }
   .tour__card.is-on { opacity: 1; visibility: visible; }
   .tour__card .eyebrow { color: var(--color-gold); letter-spacing: 0.34em; }
@@ -326,6 +329,43 @@
     .tour__body { font-size: 0.86rem; line-height: 1.5; }
     .tour__ph { font-size: 0.5rem; letter-spacing: 0.12em; }
   }
+
+  /* ---------- Photo transitions (each lasts two beats) ---------- */
+  .tour__slide.is-leaving { opacity: 1; transition: none; z-index: 1; }
+  .tour__slide.is-active { z-index: 2; }
+  .tour__slide.is-active[class*="tr-"] { transition: none; opacity: 1; }
+  /* dissolve: a classic cross-fade */
+  .tour__slide.tr-dissolve { animation: trFadeIn 0.96s ease both; }
+  .tour__slide.lv-dissolve { animation: trFadeOut 0.96s ease both; }
+  @keyframes trFadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes trFadeOut { from { opacity: 1; } to { opacity: 0; } }
+  /* push: the new photo glides in while the old one drifts away */
+  .tour__slide.tr-push { animation: trPushIn 0.96s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+  .tour__slide.lv-push { animation: trPushOut 0.96s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+  @keyframes trPushIn { from { opacity: 0; transform: translateX(9%); } to { opacity: 1; transform: none; } }
+  @keyframes trPushOut { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateX(-9%); } }
+  /* zoom: the old photo swells away, the new one settles in */
+  .tour__slide.tr-zoom { animation: trZoomIn 0.96s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+  .tour__slide.lv-zoom { animation: trZoomOut 0.96s ease both; }
+  @keyframes trZoomIn { from { opacity: 0; transform: scale(1.14); } to { opacity: 1; transform: none; } }
+  @keyframes trZoomOut { from { opacity: 1; transform: none; } to { opacity: 0; transform: scale(0.9); } }
+  /* wipe: the new photo is revealed from left to right */
+  .tour__slide.tr-wipe { animation: trWipe 0.96s cubic-bezier(0.65, 0, 0.35, 1) both; }
+  @keyframes trWipe { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+  /* iris: the new photo opens from the centre like a camera lens */
+  .tour__slide.tr-iris { animation: trIris 0.96s cubic-bezier(0.65, 0, 0.35, 1) both; }
+  @keyframes trIris { from { clip-path: circle(0% at 50% 50%); } to { clip-path: circle(75% at 50% 50%); } }
+  /* blur: a soft-focus dissolve */
+  .tour__slide.tr-blur { animation: trBlurIn 0.96s ease both; }
+  .tour__slide.lv-blur { animation: trBlurOut 0.96s ease both; }
+  @keyframes trBlurIn { from { opacity: 0; filter: blur(20px); } to { opacity: 1; filter: blur(0); } }
+  @keyframes trBlurOut { from { opacity: 1; filter: blur(0); } to { opacity: 0; filter: blur(16px); } }
+  /* glow: a warm golden bloom, then focus */
+  .tour__slide.tr-glow { animation: trGlowIn 0.96s ease both; }
+  @keyframes trGlowIn { 0% { opacity: 0; filter: brightness(2.4) saturate(0.5); } 55% { opacity: 1; filter: brightness(1.5) saturate(0.8); } 100% { opacity: 1; filter: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .tour__slide[class*="tr-"], .tour__slide[class*="lv-"] { animation: none; }
+  }
   @media (prefers-reduced-motion: reduce) {
     .tourhero__img, .tour__slide.is-active img { animation: none; }
   }
@@ -367,7 +407,7 @@
   </div>
 </section>
 
-<script type="application/json" id="tourData">[{"src":"assets/images/life/hero-poolside.webp","alt":"Two friends laughing with cocktails beside the pool, bougainvillea above","cap":"Cheers to long afternoons by the pool."},{"src":"assets/images/life/garden-dining.webp","alt":"A garden dining table for eight beneath a pergola with lanterns","cap":"A table for eight beneath the pergola, lanterns lit and nowhere to be."},{"src":"assets/images/life/sunset-tennis.webp","alt":"Two people playing tennis at sunset with Table Mountain behind","cap":"Match point beneath a Table Mountain sunset."},{"src":"assets/images/life/dinner-wesley-and-noel.webp","alt":"Wesley and Noel at a candlelit dinner table in the garden room, with the pool behind them","cap":"Dinner at The Molteno is always a special time, with your host Julian as your personal chef. Wesley and Noel met and became great friends during their stay at The Molteno Guesthouse, and they remain mates to this day."},{"src":"assets/images/life/balcony-friends.webp","alt":"Two friends laughing over a laptop and fruit on a sunny balcony","cap":"Room service? With pleasure! We’re here to make your stay as relaxing, comfortable, and enjoyable as possible. Just let us know what you need, and we’ll be happy to assist with a big smile!"},{"src":"assets/images/life/jack-russells.webp","alt":"Two Jack Russells wrapped in cosy blankets","cap":"Cosy corners, soft blankets and good company."},{"src":"assets/images/life/guest-photo-c.webp","alt":"A guest relaxing on a daybed with a Jack Russell","cap":"New friends come in all shapes and sizes."},{"src":"assets/images/life/guest-photo-d.webp","alt":"A guest smiling on a daybed with a Jack Russell on his lap","cap":"Settling in, Molteno style."},{"src":"assets/images/life/dinner-long-table.webp","alt":"Guests raising their glasses around a long candlelit dinner table beside the pool","cap":"Dinner at The Molteno is always a special time, with your host Julian as your personal chef. The occasions at The Molteno build quality connections that last a lifetime."},{"src":"assets/images/life/guest-photo-b.webp","alt":"A long table of friends raising their glasses together","cap":"A long table, raised glasses and the best kind of noise."},{"src":"assets/images/life/aleksa-and-jules.webp","alt":"Two guests smiling at an evening party beside a lit fountain","cap":"An evening under fairy lights."},{"src":"assets/images/life/special-events.webp","alt":"Two champagne coupes, a red anemone and an open ring box, in black and white with the flower in red","cap":"Whether it’s a birthday, anniversary, engagement proposal, or any moment worth celebrating, we’ll make it extraordinary. From elegant private dinners to beautifully set surprises, every detail is handled with care and perfection. Need flowers and champagne to make it extra special? Just tell us your favourite blooms and your preferred colour and consider it done. At The Molteno, every occasion deserves to be celebrated in style.","layout":"spread","extras":1,"ms":16000,"title":"Special Celebrations","subtitle":"Make It Unforgettable","photos":[{"src":"assets/images/life/celebration-chef.webp","alt":"A smiling chef in whites spooning fresh tomato and basil topping onto bruschetta"},{"src":"assets/images/life/celebration-roses.webp","alt":"A bouquet of yellow and white roses, ready to make a celebration extra special"},{"src":"assets/images/life/sasha-3.webp","alt":"Two guests posing under colourful party lights"}]}]</script>
+<script type="application/json" id="tourData">[{"src":"assets/images/life/hero-poolside.webp","alt":"Two friends laughing with cocktails beside the pool, bougainvillea above","cap":"Cheers to long afternoons by the pool."},{"src":"assets/images/life/garden-dining.webp","alt":"A garden dining table for eight beneath a pergola with lanterns","cap":"A table for eight beneath the pergola, lanterns lit and nowhere to be."},{"src":"assets/images/life/sunset-tennis.webp","alt":"Two people playing tennis at sunset with Table Mountain behind","cap":"Match point beneath a Table Mountain sunset."},{"src":"assets/images/life/dinner-wesley-and-noel.webp","alt":"Wesley and Noel at a candlelit dinner table in the garden room, with the pool behind them","cap":"Dinner at The Molteno is always a special time, with your host Julian as your personal chef. Wesley and Noel met and became great friends during their stay at The Molteno Guesthouse, and they remain mates to this day."},{"src":"assets/images/life/balcony-friends.webp","alt":"Two friends laughing over a laptop and fruit on a sunny balcony","cap":"Room service? With pleasure! We’re here to make your stay as relaxing, comfortable, and enjoyable as possible. Just let us know what you need, and we’ll be happy to assist with a big smile!"},{"src":"assets/images/life/jack-russells.webp","alt":"Two Jack Russells wrapped in cosy blankets","cap":"Cosy corners, soft blankets and good company."},{"src":"assets/images/life/guest-photo-c.webp","alt":"A guest relaxing on a daybed with a Jack Russell","cap":"New friends come in all shapes and sizes."},{"src":"assets/images/life/guest-photo-d.webp","alt":"A guest smiling on a daybed with a Jack Russell on his lap","cap":"Settling in, Molteno style."},{"src":"assets/images/life/dinner-long-table.webp","alt":"Guests raising their glasses around a long candlelit dinner table beside the pool","cap":"Dinner at The Molteno is always a special time, with your host Julian as your personal chef. The occasions at The Molteno build quality connections that last a lifetime."},{"src":"assets/images/life/aleksa-and-jules.webp","alt":"Two guests smiling at an evening party beside a lit fountain","cap":"An evening under fairy lights."},{"src":"assets/images/life/special-events.webp","alt":"Two champagne coupes, a red anemone and an open ring box, in black and white with the flower in red","cap":"Whether it’s a birthday, anniversary, engagement proposal, or any moment worth celebrating, we’ll make it extraordinary. From elegant private dinners to beautifully set surprises, every detail is handled with care and perfection. Need flowers and champagne to make it extra special? Just tell us your favourite blooms and your preferred colour and consider it done. At The Molteno, every occasion deserves to be celebrated in style.","layout":"spread","extras":1,"ms":16000,"title":"Special Celebrations","subtitle":"Make It Unforgettable","photos":[{"src":"assets/images/life/celebration-chef.webp","alt":"A smiling chef in whites spooning fresh tomato and basil topping onto bruschetta"},{"src":"assets/images/life/celebration-roses.webp","alt":"A bouquet of yellow and white roses, ready to make a celebration extra special"},{"src":"assets/images/life/sasha-3.webp","alt":"Two guests posing under colourful party lights"}]}]</script>
 
 <section class="section cta-band">
   <div class="container">
@@ -420,6 +460,7 @@
     <span class="tour__label">The Molteno &nbsp;&middot;&nbsp; Life</span>
     <div class="tour__controls">
       <button type="button" class="tour__btn" id="tourPlay" aria-label="Pause"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></button>
+      <button type="button" class="tour__btn" id="tourSound" aria-label="Mute music" aria-pressed="false"><svg class="ico-on" viewBox="0 0 24 24" fill="currentColor"><path d="M4 9v6h4l5 5V4L8 9H4z"/><path d="M16 8.5c1.3 1 2 2.3 2 3.5s-.7 2.5-2 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><svg class="ico-off" viewBox="0 0 24 24" fill="currentColor"><path d="M4 9v6h4l5 5V4L8 9H4z"/><path d="M16 9l5 6M21 9l-5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
       <button type="button" class="tour__btn" id="tourFs" aria-label="Full screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
       <button type="button" class="tour__btn" id="tourClose" aria-label="Close tour"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
     </div>

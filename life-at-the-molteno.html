@@ -8,7 +8,7 @@
 <link rel="icon" href="assets/logo/molteno-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=20261117">
+<link rel="stylesheet" href="css/styles.css?v=20261121">
 <style>
   /* ---------- Cover with one big photo ---------- */
   .tourhero {
@@ -366,6 +366,50 @@
   @media (prefers-reduced-motion: reduce) {
     .tour__slide[class*="tr-"], .tour__slide[class*="lv-"] { animation: none; }
   }
+
+  /* Royalty spread: three photos, revealed one by one on the beat */
+  .tour__spread--three .tour__ph:nth-of-type(3) { grid-column: 2 / 4; grid-row: 2; }
+
+  /* Five photos: three rows, the wide collage along the bottom */
+  .tour__spread--five { grid-template-rows: repeat(3, minmax(0, 1fr)); }
+  .tour__spread--five .tour__ph:nth-of-type(1) { grid-column: 2; grid-row: 1; }
+  .tour__spread--five .tour__ph:nth-of-type(2) { grid-column: 3; grid-row: 1; }
+  .tour__spread--five .tour__ph:nth-of-type(3) { grid-column: 2; grid-row: 2; }
+  .tour__spread--five .tour__ph:nth-of-type(4) { grid-column: 3; grid-row: 2; }
+  .tour__spread--five .tour__ph:nth-of-type(5) { grid-column: 2 / 4; grid-row: 3; }
+  .tour__slide.is-active .tour__spread .tour__ph {
+    animation: cellIn 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: calc(var(--k, 1) * 0.96s);
+  }
+  .tour.is-paused .tour__ph { animation-play-state: paused; }
+  @keyframes cellIn {
+    from { opacity: 0; transform: translateY(26px) scale(0.94); }
+    to { opacity: 1; transform: none; }
+  }
+  .tour__emblem {
+    display: block;
+    width: 54px;
+    margin-bottom: 14px;
+    color: #d3b06b;
+    animation: crownFloat 3.84s ease-in-out infinite;
+  }
+  .tour__emblem svg { display: block; width: 100%; height: auto; }
+  @keyframes crownFloat { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-6px) rotate(2deg); } }
+  .tour__body + .tour__body { margin-top: 0.75em; }
+  .tour__caption.is-xlong .tour__h { font-size: clamp(1.4rem, 2vw, 1.95rem); }
+  .tour__caption.is-xlong .tour__sub { font-size: clamp(1rem, 1.35vw, 1.25rem); margin-bottom: 12px; }
+  .tour__caption.is-xlong .tour__body { font-size: clamp(0.8rem, 0.98vw, 0.97rem); line-height: 1.55; }
+  @media (max-width: 700px) {
+    .tour.has-xlong .tour__slide { bottom: calc(10vh + 370px); }
+    .tour__caption.is-xlong { height: 360px; }
+    .tour__caption.is-xlong .tour__h { font-size: 1.15rem; }
+    .tour__caption.is-xlong .tour__sub { font-size: 0.86rem; margin-bottom: 6px; }
+    .tour__caption.is-xlong .tour__body { font-size: 0.7rem; line-height: 1.42; }
+    .tour__emblem { width: 38px; margin-bottom: 8px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tour__slide.is-active .tour__spread .tour__ph, .tour__emblem { animation: none; }
+  }
   @media (prefers-reduced-motion: reduce) {
     .tourhero__img, .tour__slide.is-active img { animation: none; }
   }
@@ -407,7 +451,7 @@
   </div>
 </section>
 
-<script type="application/json" id="tourData">[{"src":"assets/images/life/hero-poolside.webp","alt":"Two friends laughing with cocktails beside the pool, bougainvillea above","cap":"Cheers to long afternoons by the pool."},{"src":"assets/images/life/garden-dining.webp","alt":"A garden dining table for eight beneath a pergola with lanterns","cap":"A table for eight beneath the pergola, lanterns lit and nowhere to be."},{"src":"assets/images/life/sunset-tennis.webp","alt":"Two people playing tennis at sunset with Table Mountain behind","cap":"Match point beneath a Table Mountain sunset."},{"src":"assets/images/life/dinner-wesley-and-noel.webp","alt":"Wesley and Noel at a candlelit dinner table in the garden room, with the pool behind them","cap":"Dinner at The Molteno is always a special time, with your host Julian as your personal chef. Wesley and Noel met and became great friends during their stay at The Molteno Guesthouse, and they remain mates to this day."},{"src":"assets/images/life/balcony-friends.webp","alt":"Two friends laughing over a laptop and fruit on a sunny balcony","cap":"Room service? With pleasure! We’re here to make your stay as relaxing, comfortable, and enjoyable as possible. Just let us know what you need, and we’ll be happy to assist with a big smile!"},{"src":"assets/images/life/jack-russells.webp","alt":"Two Jack Russells wrapped in cosy blankets","cap":"Cosy corners, soft blankets and good company."},{"src":"assets/images/life/guest-photo-c.webp","alt":"A guest relaxing on a daybed with a Jack Russell","cap":"New friends come in all shapes and sizes."},{"src":"assets/images/life/guest-photo-d.webp","alt":"A guest smiling on a daybed with a Jack Russell on his lap","cap":"Settling in, Molteno style."},{"src":"assets/images/life/dinner-long-table.webp","alt":"Guests raising their glasses around a long candlelit dinner table beside the pool","cap":"Dinner at The Molteno is always a special time, with your host Julian as your personal chef. The occasions at The Molteno build quality connections that last a lifetime."},{"src":"assets/images/life/aleksa-and-jules.webp","alt":"Two guests smiling at an evening party beside a lit fountain","cap":"An evening under fairy lights."},{"src":"assets/images/life/special-events.webp","alt":"Two champagne coupes, a red anemone and an open ring box, in black and white with the flower in red","cap":"Whether it’s a birthday, anniversary, engagement proposal, or any moment worth celebrating, we’ll make it extraordinary. From elegant private dinners to beautifully set surprises, every detail is handled with care and perfection. Need flowers and champagne to make it extra special? Just tell us your favourite blooms and your preferred colour and consider it done. At The Molteno, every occasion deserves to be celebrated in style.","layout":"spread","extras":1,"ms":16000,"title":"Special Celebrations","subtitle":"Make It Unforgettable","photos":[{"src":"assets/images/life/celebration-chef.webp","alt":"A smiling chef in whites spooning fresh tomato and basil topping onto bruschetta"},{"src":"assets/images/life/celebration-roses.webp","alt":"A bouquet of yellow and white roses, ready to make a celebration extra special"},{"src":"assets/images/life/sasha-3.webp","alt":"Two guests posing under colourful party lights"}]}]</script>
+<script type="application/json" id="tourData">[{"src":"assets/images/life/hero-poolside.webp","alt":"Two friends laughing with cocktails beside the pool, bougainvillea above","cap":"Cheers to long afternoons by the pool."},{"src":"assets/images/life/garden-dining.webp","alt":"A garden dining table for eight beneath a pergola with lanterns","cap":"A table for eight beneath the pergola, lanterns lit and nowhere to be."},{"src":"assets/images/life/sunset-tennis.webp","alt":"Two people playing tennis at sunset with Table Mountain behind","cap":"Match point beneath a Table Mountain sunset."},{"src":"assets/images/life/dinner-wesley-and-noel.webp","alt":"Wesley and Noel at a candlelit dinner table in the garden room, with the pool behind them","cap":"Dinner at The Molteno is always a special time, with your host Julian as your personal chef. Wesley and Noel met and became great friends during their stay at The Molteno Guesthouse, and they remain mates to this day."},{"src":"assets/images/life/balcony-friends.webp","alt":"Two friends laughing over a laptop and fruit on a sunny balcony","cap":"Room service? With pleasure! We’re here to make your stay as relaxing, comfortable, and enjoyable as possible. Just let us know what you need, and we’ll be happy to assist with a big smile!"},{"src":"assets/images/life/jack-russells.webp","alt":"Two Jack Russells wrapped in cosy blankets","cap":"Meet Julian’s two adorable Jack Russells, the little queens of The Molteno: Queen Lilly and Xena the Princess Warrior.\n\nCute, charming and wonderfully well-behaved, these two have a special talent for winning hearts and making guests feel right at home. A wagging tail, a curious little face and a sprinkle of canine charm, and just like that, you’re part of their kingdom!\n\nFair warning: you might arrive as a guest, but you’ll probably leave as one of their biggest fans.","layout":"spread","emblem":"crown","bars":16,"extras":0,"title":"Meet the Royalty of The Molteno Guesthouse","subtitle":"Every guesthouse has its own VIPs, and ours have four paws each!","photos":[{"src":"assets/images/life/royalty-sofa.webp","alt":"Two guests laughing on a sofa with a Jack Russell cuddled into one of them"},{"src":"assets/images/life/royalty-bows.webp","alt":"Queen Lilly and Xena, two Jack Russells wearing a pink and a blue bow tie on a white bed"},{"src":"assets/images/life/royalty-pink-wine.webp","alt":"A guest in a pink jumper on a leather armchair with a glass of white wine and both Jack Russells on her lap"},{"src":"assets/images/life/royalty-cafe.webp","alt":"A guest at a sunny cafe table with a glass of champagne, holding a Jack Russell in her arms"},{"src":"assets/images/life/royalty-collage.webp","alt":"Collage of guests relaxing with the Jack Russells: on a deck chair, on a sofa and with a glass of champagne"}]},{"src":"assets/images/life/guest-photo-d.webp","alt":"A guest smiling on a daybed with a Jack Russell on his lap","cap":"Settling in, Molteno style."},{"src":"assets/images/life/dinner-long-table.webp","alt":"Guests raising their glasses around a long candlelit dinner table beside the pool","cap":"Dinner at The Molteno is always a special time, with your host Julian as your personal chef. The occasions at The Molteno build quality connections that last a lifetime."},{"src":"assets/images/life/aleksa-and-jules.webp","alt":"Two guests smiling at an evening party beside a lit fountain","cap":"An evening under fairy lights."},{"src":"assets/images/life/special-events.webp","alt":"Two champagne coupes, a red anemone and an open ring box, in black and white with the flower in red","cap":"Whether it’s a birthday, anniversary, engagement proposal, or any moment worth celebrating, we’ll make it extraordinary. From elegant private dinners to beautifully set surprises, every detail is handled with care and perfection. Need flowers and champagne to make it extra special? Just tell us your favourite blooms and your preferred colour and consider it done. At The Molteno, every occasion deserves to be celebrated in style.","layout":"spread","extras":1,"ms":16000,"title":"Special Celebrations","subtitle":"Make It Unforgettable","photos":[{"src":"assets/images/life/celebration-chef.webp","alt":"A smiling chef in whites spooning fresh tomato and basil topping onto bruschetta"},{"src":"assets/images/life/celebration-roses.webp","alt":"A bouquet of yellow and white roses, ready to make a celebration extra special"},{"src":"assets/images/life/sasha-3.webp","alt":"Two guests posing under colourful party lights"}]}]</script>
 
 <section class="section cta-band">
   <div class="container">
@@ -490,6 +534,6 @@
 </div>
 
 <script src="js/main.js"></script>
-<script src="js/life-tour.js"></script>
+<script src="js/life-tour.js?v=20261121"></script>
 </body>
 </html>

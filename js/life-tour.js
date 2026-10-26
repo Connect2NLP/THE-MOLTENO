@@ -75,11 +75,15 @@
       el.classList.add("is-spread");
       const grid = document.createElement("div");
       grid.className = "tour__spread";
+      if ((d.photos || []).length + (d.extras || 0) === 3) grid.classList.add("tour__spread--three");
+      if ((d.photos || []).length + (d.extras || 0) === 5) grid.classList.add("tour__spread--five");
       img.className = "tour__main";
       grid.appendChild(img);
+      let cellIndex = 0;
       (d.photos || []).forEach((p) => {
         const cell = document.createElement("div");
         cell.className = "tour__ph has-photo";
+        cell.style.setProperty("--k", ++cellIndex);
         const pi = new Image();
         pi.alt = p.alt;
         pi.decoding = "async";
@@ -90,6 +94,7 @@
       for (let k = 0; k < (d.extras || 0); k++) {
         const ph = document.createElement("div");
         ph.className = "tour__ph";
+        ph.style.setProperty("--k", ++cellIndex);
         ph.setAttribute("role", "img");
         ph.setAttribute("aria-label", "Photo coming soon");
         ph.textContent = "Photo coming soon";
@@ -227,6 +232,7 @@
       el.classList.toggle("is-active", on);
     });
     tour.classList.toggle("has-long", s.t === "slide" && !!data[s.i].title);
+    tour.classList.toggle("has-xlong", s.t === "slide" && !!data[s.i].title && data[s.i].cap.length > 450);
     titleCard.classList.toggle("is-on", s.t === "title");
     endCard.classList.toggle("is-on", s.t === "end");
 
@@ -241,6 +247,7 @@
         captionNo.textContent = "No. " + String(s.i + 1).padStart(2, "0") + " / " + String(data.length).padStart(2, "0");
         captionText.textContent = "";
         caption.classList.toggle("is-long", !!d.title);
+        caption.classList.toggle("is-xlong", !!d.title && d.cap.length > 450);
         if (d.title) {
           const hd = document.createElement("span");
           hd.className = "tour__h";
@@ -252,10 +259,19 @@
             sb.textContent = d.subtitle;
             captionText.appendChild(sb);
           }
-          const bd = document.createElement("span");
-          bd.className = "tour__body";
-          bd.textContent = d.cap;
-          captionText.appendChild(bd);
+          d.cap.split("\n\n").forEach((para) => {
+            const bd = document.createElement("span");
+            bd.className = "tour__body";
+            bd.textContent = para;
+            captionText.appendChild(bd);
+          });
+          if (d.emblem === "crown") {
+            const em = document.createElement("span");
+            em.className = "tour__emblem";
+            em.setAttribute("aria-hidden", "true");
+            em.innerHTML = '<svg viewBox="0 0 64 40" fill="currentColor"><path d="M4 8l14 12 14-16 14 16 14-12-6 28H10z"/><circle cx="4" cy="7" r="3.2"/><circle cx="32" cy="3.5" r="3.2"/><circle cx="60" cy="7" r="3.2"/></svg>';
+            captionText.insertBefore(em, captionText.firstChild);
+          }
         } else {
           captionText.textContent = d.cap;
         }
@@ -382,8 +398,8 @@
       slideEls.forEach((el) => el.classList.remove("is-active"));
       titleCard.classList.remove("is-on");
       endCard.classList.remove("is-on");
-      caption.classList.remove("is-on", "is-long");
-      tour.classList.remove("has-long");
+      caption.classList.remove("is-on", "is-long", "is-xlong");
+      tour.classList.remove("has-long", "has-xlong");
     }, 900);
     if (lastFocus) lastFocus.focus();
   };

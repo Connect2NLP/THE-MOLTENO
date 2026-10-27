@@ -8,7 +8,7 @@
 <link rel="icon" href="assets/logo/molteno-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=20261130">
+<link rel="stylesheet" href="css/styles.css?v=20261204">
 <style>
   .page-hero {
     background: var(--color-navy);
@@ -45,6 +45,104 @@
   .place-card__photo--wide { aspect-ratio: 1748 / 1240; }
   .place-card__body { padding: 26px 28px 30px; }
   .place-card__body h3 { margin-top: 0; }
+
+
+  /* Cape Town's Must-Sees: a full-width panorama, then headings that open on hover */
+  main, .section { overflow-x: clip; }
+  .place-banner {
+    margin: 0 0 44px;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    background: var(--color-navy-dark);
+  }
+  .place-banner img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 2 / 1;
+    max-height: 82vh;
+    object-fit: cover;
+    object-position: center;
+  }
+  .place-grid--reveal { align-items: start; }
+  .place-grid--reveal .place-card {
+    position: relative;
+    height: 84px;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: var(--radius);
+    overflow: visible;
+    outline: none;
+  }
+  .place-reveal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    max-height: 84px;
+    overflow: hidden;
+    padding: 0 28px;
+    background: var(--color-cream);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: max-height 0.6s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.5s ease, border-color 0.5s ease;
+  }
+  .place-reveal h3 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    height: 82px;
+    margin: 0;
+  }
+  .place-reveal h3::after {
+    content: "+";
+    flex: none;
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--color-gold);
+    border-radius: 50%;
+    color: var(--color-gold-dark);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1;
+    transition: transform 0.5s ease, background 0.4s ease, color 0.4s ease;
+  }
+  .place-reveal p {
+    margin: 0;
+    padding-bottom: 28px;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.45s ease 0.12s, transform 0.45s ease 0.12s;
+  }
+  .place-grid--reveal .place-card.is-open .place-reveal,
+  .place-grid--reveal .place-card:focus-within .place-reveal {
+    max-height: 420px;
+    z-index: 6;
+    border-color: var(--color-gold);
+    box-shadow: 0 22px 46px rgba(20, 38, 53, 0.2);
+  }
+  .place-grid--reveal .place-card.is-open .place-reveal p,
+  .place-grid--reveal .place-card:focus-within .place-reveal p { opacity: 1; transform: none; }
+  .place-grid--reveal .place-card.is-open h3::after,
+  .place-grid--reveal .place-card:focus-within h3::after { transform: rotate(45deg); background: var(--color-gold); color: var(--color-cream); }
+  @media (hover: hover) {
+    .place-grid--reveal .place-card:hover .place-reveal {
+      max-height: 420px;
+      z-index: 6;
+      border-color: var(--color-gold);
+      box-shadow: 0 22px 46px rgba(20, 38, 53, 0.2);
+    }
+    .place-grid--reveal .place-card:hover .place-reveal p { opacity: 1; transform: none; }
+    .place-grid--reveal .place-card:hover h3::after { transform: rotate(45deg); background: var(--color-gold); color: var(--color-cream); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .place-reveal, .place-reveal p, .place-reveal h3::after { transition: none; }
+  }
 
   @media (max-width: 900px) {
     .place-grid { grid-template-columns: repeat(2, 1fr); }
@@ -94,30 +192,45 @@
         <h2>Cape Town's Must-Sees</h2>
         <p>The sights that put Cape Town on the map — best enjoyed with an early start and a good guide.</p>
       </div>
-      <div class="place-grid">
-        <article class="place-card">
-          <h3>Table Mountain</h3>
-          <p>Ride the rotating cableway to the top of one of the New7Wonders of Nature for sweeping views over the city, Table Bay and the Atlantic. We'll time your visit around the weather for the clearest views.</p>
+      <figure class="place-banner">
+        <img src="assets/images/tours/table-mountain-panorama.webp" alt="Aerial view of Cape Town beneath Table Mountain at golden hour, with the harbour, the stadium and the Atlantic coast" loading="lazy" decoding="async">
+      </figure>
+      <div class="place-grid place-grid--reveal">
+        <article class="place-card" tabindex="0">
+          <div class="place-reveal">
+            <h3>Table Mountain</h3>
+            <p>Ride the rotating cableway to the top of one of the New7Wonders of Nature for sweeping views over the city, Table Bay and the Atlantic. We'll time your visit around the weather for the clearest views.</p>
+          </div>
         </article>
-        <article class="place-card">
-          <h3>Cape Point &amp; Cape of Good Hope</h3>
-          <p>A dramatic scenic drive to the southwestern tip of the peninsula, with rugged cliffs, wild fynbos, roaming ostriches and the historic lighthouse at the point.</p>
+        <article class="place-card" tabindex="0">
+          <div class="place-reveal">
+            <h3>Cape Point &amp; Cape of Good Hope</h3>
+            <p>A dramatic scenic drive to the southwestern tip of the peninsula, with rugged cliffs, wild fynbos, roaming ostriches and the historic lighthouse at the point.</p>
+          </div>
         </article>
-        <article class="place-card">
-          <h3>V&amp;A Waterfront</h3>
-          <p>Cape Town's harbourside hub for shopping, seafood and sundowners, with views across to Robben Island and Table Mountain from the water's edge.</p>
+        <article class="place-card" tabindex="0">
+          <div class="place-reveal">
+            <h3>V&amp;A Waterfront</h3>
+            <p>Cape Town's harbourside hub for shopping, seafood and sundowners, with views across to Robben Island and Table Mountain from the water's edge.</p>
+          </div>
         </article>
-        <article class="place-card">
-          <h3>Bo-Kaap</h3>
-          <p>Wander the cobbled streets of this historic Cape Malay neighbourhood, known for its brightly coloured houses, cobblestones and rich culinary heritage.</p>
+        <article class="place-card" tabindex="0">
+          <div class="place-reveal">
+            <h3>Bo-Kaap</h3>
+            <p>Wander the cobbled streets of this historic Cape Malay neighbourhood, known for its brightly coloured houses, cobblestones and rich culinary heritage.</p>
+          </div>
         </article>
-        <article class="place-card">
-          <h3>Robben Island</h3>
-          <p>A short ferry from the Waterfront to the island where Nelson Mandela was imprisoned, now a UNESCO World Heritage Site with guided tours led by former political prisoners.</p>
+        <article class="place-card" tabindex="0">
+          <div class="place-reveal">
+            <h3>Robben Island</h3>
+            <p>A short ferry from the Waterfront to the island where Nelson Mandela was imprisoned, now a UNESCO World Heritage Site with guided tours led by former political prisoners.</p>
+          </div>
         </article>
-        <article class="place-card">
-          <h3>Company's Garden &amp; District Six Museum</h3>
-          <p>A leafy city-centre garden dating back to 1652, and a moving museum telling the story of a community uprooted by forced removals during apartheid.</p>
+        <article class="place-card" tabindex="0">
+          <div class="place-reveal">
+            <h3>Company's Garden &amp; District Six Museum</h3>
+            <p>A leafy city-centre garden dating back to 1652, and a moving museum telling the story of a community uprooted by forced removals during apartheid.</p>
+          </div>
         </article>
       </div>
     </div>
@@ -128,30 +241,45 @@
         <h2>Beyond the City</h2>
         <p>From penguins to proteas, Cape Town's natural surrounds are just as memorable as its skyline.</p>
       </div>
-      <div class="place-grid">
-        <article class="place-card">
-          <h3>Boulders Beach Penguins</h3>
-          <p>A protected colony of African penguins waddling along a beautiful beach in Simon's Town — one of the only places in the world to see penguins up close in the wild.</p>
+      <figure class="place-banner">
+        <img src="assets/images/tours/penguins-boulders-beach.webp" alt="African penguins walking along the sand at Boulders Beach in the golden evening light" loading="lazy" decoding="async">
+      </figure>
+      <div class="place-grid place-grid--reveal">
+        <article class="place-card" tabindex="0">
+          <div class="place-reveal">
+            <h3>Boulders Beach Penguins</h3>
+            <p>A protected colony of African penguins waddling along a beautiful beach in Simon's Town — one of the only places in the world to see penguins up close in the wild.</p>
+          </div>
         </article>
-        <article class="place-card">
-          <h3>Kirstenbosch Botanical Gardens</h3>
-          <p>World-renowned gardens set against the eastern slopes of Table Mountain, home to South Africa's unique fynbos and the famous Boomslang canopy walkway.</p>
+        <article class="place-card" tabindex="0">
+          <div class="place-reveal">
+            <h3>Kirstenbosch Botanical Gardens</h3>
+            <p>World-renowned gardens set against the eastern slopes of Table Mountain, home to South Africa's unique fynbos and the famous Boomslang canopy walkway.</p>
+          </div>
         </article>
-        <article class="place-card">
-          <h3>Lion's Head &amp; Signal Hill</h3>
-          <p>A popular sunrise or full-moon hike up Lion's Head, or an easy scenic drive up Signal Hill — both offering some of the best panoramic views in the city.</p>
+        <article class="place-card" tabindex="0">
+          <div class="place-reveal">
+            <h3>Lion's Head &amp; Signal Hill</h3>
+            <p>A popular sunrise or full-moon hike up Lion's Head, or an easy scenic drive up Signal Hill — both offering some of the best panoramic views in the city.</p>
+          </div>
         </article>
-        <article class="place-card">
-          <h3>Whale Watching in Hermanus</h3>
-          <p>Between June and December, Southern Right whales come remarkably close to shore along the Hermanus coastline — one of the best land-based whale watching spots on earth.</p>
+        <article class="place-card" tabindex="0">
+          <div class="place-reveal">
+            <h3>Whale Watching in Hermanus</h3>
+            <p>Between June and December, Southern Right whales come remarkably close to shore along the Hermanus coastline — one of the best land-based whale watching spots on earth.</p>
+          </div>
         </article>
-        <article class="place-card">
-          <h3>Big Five Safari</h3>
-          <p>A day trip or overnight safari to a nearby game reserve, where expert guides help you track lion, elephant, rhino, buffalo and leopard.</p>
+        <article class="place-card" tabindex="0">
+          <div class="place-reveal">
+            <h3>Big Five Safari</h3>
+            <p>A day trip or overnight safari to a nearby game reserve, where expert guides help you track lion, elephant, rhino, buffalo and leopard.</p>
+          </div>
         </article>
-        <article class="place-card">
-          <h3>Shark Cage Diving</h3>
-          <p>For the adventurous, an unforgettable face-to-face encounter with great white sharks in their natural habitat, arranged with trusted local operators.</p>
+        <article class="place-card" tabindex="0">
+          <div class="place-reveal">
+            <h3>Shark Cage Diving</h3>
+            <p>For the adventurous, an unforgettable face-to-face encounter with great white sharks in their natural habitat, arranged with trusted local operators.</p>
+          </div>
         </article>
       </div>
     </div>
@@ -268,5 +396,26 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script>
+  // Must-Sees: on touch screens (no hover) and from the keyboard, tap a heading to open or close it.
+  (function () {
+    var cards = document.querySelectorAll(".place-grid--reveal .place-card");
+    cards.forEach(function (card) {
+      card.addEventListener("click", function (e) {
+        var opening = !card.classList.contains("is-open");
+        cards.forEach(function (c) { c.classList.remove("is-open"); });
+        if (opening) card.classList.add("is-open");
+        if (!opening) card.blur();
+      });
+      card.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); card.click(); }
+      });
+    });
+    document.addEventListener("click", function (e) {
+      if (!e.target.closest(".place-grid--reveal .place-card")) cards.forEach(function (c) { c.classList.remove("is-open"); });
+    });
+  })();
+</script>
+
 </body>
 </html>

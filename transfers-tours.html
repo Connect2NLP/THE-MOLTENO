@@ -8,7 +8,7 @@
 <link rel="icon" href="assets/logo/molteno-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=20261016">
+<link rel="stylesheet" href="css/styles.css?v=20261129">
 <style>
   .page-hero {
     background: var(--color-navy);
@@ -38,6 +38,12 @@
   }
   .place-card h3 { font-size: 1.15rem; margin-bottom: 10px; }
   .place-card p { color: #5c5644; font-size: 0.92rem; margin: 0; }
+
+  .place-card--photo { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+  .place-card__photo { aspect-ratio: 1240 / 1000; display: grid; place-items: center; background: var(--color-navy-dark); }
+  .place-card__photo img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; }
+  .place-card__body { padding: 26px 28px 30px; }
+  .place-card__body h3 { margin-top: 0; }
 
   @media (max-width: 900px) {
     .place-grid { grid-template-columns: repeat(2, 1fr); }
@@ -178,17 +184,26 @@
         <p>Full-day escapes for wine lovers, history buffs and anyone wanting to see more of the Western Cape.</p>
       </div>
       <div class="place-grid">
-        <article class="place-card">
-          <h3>Stellenbosch &amp; Franschhoek</h3>
-          <p>The heart of the Cape Winelands — historic oak-lined towns surrounded by award-winning estates, offering tastings, cellar tours and exceptional food.</p>
+        <article class="place-card place-card--photo">
+          <div class="place-card__photo"><img src="assets/images/tours/winelands-stellenbosch.webp" alt="Ripe red grapes on the vine in a Winelands vineyard at golden hour" loading="lazy" decoding="async"></div>
+          <div class="place-card__body">
+            <h3>Stellenbosch &amp; Franschhoek</h3>
+            <p>The heart of the Cape Winelands — historic oak-lined towns surrounded by award-winning estates, offering tastings, cellar tours and exceptional food.</p>
+          </div>
         </article>
-        <article class="place-card">
-          <h3>Constantia Wine Route</h3>
-          <p>South Africa's oldest wine-producing region, just twenty minutes from the city, home to historic estates like Groot Constantia.</p>
+        <article class="place-card place-card--photo">
+          <div class="place-card__photo"><img src="assets/images/tours/winelands-constantia.webp" alt="A vaulted wine cellar lined with oak barrels at a Constantia estate" loading="lazy" decoding="async"></div>
+          <div class="place-card__body">
+            <h3>Constantia Wine Route</h3>
+            <p>South Africa's oldest wine-producing region, just twenty minutes from the city, home to historic estates like Groot Constantia.</p>
+          </div>
         </article>
-        <article class="place-card">
-          <h3>Helicopter &amp; Scenic Flights</h3>
-          <p>See it all from above — Table Mountain, the Atlantic Seaboard and the peninsula from a private helicopter flight, arranged for special occasions or simply the best view in town.</p>
+        <article class="place-card place-card--photo">
+          <div class="place-card__photo"><img src="assets/images/tours/winelands-helicopter.webp" alt="A helicopter flying over Cape Town and Table Mountain, with the smiling pilot in the cockpit" loading="lazy" decoding="async"></div>
+          <div class="place-card__body">
+            <h3>Helicopter &amp; Scenic Flights</h3>
+            <p>See it all from above — Table Mountain, the Atlantic Seaboard and the peninsula from a private helicopter flight, arranged for special occasions or simply the best view in town.</p>
+          </div>
         </article>
       </div>
     </div>

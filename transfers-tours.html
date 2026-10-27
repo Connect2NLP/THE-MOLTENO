@@ -8,7 +8,7 @@
 <link rel="icon" href="assets/logo/molteno-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=20261129">
+<link rel="stylesheet" href="css/styles.css?v=20261130">
 <style>
   .page-hero {
     background: var(--color-navy);
@@ -42,6 +42,7 @@
   .place-card--photo { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
   .place-card__photo { aspect-ratio: 1240 / 1000; display: grid; place-items: center; background: var(--color-navy-dark); }
   .place-card__photo img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; }
+  .place-card__photo--wide { aspect-ratio: 1748 / 1240; }
   .place-card__body { padding: 26px 28px 30px; }
   .place-card__body h3 { margin-top: 0; }
 
@@ -162,17 +163,26 @@
         <p>Cape Town's coastline is as varied as it is beautiful, from surf beaches to cliffside drives.</p>
       </div>
       <div class="place-grid">
-        <article class="place-card">
-          <h3>Camps Bay &amp; Clifton Beaches</h3>
-          <p>Palm-lined promenades, white sand and the dramatic backdrop of the Twelve Apostles — perfect for a sundowner or a lazy beach afternoon.</p>
+        <article class="place-card place-card--photo">
+          <div class="place-card__photo place-card__photo--wide"><img src="assets/images/tours/beaches-camps-bay.webp" alt="Palm trees, the Camps Bay promenade and Table Mountain beneath a bright blue sky" loading="lazy" decoding="async"></div>
+          <div class="place-card__body">
+            <h3>Camps Bay &amp; Clifton Beaches</h3>
+            <p>Palm-lined promenades, white sand and the dramatic backdrop of the Twelve Apostles — perfect for a sundowner or a lazy beach afternoon.</p>
+          </div>
         </article>
-        <article class="place-card">
-          <h3>Chapman's Peak Drive</h3>
-          <p>One of the most spectacular coastal drives in the world, carved into the cliffs between Hout Bay and Noordhoek, with a toll and endless photo stops.</p>
+        <article class="place-card place-card--photo">
+          <div class="place-card__photo place-card__photo--wide"><img src="assets/images/tours/beaches-chapmans-peak.webp" alt="The Chapman's Peak coastal road carved into golden cliffs above the sea" loading="lazy" decoding="async"></div>
+          <div class="place-card__body">
+            <h3>Chapman's Peak Drive</h3>
+            <p>One of the most spectacular coastal drives in the world, carved into the cliffs between Hout Bay and Noordhoek, with a toll and endless photo stops.</p>
+          </div>
         </article>
-        <article class="place-card">
-          <h3>Muizenberg Beach</h3>
-          <p>Cape Town's colourful surf capital, with warmer False Bay waters, beginner-friendly waves and the iconic row of Victorian bathing huts.</p>
+        <article class="place-card place-card--photo">
+          <div class="place-card__photo place-card__photo--wide"><img src="assets/images/tours/beaches-muizenberg.webp" alt="Colourful Victorian bathing huts lined up on the white sand at Muizenberg" loading="lazy" decoding="async"></div>
+          <div class="place-card__body">
+            <h3>Muizenberg Beach</h3>
+            <p>Cape Town's colourful surf capital, with warmer False Bay waters, beginner-friendly waves and the iconic row of Victorian bathing huts.</p>
+          </div>
         </article>
       </div>
     </div>

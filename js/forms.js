@@ -21,7 +21,7 @@
       new FormData(form).forEach(function (v, k) { data[k] = v; });
       button.disabled = true;
       status.className = "form-status";
-      status.textContent = "Sending...";
+      status.textContent = "Sending, this can take up to a minute. Please keep this page open.";
       fetch("https://formsubmit.co/ajax/info@themolteno.com", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },

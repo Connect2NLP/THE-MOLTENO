@@ -8,7 +8,7 @@
 <link rel="icon" href="assets/logo/molteno-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=20261226">
+<link rel="stylesheet" href="css/styles.css?v=20261231">
 <style>
   .page-hero {
     background: var(--color-navy);
@@ -21,7 +21,8 @@
     position: relative;
     overflow: hidden;
     isolation: isolate;
-    min-height: 620px;
+    min-height: 700px;
+    padding-top: 198px;
     background: var(--color-navy-dark);
   }
   .page-hero--photo::before {
@@ -50,10 +51,16 @@
     mask-image: linear-gradient(to right, transparent 0%, #000 18%, #000 82%, transparent 100%);
   }
   .page-hero--photo .container { position: relative; z-index: 1; }
-  .page-hero--photo h1 { font-weight: 300; filter: drop-shadow(0 2px 14px rgba(0, 0, 0, 0.65)); }
-  .page-hero--photo p { color: #eef1ec; text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6); }
+  .page-hero--photo h1 {
+    font-weight: 300;
+    font-size: clamp(1.3rem, 5.3vw, 4.25rem);
+    white-space: nowrap;
+    margin-bottom: 8px;
+    filter: drop-shadow(0 2px 14px rgba(0, 0, 0, 0.65));
+  }
+  .page-hero--photo p { color: #eef1ec; max-width: 880px; text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6); }
   @media (max-width: 900px) {
-    .page-hero--photo { min-height: 0; padding-bottom: 150px; }
+    .page-hero--photo { min-height: 0; padding-top: calc(clamp(90px, 13.4vw, 180px) + 12px + 40.8vw + 22px); padding-bottom: 60px; }
     .page-hero--photo::after {
       left: 0;
       right: 0;

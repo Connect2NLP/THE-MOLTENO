@@ -8,7 +8,7 @@
 <link rel="icon" href="assets/logo/molteno-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=20261213">
+<link rel="stylesheet" href="css/styles.css?v=20261216">
 <style>
   .page-hero {
     background: var(--color-navy);
@@ -64,6 +64,40 @@
   @media (max-width: 800px) {
     .contact-grid { grid-template-columns: 1fr; }
     .form-row { grid-template-columns: 1fr; }
+  }
+
+  /* Meet your host */
+  .host-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 88px;
+    align-items: center;
+  }
+  .host-photo { margin: 0; }
+  .host-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 2px;
+    outline: 1px solid rgba(211, 176, 107, 0.6);
+    outline-offset: 12px;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+  }
+  .host-copy .eyebrow { color: var(--color-gold); }
+  .host-copy h2 { color: var(--color-cream); margin: 0 0 22px; }
+  .host-copy p { color: #dbe4dc; }
+  .host-copy .host-lead {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.5rem;
+    line-height: 1.45;
+    color: #d3b06b;
+    margin: 0 0 22px;
+  }
+  @media (max-width: 900px) {
+    .host-grid { grid-template-columns: 1fr; gap: 44px; }
+    .host-photo { max-width: 420px; margin: 0 auto; }
+    .host-photo img { outline-offset: 8px; }
   }
 </style>
 </head>
@@ -134,6 +168,21 @@
       <p class="promo-note">Enquiring about the Summer Escape offer? Please read the <a href="index.html#summer-escape-terms">offer terms &amp; conditions</a> before you submit.</p>
       <button type="submit" class="btn btn--solid" style="justify-self:start;">Submit Form</button>
     </form>
+  </div>
+</section>
+
+<section class="section section--dark" id="host">
+  <div class="container host-grid">
+    <figure class="host-photo">
+      <img src="assets/images/julian-host.webp" width="1400" height="1974" alt="Julian, your host at The Molteno, smiling at a candlelit restaurant table" loading="lazy" decoding="async">
+    </figure>
+    <div class="host-copy">
+      <span class="eyebrow">Meet your host, Julian</span>
+      <h2>So, this is Julian</h2>
+      <p class="host-lead">Your gracious, fun host at The Molteno</p>
+      <p>Julian, or as many know him, Jules, your host at The Molteno, is a social, attentive, fun guy who brings heart, laughter, and a genuine love for people into every guest experience. With a passion for hospitality, entertaining, food &amp; wine, the outdoors, plants, music, and creating meaningful connections, Jules ensures every stay feels personal, comfortable, and truly memorable.</p>
+      <p>He loves a good cook-up, and hosting intimate guest dinners, braais and social gatherings. He'll go the extra mile for people and is great at maintaining quality connections and friendships long after the stay at The Molteno.</p>
+    </div>
   </div>
 </section>
 

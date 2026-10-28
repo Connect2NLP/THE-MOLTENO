@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — The Molteno</title>
 <meta name="description" content="Get in touch with The Molteno, Cape Town's Victorian Gem guesthouse in Gardens.">
+<link rel="canonical" href="https://themolteno.com/contact.html">
 <link rel="icon" href="assets/logo/molteno-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
@@ -135,7 +136,7 @@
       </div>
       <a href="rooms-rates.html">Rooms &amp; Rates</a>
     </nav>
-    <a href="contact.html" class="btn btn--nav">Reservations</a>
+    <a href="enquire.html" class="btn btn--nav">Reservations</a>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -161,7 +162,11 @@
       <dd><a href="mailto:info@themolteno.com">info@themolteno.com</a></dd>
     </dl>
 
-    <form action="mailto:info@themolteno.com" method="post" enctype="text/plain">
+    <form data-email-form>
+      <input type="hidden" name="_subject" value="Website message: The Molteno contact form">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="form-row">
         <div>
           <label for="fname">First Name</label>
@@ -174,7 +179,7 @@
       </div>
       <div>
         <label for="email">Email</label>
-        <input id="email" name="Email" type="email" required>
+        <input id="email" name="email" type="email" required>
       </div>
       <div>
         <label for="subject">Subject</label>
@@ -186,6 +191,7 @@
       </div>
       <p class="promo-note">Enquiring about the Summer Escape offer? Please read the <a href="index.html#summer-escape-terms">offer terms &amp; conditions</a> before you submit.</p>
       <button type="submit" class="btn btn--solid" style="justify-self:start;">Submit Form</button>
+      <p class="form-status" role="status" aria-live="polite"></p>
     </form>
   </div>
 </section>
@@ -275,5 +281,6 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script src="js/forms.js"></script>
 </body>
 </html>

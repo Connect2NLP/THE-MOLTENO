@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enquire &amp; Book | The Molteno Guesthouse, Gardens, Cape Town</title>
+<meta name="description" content="Enquire about a stay at The Molteno, a boutique Victorian guesthouse in Gardens, Cape Town. Choose your suite and dates and we will be in touch.">
+<link rel="canonical" href="https://themolteno.com/enquire.html">
+<link rel="icon" href="assets/logo/molteno-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css?v=20270101">
+<style>
+  .page-hero {
+    background: var(--color-navy);
+    color: var(--color-cream);
+    padding: 206px 0 90px;
+    text-align: center;
+  }
+  .page-hero--photo {
+    background:
+      linear-gradient(180deg, rgba(20, 38, 53, 0.84) 0%, rgba(31, 58, 82, 0.68) 45%, rgba(20, 38, 53, 0.92) 100%),
+      url("assets/images/contact-hero-protea.webp") center / cover no-repeat;
+    background-color: var(--color-navy);
+  }
+  .page-hero--photo h1 { font-weight: 300; filter: drop-shadow(0 2px 14px rgba(0, 0, 0, 0.6)); }
+  .page-hero--photo p { color: #eef1ec; text-shadow: 0 2px 16px rgba(0, 0, 0, 0.55); }
+  .page-hero .eyebrow { color: var(--color-gold); }
+  .page-hero h1 { margin-bottom: 12px; }
+  .page-hero p { color: #dbe4dc; max-width: 520px; margin: 0 auto; }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 64px;
+  }
+  .contact-info dt {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    margin-top: 28px;
+  }
+  .contact-info dt:first-child { margin-top: 0; }
+  .contact-info dd {
+    margin: 6px 0 0;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--color-navy);
+  }
+  form { display: grid; gap: 18px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  label {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #5c5644;
+    margin-bottom: 8px;
+  }
+  input, textarea, select {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    padding: 13px 14px;
+    border: 1px solid var(--color-line);
+    background: var(--color-cream);
+    color: var(--color-ink);
+    border-radius: var(--radius);
+  }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--color-green); }
+  textarea { min-height: 140px; resize: vertical; }
+  @media (max-width: 800px) {
+    .contact-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+
+  /* Meet your host */
+  #host { scroll-margin-top: 110px; }
+  .host-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 88px;
+    align-items: center;
+  }
+  .host-photo { margin: 0; }
+  .host-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 2px;
+    outline: 1px solid rgba(211, 176, 107, 0.6);
+    outline-offset: 12px;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+  }
+  .host-copy .eyebrow { color: var(--color-gold); }
+  .host-copy h2 { color: var(--color-cream); margin: 0 0 22px; }
+  .host-copy p { color: #dbe4dc; }
+  .host-copy .host-lead {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.5rem;
+    line-height: 1.45;
+    color: #d3b06b;
+    margin: 0 0 22px;
+  }
+  @media (max-width: 900px) {
+    .host-grid { grid-template-columns: 1fr; gap: 44px; }
+    .host-photo { max-width: 420px; margin: 0 auto; }
+    .host-photo img { outline-offset: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header is-scrolled">
+  <div class="container header-row">
+    <a href="index.html" class="brand">
+      <img src="assets/logo/molteno-logo.png" alt="The Molteno" class="brand-logo">
+    </a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="reviews.html">Reviews</a>
+      <div class="nav-item has-dropdown">
+        <a href="contact.html">Contact</a>
+        <div class="nav-dropdown">
+          <a href="contact.html#host">Meet your host</a>
+        </div>
+      </div>
+      <a href="the-molteno-experience.html">The Molteno Experience</a>
+      <div class="nav-item has-dropdown">
+        <a href="transfers-tours.html">Tours</a>
+        <div class="nav-dropdown">
+          <a href="dining-out.html">Dining Out</a>
+        </div>
+      </div>
+      <a href="rooms-rates.html">Rooms &amp; Rates</a>
+    </nav>
+    <a href="enquire.html" class="btn btn--nav">Reservations</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="page-hero page-hero--photo">
+  <div class="container">
+    <span class="eyebrow">Reservations</span>
+    <h1>Enquire about your stay</h1>
+    <p>Tell us when you would like to visit and which suite you prefer, and we will come back to you personally.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container contact-grid">
+    <dl class="contact-info">
+      <dt>Visit Us</dt>
+      <dd>4 Molteno Road, Gardens, Cape Town</dd>
+      <dt>Call Us</dt>
+      <dd><a href="tel:+27723034857">+27 72 303 4857</a></dd>
+      <dt>Email Us</dt>
+      <dd><a href="mailto:info@themolteno.com">info@themolteno.com</a></dd>
+    </dl>
+
+    <form data-email-form>
+      <input type="hidden" name="_subject" value="Booking enquiry: The Molteno">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="form-row">
+        <div><label for="fname">First Name</label><input id="fname" name="First Name" type="text" required autocomplete="given-name"></div>
+        <div><label for="lname">Last Name</label><input id="lname" name="Last Name" type="text" required autocomplete="family-name"></div>
+      </div>
+      <div class="form-row">
+        <div><label for="email">Email</label><input id="email" name="email" type="email" required autocomplete="email"></div>
+        <div><label for="guests">Number of Guests</label><input id="guests" name="Number of Guests" type="number" min="1" max="20" inputmode="numeric" required></div>
+      </div>
+      <div>
+        <label for="suite">Suite</label>
+        <select id="suite" name="Suite" required>
+          <option value="" disabled selected>Select a suite</option>
+          <option>Azura Suite (Deluxe)</option>
+          <option>Sanctuary Suite (Deluxe)</option>
+          <option>The Studio Suite (Premium)</option>
+          <option>The Monarch Suite (Superior)</option>
+          <option>The Panorama Suite (Executive)</option>
+          <option>Not sure yet, please advise</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div><label for="dfrom">Date From</label><input id="dfrom" name="Date From" type="date" required></div>
+        <div><label for="dto">Date To</label><input id="dto" name="Date To" type="date" required></div>
+      </div>
+      <div>
+        <label for="message">Any Questions?</label>
+        <textarea id="message" name="Message"></textarea>
+      </div>
+      <p class="promo-note">Enquiring about the Summer Escape offer? Please read the <a href="index.html#summer-escape-terms">offer terms &amp; conditions</a> before you submit.</p>
+      <button type="submit" class="btn btn--solid" style="justify-self:start;">Send Enquiry</button>
+      <p class="form-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/logo/molteno-logo.png" alt="The Molteno">
+        <p>Cape Town's Victorian Gem — a classy, elegant, effortless home away from home beneath the slopes of Table Mountain.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Explore</h4>
+        <a href="index.html">Home</a>
+        <a href="reviews.html">Reviews</a>
+        <a href="the-molteno-experience.html">The Molteno Experience</a>
+      <a href="transfers-tours.html">Transfers &amp; Tours</a>
+        <a href="dining-out.html">Dining Out</a>
+        <a href="rooms-rates.html">Rooms &amp; Rates</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-links">
+        <h4>Get In Touch</h4>
+        <div>4 Molteno Road, Gardens, Cape Town</div>
+        <a href="tel:+27723034857">+27 72 303 4857</a>
+        <a href="mailto:info@themolteno.com">info@themolteno.com</a>
+      </div>
+      <div class="footer-links">
+        <h4>Follow Us</h4>
+        <a href="https://www.facebook.com/share/1BxByJtBjG/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.instagram.com/themolteno" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@themolteno" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://wa.me/27723034857" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 The Molteno. All rights reserved.</span>
+      <a href="privacy-policy.html">Privacy Policy</a> &nbsp;&middot;&nbsp; <a href="terms-of-use.html">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/forms.js"></script>
+</body>
+</html>

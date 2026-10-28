@@ -9,7 +9,7 @@
 <link rel="icon" href="assets/logo/molteno-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=20270106">
+<link rel="stylesheet" href="css/styles.css?v=20270108">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"Julian's Favourite & Suggested Restaurants, Cape Town","itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"Restaurant","name":"Black Sheep Restaurant","url":"https://blacksheeprestaurant.co.za/","address":{"@type":"PostalAddress","addressLocality":"Gardens","addressRegion":"Western Cape","addressCountry":"ZA"}}},{"@type":"ListItem","position":2,"item":{"@type":"Restaurant","name":"Bacini's","url":"https://www.mochachos.com/bacinis-brands/","address":{"@type":"PostalAddress","addressLocality":"Kloof Street","addressRegion":"Western Cape","addressCountry":"ZA"}}},{"@type":"ListItem","position":3,"item":{"@type":"Restaurant","name":"The Codfather","url":"https://www.codfather.co.za/","address":{"@type":"PostalAddress","addressLocality":"Camps Bay","addressRegion":"Western Cape","addressCountry":"ZA"}}},{"@type":"ListItem","position":4,"item":{"@type":"Restaurant","name":"Zest","address":{"@type":"PostalAddress","addressLocality":"Sea Point","addressRegion":"Western Cape","addressCountry":"ZA"}}},{"@type":"ListItem","position":5,"item":{"@type":"Restaurant","name":"Maria's Greek Café","address":{"@type":"PostalAddress","addressLocality":"Barnet Street","addressRegion":"Western Cape","addressCountry":"ZA"}}},{"@type":"ListItem","position":6,"item":{"@type":"Restaurant","name":"The Pot Luck Club","url":"https://thepotluckclub.co.za/","address":{"@type":"PostalAddress","addressLocality":"Woodstock","addressRegion":"Western Cape","addressCountry":"ZA"}}},{"@type":"ListItem","position":7,"item":{"@type":"Restaurant","name":"Nelson's Eye","address":{"@type":"PostalAddress","addressLocality":"Gardens","addressRegion":"Western Cape","addressCountry":"ZA"}}},{"@type":"ListItem","position":8,"item":{"@type":"Restaurant","name":"Belly of the Beast","url":"https://bellyofthebeast.co.za/","address":{"@type":"PostalAddress","addressLocality":"Zonnebloem","addressRegion":"Western Cape","addressCountry":"ZA"}}},{"@type":"ListItem","position":9,"item":{"@type":"Restaurant","name":"La Boheme Wine Bar & Bistro","url":"https://labohemebistro.co.za/","address":{"@type":"PostalAddress","addressLocality":"Sea Point","addressRegion":"Western Cape","addressCountry":"ZA"}}},{"@type":"ListItem","position":10,"item":{"@type":"Restaurant","name":"VIXI Social House","url":"https://vixi.co.za/","address":{"@type":"PostalAddress","addressLocality":"Cape Town CBD","addressRegion":"Western Cape","addressCountry":"ZA"}}},{"@type":"ListItem","position":11,"item":{"@type":"Restaurant","name":"Saigon Vietnamese Restaurant","address":{"@type":"PostalAddress","addressLocality":"Gardens","addressRegion":"Western Cape","addressCountry":"ZA"}}},{"@type":"ListItem","position":12,"item":{"@type":"Restaurant","name":"Dias Tavern Portuguese Restaurant","address":{"@type":"PostalAddress","addressLocality":"District Six","addressRegion":"Western Cape","addressCountry":"ZA"}}},{"@type":"ListItem","position":13,"item":{"@type":"Restaurant","name":"Clarke's Bar & Dining Room","url":"https://www.clarkesdining.co.za/","address":{"@type":"PostalAddress","addressLocality":"Bree Street","addressRegion":"Western Cape","addressCountry":"ZA"}}},{"@type":"ListItem","position":14,"item":{"@type":"Restaurant","name":"Thali Restaurant","address":{"@type":"PostalAddress","addressLocality":"Gardens","addressRegion":"Western Cape","addressCountry":"ZA"}}},{"@type":"ListItem","position":15,"item":{"@type":"Restaurant","name":"Col'Cacchio","url":"https://www.colcacchio.co.za/","address":{"@type":"PostalAddress","addressLocality":"Foreshore","addressRegion":"Western Cape","addressCountry":"ZA"}}},{"@type":"ListItem","position":16,"item":{"@type":"Restaurant","name":"Bobo's","url":"https://www.kovecollection.co.za/bobos/","address":{"@type":"PostalAddress","addressLocality":"Mouille Point","addressRegion":"Western Cape","addressCountry":"ZA"}}},{"@type":"ListItem","position":17,"item":{"@type":"Restaurant","name":"The Office Restaurant, Sports Bar and Music","url":"https://www.theofficecpt.com/","address":{"@type":"PostalAddress","addressLocality":"Sea Point","addressRegion":"Western Cape","addressCountry":"ZA"}}},{"@type":"ListItem","position":18,"item":{"@type":"Restaurant","name":"Manos","address":{"@type":"PostalAddress","addressLocality":"Green Point","addressRegion":"Western Cape","addressCountry":"ZA"}}},{"@type":"ListItem","position":19,"item":{"@type":"Restaurant","name":"Carné on Kloof","url":"https://carne-sa.com","address":{"@type":"PostalAddress","addressLocality":"Kloof Street","addressRegion":"Western Cape","addressCountry":"ZA"}}},{"@type":"ListItem","position":20,"item":{"@type":"Restaurant","name":"La Colombe","url":"https://lacolombe.co.za/","address":{"@type":"PostalAddress","addressLocality":"Constantia","addressRegion":"Western Cape","addressCountry":"ZA"}}}]}</script>
 <style>
   /* Banner: the whole photo, its left and right edges fading into the navy */
@@ -74,31 +74,38 @@
   .dining-filters button:hover { background: rgba(173, 138, 78, 0.16); }
   .dining-filters button[aria-pressed="true"] { background: var(--color-navy-dark); color: var(--color-cream); border-color: var(--color-navy-dark); }
 
-  .dining-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+  .dining-grid { align-items: start; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+  #restaurants { position: relative; overflow: hidden; isolation: isolate; }
+  .dining-bg { position: absolute; z-index: -1; width: 760px; height: 760px; border-radius: 50%; background-size: cover; background-position: center; filter: blur(46px) saturate(1.1); opacity: 0.5; pointer-events: none; }
+  .dining-bg--a { top: 140px; left: -220px; background-image: url("assets/images/dining/vixi.webp"); }
+  .dining-bg--b { bottom: 60px; right: -220px; background-image: url("assets/images/dining/la-colombe.webp"); }
   .dining-card {
-    display: flex;
-    flex-direction: column;
     background: var(--color-cream);
     border: 1px solid var(--color-line);
     border-top: 3px solid var(--color-gold);
     border-radius: var(--radius);
-    padding: 30px 28px 26px;
-    transition: box-shadow 0.5s ease, transform 0.5s ease;
+    transition: box-shadow 0.5s ease;
   }
-  .dining-card:hover { box-shadow: 0 24px 50px rgba(20, 38, 53, 0.16); transform: translateY(-4px); }
+  .dining-card:hover, .dining-card[open] { box-shadow: 0 20px 44px rgba(20, 38, 53, 0.14); }
   .dining-card[hidden] { display: none; }
-  .dining-card__photo { margin: -30px -28px 22px; }
-  .dining-card__photo img { display: block; width: 100%; height: auto; }
-  .dining-card__fav { margin: 0 0 10px; align-self: flex-start; padding: 4px 12px; background: var(--color-gold); color: #fff; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; border-radius: 999px; }
-  .dining-card__where { margin: 0 0 8px; font-size: 0.68rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--color-gold-dark); }
-  .dining-card h3 { margin: 0 0 6px; font-size: 1.45rem; font-weight: 400; color: var(--color-navy-dark); }
-  .dining-card h3 a { color: inherit; border-bottom: 1px solid transparent; transition: border-color 0.3s ease, color 0.3s ease; }
-  .dining-card h3 a:hover { color: var(--color-gold-dark); border-color: var(--color-gold); }
-  .dining-card__mood { margin: 0 0 14px; font-family: var(--font-display); font-style: italic; font-size: 1.1rem; color: var(--color-gold-dark); }
-  .dining-card__desc { margin: 0 0 18px; color: #524c3c; font-size: 0.95rem; flex: 1; }
-  .dining-card__tags { list-style: none; padding: 0; margin: 0 0 20px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .dining-card summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 24px 26px; cursor: pointer; }
+  .dining-card summary::-webkit-details-marker { display: none; }
+  .dining-card summary:focus-visible { outline: 2px solid var(--color-gold); outline-offset: -4px; }
+  .dining-card__text { display: block; }
+  .dining-card__toggle { position: relative; flex: none; width: 30px; height: 30px; border: 1px solid var(--color-gold); border-radius: 50%; }
+  .dining-card__toggle::before, .dining-card__toggle::after { content: ""; position: absolute; top: 50%; left: 50%; width: 11px; height: 1px; background: var(--color-gold-dark); transform: translate(-50%, -50%); transition: transform 0.35s ease; }
+  .dining-card__toggle::after { transform: translate(-50%, -50%) rotate(90deg); }
+  .dining-card[open] .dining-card__toggle::after { transform: translate(-50%, -50%) rotate(0deg); }
+  .dining-card__body { padding: 0 26px 24px; border-top: 1px solid rgba(173, 138, 78, 0.35); padding-top: 18px; animation: diningOpen 0.45s ease; }
+  @keyframes diningOpen { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+  .dining-card__fav { display: inline-block; margin: 0 0 8px; padding: 3px 11px; background: var(--color-gold); color: #fff; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; border-radius: 999px; }
+  .dining-card__where { display: block; margin: 0 0 6px; font-size: 0.68rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--color-gold-dark); }
+  .dining-card h3 { margin: 0 0 4px; font-size: 1.4rem; font-weight: 400; color: var(--color-navy-dark); }
+  .dining-card__mood { display: block; font-family: var(--font-display); font-style: italic; font-size: 1.1rem; color: var(--color-gold-dark); }
+  .dining-card__desc { margin: 0 0 16px; color: #524c3c; font-size: 0.95rem; }
+  .dining-card__tags { list-style: none; padding: 0; margin: 0 0 18px; display: flex; flex-wrap: wrap; gap: 6px; }
   .dining-card__tags li { padding: 4px 10px; border: 1px solid rgba(173, 138, 78, 0.5); border-radius: 999px; font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: #6b6551; }
-  .dining-card__links { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; padding-top: 16px; border-top: 1px solid rgba(173, 138, 78, 0.4); }
+  .dining-card__links { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px;  }
   .dining-card__links a { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-navy-dark); border-bottom: 1px solid var(--color-gold); padding-bottom: 2px; transition: color 0.3s ease; }
   .dining-card__links a:hover { color: var(--color-gold-dark); }
   .dining-card__note { font-size: 0.78rem; color: #6b6551; font-style: italic; }
@@ -161,6 +168,8 @@
 </section>
 
 <section class="section" id="restaurants">
+  <div class="dining-bg dining-bg--a" aria-hidden="true"></div>
+  <div class="dining-bg dining-bg--b" aria-hidden="true"></div>
   <div class="container">
     <div class="dining-intro">
       <p>At The Molteno, we believe that discovering a destination is as much about its food and people as it is about its landmarks. Julian has curated this selection of favourite and recommended restaurants to help you find everything from relaxed neighbourhood dining and lively social spots to memorable seafood, international cuisine, and special evenings out.</p>
@@ -180,266 +189,386 @@
     <p class="dining-count" id="diningCount" aria-live="polite"></p>
 
     <div class="dining-grid" id="diningGrid">
-      <article class="dining-card reveal" data-cats="fav casual">
-        
-        <p class="dining-card__fav">Julian&rsquo;s Favourite</p>
-        <p class="dining-card__where">Gardens</p>
-        <h3><a href="https://blacksheeprestaurant.co.za/" target="_blank" rel="noopener">Black Sheep Restaurant</a></h3>
-        <p class="dining-card__mood">Neighbourhood favourite</p>
-        <p class="dining-card__desc">A Kloof Street address in Gardens, the neighbourhood The Molteno calls home. The restaurant's own motto sums it up: good food, good company, every day.</p>
-        <ul class="dining-card__tags" aria-label="Categories"><li>Julian's Favourites</li><li>Casual Dining &amp; Neighbourhood Favourites</li></ul>
-        <div class="dining-card__links">
-          <a href="https://blacksheeprestaurant.co.za/" target="_blank" rel="noopener">Website &amp; booking</a>
-          <a href="https://www.google.com/maps/search/?api=1&query=Black%20Sheep%20Restaurant%2C%20Gardens%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+      <details class="dining-card reveal" data-cats="fav casual">
+        <summary>
+          <span class="dining-card__text">
+            <span class="dining-card__fav">Julian&rsquo;s Favourite</span>
+            <span class="dining-card__where">Gardens</span>
+            <h3>Black Sheep Restaurant</h3>
+            <span class="dining-card__mood">Neighbourhood favourite</span>
+          </span>
+          <span class="dining-card__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="dining-card__body">
+          <p class="dining-card__desc">A Kloof Street address in Gardens, the neighbourhood The Molteno calls home. The restaurant's own motto sums it up: good food, good company, every day.</p>
+          <ul class="dining-card__tags" aria-label="Categories"><li>Julian's Favourites</li><li>Casual Dining &amp; Neighbourhood Favourites</li></ul>
+          <div class="dining-card__links">
+            <a href="https://blacksheeprestaurant.co.za/" target="_blank" rel="noopener">Website &amp; booking</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Black%20Sheep%20Restaurant%2C%20Gardens%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+          </div>
         </div>
-      </article>
-      <article class="dining-card reveal" data-cats="fav casual intl">
-        
-        <p class="dining-card__fav">Julian&rsquo;s Favourite</p>
-        <p class="dining-card__where">Kloof Street</p>
-        <h3><a href="https://www.mochachos.com/bacinis-brands/" target="_blank" rel="noopener">Bacini's</a></h3>
-        <p class="dining-card__mood">Relaxed</p>
-        <p class="dining-card__desc">Wood-oven pizza and fresh pasta with an Italian deli attached, plus a shaded deck with a view of Lion's Head.</p>
-        <ul class="dining-card__tags" aria-label="Categories"><li>Julian's Favourites</li><li>Casual Dining &amp; Neighbourhood Favourites</li><li>International Cuisine</li></ul>
-        <div class="dining-card__links">
-          <a href="https://www.mochachos.com/bacinis-brands/" target="_blank" rel="noopener">Website &amp; booking</a>
-          <a href="https://www.google.com/maps/search/?api=1&query=Bacini's%2C%20Kloof%20Street%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+      </details>
+      <details class="dining-card reveal" data-cats="fav casual intl">
+        <summary>
+          <span class="dining-card__text">
+            <span class="dining-card__fav">Julian&rsquo;s Favourite</span>
+            <span class="dining-card__where">Kloof Street</span>
+            <h3>Bacini's</h3>
+            <span class="dining-card__mood">Relaxed</span>
+          </span>
+          <span class="dining-card__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="dining-card__body">
+          <p class="dining-card__desc">Wood-oven pizza and fresh pasta with an Italian deli attached, plus a shaded deck with a view of Lion's Head.</p>
+          <ul class="dining-card__tags" aria-label="Categories"><li>Julian's Favourites</li><li>Casual Dining &amp; Neighbourhood Favourites</li><li>International Cuisine</li></ul>
+          <div class="dining-card__links">
+            <a href="https://www.mochachos.com/bacinis-brands/" target="_blank" rel="noopener">Website &amp; booking</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Bacini's%2C%20Kloof%20Street%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+          </div>
         </div>
-      </article>
-      <article class="dining-card reveal" data-cats="fav sea">
-        <div class="dining-card__photo"><img src="assets/images/dining/codfather.webp" alt="The fish tank at The Codfather seafood restaurant in Camps Bay" loading="lazy" width="900"></div>
-        <p class="dining-card__fav">Julian&rsquo;s Favourite</p>
-        <p class="dining-card__where">Camps Bay</p>
-        <h3><a href="https://www.codfather.co.za/" target="_blank" rel="noopener">The Codfather</a></h3>
-        <p class="dining-card__mood">Seaside</p>
-        <p class="dining-card__desc">Seafood and sushi in Camps Bay with no printed menu: you choose from the day's catch at the counter and the kitchen cooks it to order.</p>
-        <ul class="dining-card__tags" aria-label="Categories"><li>Julian's Favourites</li><li>Seafood &amp; Ocean Views</li></ul>
-        <div class="dining-card__links">
-          <a href="https://www.codfather.co.za/" target="_blank" rel="noopener">Website &amp; booking</a>
-          <a href="https://www.google.com/maps/search/?api=1&query=The%20Codfather%2C%20Camps%20Bay%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+      </details>
+      <details class="dining-card reveal" data-cats="fav sea">
+        <summary>
+          <span class="dining-card__text">
+            <span class="dining-card__fav">Julian&rsquo;s Favourite</span>
+            <span class="dining-card__where">Camps Bay</span>
+            <h3>The Codfather</h3>
+            <span class="dining-card__mood">Seaside</span>
+          </span>
+          <span class="dining-card__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="dining-card__body">
+          <p class="dining-card__desc">Seafood and sushi in Camps Bay with no printed menu: you choose from the day's catch at the counter and the kitchen cooks it to order.</p>
+          <ul class="dining-card__tags" aria-label="Categories"><li>Julian's Favourites</li><li>Seafood &amp; Ocean Views</li></ul>
+          <div class="dining-card__links">
+            <a href="https://www.codfather.co.za/" target="_blank" rel="noopener">Website &amp; booking</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=The%20Codfather%2C%20Camps%20Bay%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+          </div>
         </div>
-      </article>
-      <article class="dining-card reveal" data-cats="fav fine sea intl">
-        
-        <p class="dining-card__fav">Julian&rsquo;s Favourite</p>
-        <p class="dining-card__where">Sea Point</p>
-        <h3>Zest</h3>
-        <p class="dining-card__mood">Ocean views</p>
-        <p class="dining-card__desc">A wood-fired grill with an unobstructed view of the Atlantic, serving Mediterranean and Asian-influenced dishes, with steak, line fish and a tasting menu among the highlights.</p>
-        <ul class="dining-card__tags" aria-label="Categories"><li>Julian's Favourites</li><li>Fine Dining &amp; Special Occasions</li><li>Seafood &amp; Ocean Views</li><li>International Cuisine</li></ul>
-        <div class="dining-card__links">
-          <span class="dining-card__note">Please contact the restaurant directly to book</span>
-          <a href="https://www.google.com/maps/search/?api=1&query=Zest%2C%20Sea%20Point%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+      </details>
+      <details class="dining-card reveal" data-cats="fav fine sea intl">
+        <summary>
+          <span class="dining-card__text">
+            <span class="dining-card__fav">Julian&rsquo;s Favourite</span>
+            <span class="dining-card__where">Sea Point</span>
+            <h3>Zest</h3>
+            <span class="dining-card__mood">Ocean views</span>
+          </span>
+          <span class="dining-card__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="dining-card__body">
+          <p class="dining-card__desc">A wood-fired grill with an unobstructed view of the Atlantic, serving Mediterranean and Asian-influenced dishes, with steak, line fish and a tasting menu among the highlights.</p>
+          <ul class="dining-card__tags" aria-label="Categories"><li>Julian's Favourites</li><li>Fine Dining &amp; Special Occasions</li><li>Seafood &amp; Ocean Views</li><li>International Cuisine</li></ul>
+          <div class="dining-card__links">
+            <span class="dining-card__note">Please contact the restaurant directly to book</span>
+            <a href="https://www.google.com/maps/search/?api=1&query=Zest%2C%20Sea%20Point%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+          </div>
         </div>
-      </article>
-      <article class="dining-card reveal" data-cats="fav casual intl">
-        
-        <p class="dining-card__fav">Julian&rsquo;s Favourite</p>
-        <p class="dining-card__where">Barnet Street, Gardens</p>
-        <h3>Maria's Greek Café</h3>
-        <p class="dining-card__mood">Courtyard charm</p>
-        <p class="dining-card__desc">One of the city's oldest and best-loved Greek restaurants, known for its mezze and a courtyard lit with fairy lights on Dunkley Square.</p>
-        <ul class="dining-card__tags" aria-label="Categories"><li>Julian's Favourites</li><li>Casual Dining &amp; Neighbourhood Favourites</li><li>International Cuisine</li></ul>
-        <div class="dining-card__links">
-          <span class="dining-card__note">Please contact the restaurant directly to book</span>
-          <a href="https://www.google.com/maps/search/?api=1&query=Maria's%20Greek%20Caf%C3%A9%2C%20Barnet%20Street%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+      </details>
+      <details class="dining-card reveal" data-cats="fav casual intl">
+        <summary>
+          <span class="dining-card__text">
+            <span class="dining-card__fav">Julian&rsquo;s Favourite</span>
+            <span class="dining-card__where">Barnet Street, Gardens</span>
+            <h3>Maria's Greek Café</h3>
+            <span class="dining-card__mood">Courtyard charm</span>
+          </span>
+          <span class="dining-card__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="dining-card__body">
+          <p class="dining-card__desc">One of the city's oldest and best-loved Greek restaurants, known for its mezze and a courtyard lit with fairy lights on Dunkley Square.</p>
+          <ul class="dining-card__tags" aria-label="Categories"><li>Julian's Favourites</li><li>Casual Dining &amp; Neighbourhood Favourites</li><li>International Cuisine</li></ul>
+          <div class="dining-card__links">
+            <span class="dining-card__note">Please contact the restaurant directly to book</span>
+            <a href="https://www.google.com/maps/search/?api=1&query=Maria's%20Greek%20Caf%C3%A9%2C%20Barnet%20Street%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+          </div>
         </div>
-      </article>
-      <article class="dining-card reveal" data-cats="fav fine intl social">
-        
-        <p class="dining-card__fav">Julian&rsquo;s Favourite</p>
-        <p class="dining-card__where">Woodstock, Old Biscuit Mill</p>
-        <h3><a href="https://thepotluckclub.co.za/" target="_blank" rel="noopener">The Pot Luck Club</a></h3>
-        <p class="dining-card__mood">Shared plates with a view</p>
-        <p class="dining-card__desc">Small plates designed for sharing, served at the top of the silo at the Old Biscuit Mill in Woodstock, with panoramic views over the city.</p>
-        <ul class="dining-card__tags" aria-label="Categories"><li>Julian's Favourites</li><li>Fine Dining &amp; Special Occasions</li><li>International Cuisine</li><li>Social Dining &amp; Cocktails</li></ul>
-        <div class="dining-card__links">
-          <a href="https://thepotluckclub.co.za/" target="_blank" rel="noopener">Website &amp; booking</a>
-          <a href="https://www.google.com/maps/search/?api=1&query=The%20Pot%20Luck%20Club%2C%20Woodstock%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+      </details>
+      <details class="dining-card reveal" data-cats="fav fine intl social">
+        <summary>
+          <span class="dining-card__text">
+            <span class="dining-card__fav">Julian&rsquo;s Favourite</span>
+            <span class="dining-card__where">Woodstock, Old Biscuit Mill</span>
+            <h3>The Pot Luck Club</h3>
+            <span class="dining-card__mood">Shared plates with a view</span>
+          </span>
+          <span class="dining-card__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="dining-card__body">
+          <p class="dining-card__desc">Small plates designed for sharing, served at the top of the silo at the Old Biscuit Mill in Woodstock, with panoramic views over the city.</p>
+          <ul class="dining-card__tags" aria-label="Categories"><li>Julian's Favourites</li><li>Fine Dining &amp; Special Occasions</li><li>International Cuisine</li><li>Social Dining &amp; Cocktails</li></ul>
+          <div class="dining-card__links">
+            <a href="https://thepotluckclub.co.za/" target="_blank" rel="noopener">Website &amp; booking</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=The%20Pot%20Luck%20Club%2C%20Woodstock%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+          </div>
         </div>
-      </article>
-      <article class="dining-card reveal" data-cats="fav casual">
-        
-        <p class="dining-card__fav">Julian&rsquo;s Favourite</p>
-        <p class="dining-card__where">Gardens, Hof Street</p>
-        <h3>Nelson's Eye</h3>
-        <p class="dining-card__mood">Naval-themed steakhouse</p>
-        <p class="dining-card__desc">A Gardens steakhouse on Hof Street, known for flame-grilled steaks that are aged before they reach the grill, in a roomy, nautically themed dining room.</p>
-        <ul class="dining-card__tags" aria-label="Categories"><li>Julian's Favourites</li><li>Casual Dining &amp; Neighbourhood Favourites</li></ul>
-        <div class="dining-card__links">
-          <span class="dining-card__note">Please contact the restaurant directly to book</span>
-          <a href="https://www.google.com/maps/search/?api=1&query=Nelson's%20Eye%2C%20Gardens%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+      </details>
+      <details class="dining-card reveal" data-cats="fav casual">
+        <summary>
+          <span class="dining-card__text">
+            <span class="dining-card__fav">Julian&rsquo;s Favourite</span>
+            <span class="dining-card__where">Gardens, Hof Street</span>
+            <h3>Nelson's Eye</h3>
+            <span class="dining-card__mood">Naval-themed steakhouse</span>
+          </span>
+          <span class="dining-card__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="dining-card__body">
+          <p class="dining-card__desc">A Gardens steakhouse on Hof Street, known for flame-grilled steaks that are aged before they reach the grill, in a roomy, nautically themed dining room.</p>
+          <ul class="dining-card__tags" aria-label="Categories"><li>Julian's Favourites</li><li>Casual Dining &amp; Neighbourhood Favourites</li></ul>
+          <div class="dining-card__links">
+            <span class="dining-card__note">Please contact the restaurant directly to book</span>
+            <a href="https://www.google.com/maps/search/?api=1&query=Nelson's%20Eye%2C%20Gardens%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+          </div>
         </div>
-      </article>
-      <article class="dining-card reveal" data-cats="fav fine">
-        
-        <p class="dining-card__fav">Julian&rsquo;s Favourite</p>
-        <p class="dining-card__where">Zonnebloem, Harrington Street</p>
-        <h3><a href="https://bellyofthebeast.co.za/" target="_blank" rel="noopener">Belly of the Beast</a></h3>
-        <p class="dining-card__mood">Intimate tasting menu</p>
-        <p class="dining-card__desc">A nose-to-tail restaurant from chefs Neil Swart and Anouchka Horn, with a daily-changing tasting menu built on local, seasonal produce and a light, industrial 30-seat room around an open kitchen.</p>
-        <ul class="dining-card__tags" aria-label="Categories"><li>Julian's Favourites</li><li>Fine Dining &amp; Special Occasions</li></ul>
-        <div class="dining-card__links">
-          <a href="https://bellyofthebeast.co.za/" target="_blank" rel="noopener">Website &amp; booking</a>
-          <a href="https://www.google.com/maps/search/?api=1&query=Belly%20of%20the%20Beast%2C%20Zonnebloem%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+      </details>
+      <details class="dining-card reveal" data-cats="fav fine">
+        <summary>
+          <span class="dining-card__text">
+            <span class="dining-card__fav">Julian&rsquo;s Favourite</span>
+            <span class="dining-card__where">Zonnebloem, Harrington Street</span>
+            <h3>Belly of the Beast</h3>
+            <span class="dining-card__mood">Intimate tasting menu</span>
+          </span>
+          <span class="dining-card__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="dining-card__body">
+          <p class="dining-card__desc">A nose-to-tail restaurant from chefs Neil Swart and Anouchka Horn, with a daily-changing tasting menu built on local, seasonal produce and a light, industrial 30-seat room around an open kitchen.</p>
+          <ul class="dining-card__tags" aria-label="Categories"><li>Julian's Favourites</li><li>Fine Dining &amp; Special Occasions</li></ul>
+          <div class="dining-card__links">
+            <a href="https://bellyofthebeast.co.za/" target="_blank" rel="noopener">Website &amp; booking</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Belly%20of%20the%20Beast%2C%20Zonnebloem%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+          </div>
         </div>
-      </article>
-      <article class="dining-card reveal" data-cats="social intl">
-        
-        
-        <p class="dining-card__where">Sea Point</p>
-        <h3><a href="https://labohemebistro.co.za/" target="_blank" rel="noopener">La Boheme Wine Bar &amp; Bistro</a></h3>
-        <p class="dining-card__mood">Wine-bar feel</p>
-        <p class="dining-card__desc">A Mediterranean-leaning menu with Spanish influences, paired with a long list of wines by the glass, on Sea Point's Main Road.</p>
-        <ul class="dining-card__tags" aria-label="Categories"><li>Social Dining &amp; Cocktails</li><li>International Cuisine</li></ul>
-        <div class="dining-card__links">
-          <a href="https://labohemebistro.co.za/" target="_blank" rel="noopener">Website &amp; booking</a>
-          <a href="https://www.google.com/maps/search/?api=1&query=La%20Boheme%20Wine%20Bar%20%26%20Bistro%2C%20Sea%20Point%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+      </details>
+      <details class="dining-card reveal" data-cats="social intl">
+        <summary>
+          <span class="dining-card__text">
+            
+            <span class="dining-card__where">Sea Point</span>
+            <h3>La Boheme Wine Bar &amp; Bistro</h3>
+            <span class="dining-card__mood">Wine-bar feel</span>
+          </span>
+          <span class="dining-card__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="dining-card__body">
+          <p class="dining-card__desc">A Mediterranean-leaning menu with Spanish influences, paired with a long list of wines by the glass, on Sea Point's Main Road.</p>
+          <ul class="dining-card__tags" aria-label="Categories"><li>Social Dining &amp; Cocktails</li><li>International Cuisine</li></ul>
+          <div class="dining-card__links">
+            <a href="https://labohemebistro.co.za/" target="_blank" rel="noopener">Website &amp; booking</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=La%20Boheme%20Wine%20Bar%20%26%20Bistro%2C%20Sea%20Point%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+          </div>
         </div>
-      </article>
-      <article class="dining-card reveal" data-cats="social intl casual">
-        <div class="dining-card__photo"><img src="assets/images/dining/vixi.webp" alt="The street frontage of VIXI Social House on Bree Street, Cape Town" loading="lazy" width="900"></div>
-        
-        <p class="dining-card__where">Cape Town CBD, Bree Street</p>
-        <h3><a href="https://vixi.co.za/" target="_blank" rel="noopener">VIXI Social House</a></h3>
-        <p class="dining-card__mood">Lively</p>
-        <p class="dining-card__desc">Mediterranean all-day dining on Bree Street, with handcrafted cocktails and music-led nights when the evening gets going.</p>
-        <ul class="dining-card__tags" aria-label="Categories"><li>Social Dining &amp; Cocktails</li><li>International Cuisine</li><li>Casual Dining &amp; Neighbourhood Favourites</li></ul>
-        <div class="dining-card__links">
-          <a href="https://vixi.co.za/" target="_blank" rel="noopener">Website &amp; booking</a>
-          <a href="https://www.google.com/maps/search/?api=1&query=VIXI%20Social%20House%2C%20Cape%20Town%20CBD%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+      </details>
+      <details class="dining-card reveal" data-cats="social intl casual">
+        <summary>
+          <span class="dining-card__text">
+            
+            <span class="dining-card__where">Cape Town CBD, Bree Street</span>
+            <h3>VIXI Social House</h3>
+            <span class="dining-card__mood">Lively</span>
+          </span>
+          <span class="dining-card__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="dining-card__body">
+          <p class="dining-card__desc">Mediterranean all-day dining on Bree Street, with handcrafted cocktails and music-led nights when the evening gets going.</p>
+          <ul class="dining-card__tags" aria-label="Categories"><li>Social Dining &amp; Cocktails</li><li>International Cuisine</li><li>Casual Dining &amp; Neighbourhood Favourites</li></ul>
+          <div class="dining-card__links">
+            <a href="https://vixi.co.za/" target="_blank" rel="noopener">Website &amp; booking</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=VIXI%20Social%20House%2C%20Cape%20Town%20CBD%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+          </div>
         </div>
-      </article>
-      <article class="dining-card reveal" data-cats="casual intl">
-        
-        
-        <p class="dining-card__where">Gardens</p>
-        <h3>Saigon Vietnamese Restaurant</h3>
-        <p class="dining-card__mood">Table Mountain views</p>
-        <p class="dining-card__desc">A long-standing Gardens address on the corner of Kloof and Kamp Streets, serving Vietnamese dishes with Japanese influences, with views of Table Mountain from upstairs.</p>
-        <ul class="dining-card__tags" aria-label="Categories"><li>Casual Dining &amp; Neighbourhood Favourites</li><li>International Cuisine</li></ul>
-        <div class="dining-card__links">
-          <span class="dining-card__note">Please contact the restaurant directly to book</span>
-          <a href="https://www.google.com/maps/search/?api=1&query=Saigon%20Vietnamese%20Restaurant%2C%20Gardens%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+      </details>
+      <details class="dining-card reveal" data-cats="casual intl">
+        <summary>
+          <span class="dining-card__text">
+            
+            <span class="dining-card__where">Gardens</span>
+            <h3>Saigon Vietnamese Restaurant</h3>
+            <span class="dining-card__mood">Table Mountain views</span>
+          </span>
+          <span class="dining-card__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="dining-card__body">
+          <p class="dining-card__desc">A long-standing Gardens address on the corner of Kloof and Kamp Streets, serving Vietnamese dishes with Japanese influences, with views of Table Mountain from upstairs.</p>
+          <ul class="dining-card__tags" aria-label="Categories"><li>Casual Dining &amp; Neighbourhood Favourites</li><li>International Cuisine</li></ul>
+          <div class="dining-card__links">
+            <span class="dining-card__note">Please contact the restaurant directly to book</span>
+            <a href="https://www.google.com/maps/search/?api=1&query=Saigon%20Vietnamese%20Restaurant%2C%20Gardens%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+          </div>
         </div>
-      </article>
-      <article class="dining-card reveal" data-cats="casual intl social">
-        
-        
-        <p class="dining-card__where">District Six</p>
-        <h3>Dias Tavern Portuguese Restaurant</h3>
-        <p class="dining-card__mood">Lively &amp; informal</p>
-        <p class="dining-card__desc">Portuguese cooking since 1988: garlicky trinchado, prego rolls, peri-peri chicken livers and grilled sardines in a lively, no-fuss room.</p>
-        <ul class="dining-card__tags" aria-label="Categories"><li>Casual Dining &amp; Neighbourhood Favourites</li><li>International Cuisine</li><li>Social Dining &amp; Cocktails</li></ul>
-        <div class="dining-card__links">
-          <span class="dining-card__note">Please contact the restaurant directly to book</span>
-          <a href="https://www.google.com/maps/search/?api=1&query=Dias%20Tavern%20Portuguese%20Restaurant%2C%20District%20Six%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+      </details>
+      <details class="dining-card reveal" data-cats="casual intl social">
+        <summary>
+          <span class="dining-card__text">
+            
+            <span class="dining-card__where">District Six</span>
+            <h3>Dias Tavern Portuguese Restaurant</h3>
+            <span class="dining-card__mood">Lively &amp; informal</span>
+          </span>
+          <span class="dining-card__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="dining-card__body">
+          <p class="dining-card__desc">Portuguese cooking since 1988: garlicky trinchado, prego rolls, peri-peri chicken livers and grilled sardines in a lively, no-fuss room.</p>
+          <ul class="dining-card__tags" aria-label="Categories"><li>Casual Dining &amp; Neighbourhood Favourites</li><li>International Cuisine</li><li>Social Dining &amp; Cocktails</li></ul>
+          <div class="dining-card__links">
+            <span class="dining-card__note">Please contact the restaurant directly to book</span>
+            <a href="https://www.google.com/maps/search/?api=1&query=Dias%20Tavern%20Portuguese%20Restaurant%2C%20District%20Six%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+          </div>
         </div>
-      </article>
-      <article class="dining-card reveal" data-cats="casual social">
-        
-        
-        <p class="dining-card__where">Bree Street</p>
-        <h3><a href="https://www.clarkesdining.co.za/" target="_blank" rel="noopener">Clarke's Bar &amp; Dining Room</a></h3>
-        <p class="dining-card__mood">Retro diner by day, bar by night</p>
-        <p class="dining-card__desc">A Bree Street all-day diner known for breakfasts and burgers made with house-made extras, which turns into a bar once the sun goes down.</p>
-        <ul class="dining-card__tags" aria-label="Categories"><li>Casual Dining &amp; Neighbourhood Favourites</li><li>Social Dining &amp; Cocktails</li></ul>
-        <div class="dining-card__links">
-          <a href="https://www.clarkesdining.co.za/" target="_blank" rel="noopener">Website &amp; booking</a>
-          <a href="https://www.google.com/maps/search/?api=1&query=Clarke's%20Bar%20%26%20Dining%20Room%2C%20Bree%20Street%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+      </details>
+      <details class="dining-card reveal" data-cats="casual social">
+        <summary>
+          <span class="dining-card__text">
+            
+            <span class="dining-card__where">Bree Street</span>
+            <h3>Clarke's Bar &amp; Dining Room</h3>
+            <span class="dining-card__mood">Retro diner by day, bar by night</span>
+          </span>
+          <span class="dining-card__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="dining-card__body">
+          <p class="dining-card__desc">A Bree Street all-day diner known for breakfasts and burgers made with house-made extras, which turns into a bar once the sun goes down.</p>
+          <ul class="dining-card__tags" aria-label="Categories"><li>Casual Dining &amp; Neighbourhood Favourites</li><li>Social Dining &amp; Cocktails</li></ul>
+          <div class="dining-card__links">
+            <a href="https://www.clarkesdining.co.za/" target="_blank" rel="noopener">Website &amp; booking</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Clarke's%20Bar%20%26%20Dining%20Room%2C%20Bree%20Street%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+          </div>
         </div>
-      </article>
-      <article class="dining-card reveal" data-cats="casual intl">
-        
-        
-        <p class="dining-card__where">Gardens</p>
-        <h3>Thali Restaurant</h3>
-        <p class="dining-card__mood">Shared plates</p>
-        <p class="dining-card__desc">Modern Indian dining in small, tapas-style dishes by chef Liam Tomlin, inspired by the thali, a complete meal of regional dishes, on Park Road in Gardens.</p>
-        <ul class="dining-card__tags" aria-label="Categories"><li>Casual Dining &amp; Neighbourhood Favourites</li><li>International Cuisine</li></ul>
-        <div class="dining-card__links">
-          <span class="dining-card__note">Please contact the restaurant directly to book</span>
-          <a href="https://www.google.com/maps/search/?api=1&query=Thali%20Restaurant%2C%20Gardens%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+      </details>
+      <details class="dining-card reveal" data-cats="casual intl">
+        <summary>
+          <span class="dining-card__text">
+            
+            <span class="dining-card__where">Gardens</span>
+            <h3>Thali Restaurant</h3>
+            <span class="dining-card__mood">Shared plates</span>
+          </span>
+          <span class="dining-card__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="dining-card__body">
+          <p class="dining-card__desc">Modern Indian dining in small, tapas-style dishes by chef Liam Tomlin, inspired by the thali, a complete meal of regional dishes, on Park Road in Gardens.</p>
+          <ul class="dining-card__tags" aria-label="Categories"><li>Casual Dining &amp; Neighbourhood Favourites</li><li>International Cuisine</li></ul>
+          <div class="dining-card__links">
+            <span class="dining-card__note">Please contact the restaurant directly to book</span>
+            <a href="https://www.google.com/maps/search/?api=1&query=Thali%20Restaurant%2C%20Gardens%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+          </div>
         </div>
-      </article>
-      <article class="dining-card reveal" data-cats="casual intl">
-        
-        
-        <p class="dining-card__where">Foreshore</p>
-        <h3><a href="https://www.colcacchio.co.za/" target="_blank" rel="noopener">Col'Cacchio</a></h3>
-        <p class="dining-card__mood">Casual &amp; relaxed</p>
-        <p class="dining-card__desc">Wood-fired pizzas, pastas and gourmet salads at the Foreshore branch, with an outdoor seating area and views over the waterfront.</p>
-        <ul class="dining-card__tags" aria-label="Categories"><li>Casual Dining &amp; Neighbourhood Favourites</li><li>International Cuisine</li></ul>
-        <div class="dining-card__links">
-          <a href="https://www.colcacchio.co.za/" target="_blank" rel="noopener">Website &amp; booking</a>
-          <a href="https://www.google.com/maps/search/?api=1&query=Col'Cacchio%2C%20Foreshore%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+      </details>
+      <details class="dining-card reveal" data-cats="casual intl">
+        <summary>
+          <span class="dining-card__text">
+            
+            <span class="dining-card__where">Foreshore</span>
+            <h3>Col'Cacchio</h3>
+            <span class="dining-card__mood">Casual &amp; relaxed</span>
+          </span>
+          <span class="dining-card__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="dining-card__body">
+          <p class="dining-card__desc">Wood-fired pizzas, pastas and gourmet salads at the Foreshore branch, with an outdoor seating area and views over the waterfront.</p>
+          <ul class="dining-card__tags" aria-label="Categories"><li>Casual Dining &amp; Neighbourhood Favourites</li><li>International Cuisine</li></ul>
+          <div class="dining-card__links">
+            <a href="https://www.colcacchio.co.za/" target="_blank" rel="noopener">Website &amp; booking</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Col'Cacchio%2C%20Foreshore%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+          </div>
         </div>
-      </article>
-      <article class="dining-card reveal" data-cats="fine sea intl">
-        
-        
-        <p class="dining-card__where">Mouille Point</p>
-        <h3><a href="https://www.kovecollection.co.za/bobos/" target="_blank" rel="noopener">Bobo's</a></h3>
-        <p class="dining-card__mood">Seaside</p>
-        <p class="dining-card__desc">A French-inspired brasserie on the Mouille Point seafront, with a glass front facing the Atlantic. Escargot, steak frites and bouillabaisse feature among its classics.</p>
-        <ul class="dining-card__tags" aria-label="Categories"><li>Fine Dining &amp; Special Occasions</li><li>Seafood &amp; Ocean Views</li><li>International Cuisine</li></ul>
-        <div class="dining-card__links">
-          <a href="https://www.kovecollection.co.za/bobos/" target="_blank" rel="noopener">Website &amp; booking</a>
-          <a href="https://www.google.com/maps/search/?api=1&query=Bobo's%2C%20Mouille%20Point%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+      </details>
+      <details class="dining-card reveal" data-cats="fine sea intl">
+        <summary>
+          <span class="dining-card__text">
+            
+            <span class="dining-card__where">Mouille Point</span>
+            <h3>Bobo's</h3>
+            <span class="dining-card__mood">Seaside</span>
+          </span>
+          <span class="dining-card__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="dining-card__body">
+          <p class="dining-card__desc">A French-inspired brasserie on the Mouille Point seafront, with a glass front facing the Atlantic. Escargot, steak frites and bouillabaisse feature among its classics.</p>
+          <ul class="dining-card__tags" aria-label="Categories"><li>Fine Dining &amp; Special Occasions</li><li>Seafood &amp; Ocean Views</li><li>International Cuisine</li></ul>
+          <div class="dining-card__links">
+            <a href="https://www.kovecollection.co.za/bobos/" target="_blank" rel="noopener">Website &amp; booking</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Bobo's%2C%20Mouille%20Point%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+          </div>
         </div>
-      </article>
-      <article class="dining-card reveal" data-cats="social">
-        
-        
-        <p class="dining-card__where">Sea Point</p>
-        <h3><a href="https://www.theofficecpt.com/" target="_blank" rel="noopener">The Office Restaurant, Sports Bar and Music</a></h3>
-        <p class="dining-card__mood">Lively sports bar</p>
-        <p class="dining-card__desc">A Main Road sports bar with a pub-style menu, live sport on the screens and resident DJs on Fridays.</p>
-        <ul class="dining-card__tags" aria-label="Categories"><li>Social Dining &amp; Cocktails</li></ul>
-        <div class="dining-card__links">
-          <a href="https://www.theofficecpt.com/" target="_blank" rel="noopener">Website &amp; booking</a>
-          <a href="https://www.google.com/maps/search/?api=1&query=The%20Office%20Restaurant%2C%20Sports%20Bar%20and%20Music%2C%20Sea%20Point%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+      </details>
+      <details class="dining-card reveal" data-cats="social">
+        <summary>
+          <span class="dining-card__text">
+            
+            <span class="dining-card__where">Sea Point</span>
+            <h3>The Office Restaurant, Sports Bar and Music</h3>
+            <span class="dining-card__mood">Lively sports bar</span>
+          </span>
+          <span class="dining-card__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="dining-card__body">
+          <p class="dining-card__desc">A Main Road sports bar with a pub-style menu, live sport on the screens and resident DJs on Fridays.</p>
+          <ul class="dining-card__tags" aria-label="Categories"><li>Social Dining &amp; Cocktails</li></ul>
+          <div class="dining-card__links">
+            <a href="https://www.theofficecpt.com/" target="_blank" rel="noopener">Website &amp; booking</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=The%20Office%20Restaurant%2C%20Sports%20Bar%20and%20Music%2C%20Sea%20Point%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+          </div>
         </div>
-      </article>
-      <article class="dining-card reveal" data-cats="casual intl">
-        
-        
-        <p class="dining-card__where">Green Point</p>
-        <h3>Manos</h3>
-        <p class="dining-card__mood">Cosmopolitan café-style</p>
-        <p class="dining-card__desc">A long-running Green Point favourite on Main Road, with a Mediterranean-style menu of salads, fish, pasta, steaks and burgers, and both indoor and outdoor seating.</p>
-        <ul class="dining-card__tags" aria-label="Categories"><li>Casual Dining &amp; Neighbourhood Favourites</li><li>International Cuisine</li></ul>
-        <div class="dining-card__links">
-          <span class="dining-card__note">Please contact the restaurant directly to book</span>
-          <a href="https://www.google.com/maps/search/?api=1&query=Manos%2C%20Green%20Point%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+      </details>
+      <details class="dining-card reveal" data-cats="casual intl">
+        <summary>
+          <span class="dining-card__text">
+            
+            <span class="dining-card__where">Green Point</span>
+            <h3>Manos</h3>
+            <span class="dining-card__mood">Cosmopolitan café-style</span>
+          </span>
+          <span class="dining-card__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="dining-card__body">
+          <p class="dining-card__desc">A long-running Green Point favourite on Main Road, with a Mediterranean-style menu of salads, fish, pasta, steaks and burgers, and both indoor and outdoor seating.</p>
+          <ul class="dining-card__tags" aria-label="Categories"><li>Casual Dining &amp; Neighbourhood Favourites</li><li>International Cuisine</li></ul>
+          <div class="dining-card__links">
+            <span class="dining-card__note">Please contact the restaurant directly to book</span>
+            <a href="https://www.google.com/maps/search/?api=1&query=Manos%2C%20Green%20Point%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+          </div>
         </div>
-      </article>
-      <article class="dining-card reveal" data-cats="fine intl">
-        
-        
-        <p class="dining-card__where">Kloof Street</p>
-        <h3><a href="https://carne-sa.com" target="_blank" rel="noopener">Carné on Kloof</a></h3>
-        <p class="dining-card__mood">Milanese flair</p>
-        <p class="dining-card__desc">A meat-focused restaurant with Milanese flair on Kloof Street, specialising in beef, lamb and game, from the family behind the original Carné on Keerom Street.</p>
-        <ul class="dining-card__tags" aria-label="Categories"><li>Fine Dining &amp; Special Occasions</li><li>International Cuisine</li></ul>
-        <div class="dining-card__links">
-          <a href="https://carne-sa.com" target="_blank" rel="noopener">Website &amp; booking</a>
-          <a href="https://www.google.com/maps/search/?api=1&query=Carn%C3%A9%20on%20Kloof%2C%20Kloof%20Street%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+      </details>
+      <details class="dining-card reveal" data-cats="fine intl">
+        <summary>
+          <span class="dining-card__text">
+            
+            <span class="dining-card__where">Kloof Street</span>
+            <h3>Carné on Kloof</h3>
+            <span class="dining-card__mood">Milanese flair</span>
+          </span>
+          <span class="dining-card__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="dining-card__body">
+          <p class="dining-card__desc">A meat-focused restaurant with Milanese flair on Kloof Street, specialising in beef, lamb and game, from the family behind the original Carné on Keerom Street.</p>
+          <ul class="dining-card__tags" aria-label="Categories"><li>Fine Dining &amp; Special Occasions</li><li>International Cuisine</li></ul>
+          <div class="dining-card__links">
+            <a href="https://carne-sa.com" target="_blank" rel="noopener">Website &amp; booking</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Carn%C3%A9%20on%20Kloof%2C%20Kloof%20Street%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+          </div>
         </div>
-      </article>
-      <article class="dining-card reveal" data-cats="fine intl">
-        <div class="dining-card__photo"><img src="assets/images/dining/la-colombe.webp" alt="A dish from La Colombe, the vineyard restaurant at Silvermist in Constantia" loading="lazy" width="900"></div>
-        
-        <p class="dining-card__where">Constantia, Silvermist Estate</p>
-        <h3><a href="https://lacolombe.co.za/" target="_blank" rel="noopener">La Colombe</a></h3>
-        <p class="dining-card__mood">Vineyard setting</p>
-        <p class="dining-card__desc">An awarded vineyard restaurant at Constantia Nek, pairing local ingredients with French flair, with tasting menus as the focus.</p>
-        <ul class="dining-card__tags" aria-label="Categories"><li>Fine Dining &amp; Special Occasions</li><li>International Cuisine</li></ul>
-        <div class="dining-card__links">
-          <a href="https://lacolombe.co.za/" target="_blank" rel="noopener">Website &amp; booking</a>
-          <a href="https://www.google.com/maps/search/?api=1&query=La%20Colombe%2C%20Constantia%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+      </details>
+      <details class="dining-card reveal" data-cats="fine intl">
+        <summary>
+          <span class="dining-card__text">
+            
+            <span class="dining-card__where">Constantia, Silvermist Estate</span>
+            <h3>La Colombe</h3>
+            <span class="dining-card__mood">Vineyard setting</span>
+          </span>
+          <span class="dining-card__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="dining-card__body">
+          <p class="dining-card__desc">An awarded vineyard restaurant at Constantia Nek, pairing local ingredients with French flair, with tasting menus as the focus.</p>
+          <ul class="dining-card__tags" aria-label="Categories"><li>Fine Dining &amp; Special Occasions</li><li>International Cuisine</li></ul>
+          <div class="dining-card__links">
+            <a href="https://lacolombe.co.za/" target="_blank" rel="noopener">Website &amp; booking</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=La%20Colombe%2C%20Constantia%2C%20Cape%20Town" target="_blank" rel="noopener">Directions</a>
+          </div>
         </div>
-      </article>
+      </details>
     </div>
 
     <p class="dining-disclaimer">Menus, opening hours and prices change, so please check with each restaurant before you go, and book ahead for busy evenings. We&rsquo;re happy to help guests with reservations &mdash; just ask.</p>

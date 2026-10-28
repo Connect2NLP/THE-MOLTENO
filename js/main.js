@@ -30,19 +30,66 @@ if (navToggle && header) {
   });
 }
 
+// Background music: one soundtrack across the whole site. Every page carries the
+// player and button, the track picks up where the last page left off, and it
+// steps aside while the photo tour (which has its own music) is open.
+const MUSIC_KEY = "molteno-music";
+const readMusic = () => { try { return JSON.parse(sessionStorage.getItem(MUSIC_KEY)) || {}; } catch (e) { return {}; } };
+const writeMusic = (patch) => { try { sessionStorage.setItem(MUSIC_KEY, JSON.stringify(Object.assign(readMusic(), patch))); } catch (e) { /* storage blocked */ } };
+
+if (!document.getElementById("bgMusicPlayer")) {
+  document.body.insertAdjacentHTML("beforeend", `
+  <audio id="bgMusicPlayer" src="assets/audio/molteno-music.mp3" loop preload="auto"></audio>
+  <button id="musicToggle" class="music-toggle" aria-label="Toggle background music" aria-pressed="false">
+    <svg class="music-toggle__icon music-toggle__icon--muted" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor"/>
+      <line x1="16" y1="9" x2="21" y2="15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="21" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+    <svg class="music-toggle__icon music-toggle__icon--on" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor"/>
+      <path d="M16 9c1.2 1 1.9 2.1 1.9 3.5S17.2 15 16 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <path d="M18.2 6.8c2 1.6 3.1 3.5 3.1 5.7s-1.1 4.1-3.1 5.7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+  </button>`);
+}
+
 const musicToggle = document.getElementById("musicToggle");
 const bgMusic = document.getElementById("bgMusicPlayer");
 
 if (musicToggle && bgMusic) {
-  let userStopped = false;
+  let userStopped = !!readMusic().stopped;
+  let tourOpen = false;
+  let fadeTimer = null;
   bgMusic.volume = 1;
 
   const setState = (playing) => {
     musicToggle.setAttribute("aria-pressed", String(playing));
   };
 
+  // Carry on from where the previous page stopped.
+  const resumeAt = readMusic().t;
+  if (resumeAt > 0) {
+    const seek = () => { try { bgMusic.currentTime = resumeAt; } catch (e) { /* not seekable yet */ } };
+    if (bgMusic.readyState >= 1) seek(); else bgMusic.addEventListener("loadedmetadata", seek, { once: true });
+  }
+  const save = () => writeMusic({ t: bgMusic.currentTime });
+  bgMusic.addEventListener("timeupdate", () => { if (Math.round(bgMusic.currentTime * 4) % 4 === 0) save(); });
+  window.addEventListener("pagehide", save);
+
+  const fadeTo = (target, ms, done) => {
+    clearInterval(fadeTimer);
+    const from = bgMusic.volume;
+    const t0 = performance.now();
+    fadeTimer = setInterval(() => {
+      const k = Math.min(1, (performance.now() - t0) / ms);
+      bgMusic.volume = Math.max(0, Math.min(1, from + (target - from) * k));
+      if (k >= 1) { clearInterval(fadeTimer); if (done) done(); }
+    }, 40);
+  };
+
   const start = () => {
-    if (userStopped) return;
+    if (userStopped || tourOpen) return;
     const attempt = bgMusic.play();
     if (attempt && typeof attempt.then === "function") {
       attempt.then(() => setState(true)).catch(() => setState(false));
@@ -54,7 +101,7 @@ if (musicToggle && bgMusic) {
   // interaction (click, tap, key press) until playback actually starts.
   const gestures = ["pointerdown", "pointerup", "click", "touchend", "keydown"];
   const onGesture = () => {
-    if (userStopped) return;
+    if (userStopped || tourOpen) return;
     if (!bgMusic.paused) return removeGestures();
     bgMusic.play().then(() => {
       setState(true);
@@ -69,12 +116,28 @@ if (musicToggle && bgMusic) {
   musicToggle.addEventListener("click", () => {
     if (bgMusic.paused) {
       userStopped = false;
+      writeMusic({ stopped: false });
+      bgMusic.volume = 1;
       bgMusic.play().then(() => setState(true)).catch(() => setState(false));
     } else {
       userStopped = true;
+      writeMusic({ stopped: true });
       bgMusic.pause();
       setState(false);
     }
+  });
+
+  // The photo tour has its own soundtrack: fade the site music out while it
+  // plays and bring it back when the tour closes.
+  window.addEventListener("molteno:tour-open", () => {
+    tourOpen = true;
+    fadeTo(0, 700, () => { if (tourOpen) bgMusic.pause(); });
+  });
+  window.addEventListener("molteno:tour-close", () => {
+    tourOpen = false;
+    if (userStopped) return;
+    bgMusic.volume = 0;
+    bgMusic.play().then(() => { setState(true); fadeTo(1, 1800); }).catch(() => {});
   });
 }
 

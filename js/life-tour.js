@@ -417,6 +417,7 @@
     playBtn.innerHTML = iconPause;
     tour.classList.add("is-open");
     tour.setAttribute("aria-hidden", "false");
+    window.dispatchEvent(new Event("molteno:tour-open"));
     document.body.style.overflow = "hidden";
     slideEls.forEach((el) => el.classList.remove("is-active"));
     load(0);
@@ -450,6 +451,7 @@
     captionToken++;
     tour.classList.remove("is-open", "is-idle");
     tour.setAttribute("aria-hidden", "true");
+    window.dispatchEvent(new Event("molteno:tour-close"));
     document.body.style.overflow = "";
     if (document.fullscreenElement) document.exitFullscreen();
     if (ctx) {

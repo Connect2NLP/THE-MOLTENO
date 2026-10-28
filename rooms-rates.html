@@ -161,6 +161,15 @@
   }
   .rates-table tbody td { color: var(--color-gold-dark); font-weight: 600; }
   .rates-table tbody tr:last-child th, .rates-table tbody tr:last-child td { border-bottom: 0; }
+  /* Phones: fit all four seasons on screen, no sideways scrolling */
+  @media (max-width: 700px) {
+    .rates-table { min-width: 0; table-layout: fixed; }
+    .rates-table th, .rates-table td { padding: 11px 3px; font-size: 0.74rem; overflow-wrap: anywhere; }
+    .rates-table thead tr:first-child th { font-size: 0.58rem; letter-spacing: 0.04em; padding: 12px 2px; }
+    .rates-table__dates th, .rates-table__dates td { font-size: 0.64rem; padding: 8px 2px; }
+    .rates-table tbody th, .rates-table thead th[scope="row"] { padding-left: 8px; width: 28%; text-align: left; line-height: 1.25; }
+    .rates-table thead tr:first-child th:first-child { width: 28%; }
+  }
 </style>
 </head>
 <body>

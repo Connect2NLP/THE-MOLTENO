@@ -41,6 +41,7 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // ---- timeline: how many bars each photo stays ----
+  const textLen = (d) => (d.title || "").length + (d.subtitle || "").length + (d.cap || "").length;
   const barsFor = (d) => {
     if (d.bars) return d.bars;
     const chars = (d.title || "").length + (d.subtitle || "").length + (d.cap || "").length;
@@ -307,7 +308,7 @@
       el.classList.toggle("is-active", on);
     });
     tour.classList.toggle("has-long", s.t === "slide" && !!data[s.i].title);
-    tour.classList.toggle("has-xlong", s.t === "slide" && !!data[s.i].title && data[s.i].cap.length > 450);
+    tour.classList.toggle("has-xlong", s.t === "slide" && !!data[s.i].title && textLen(data[s.i]) > 500);
     if (s.t === "slide" && slideEls[s.i]._mosaic) layoutMosaic(slideEls[s.i]);
     titleCard.classList.toggle("is-on", s.t === "title");
     endCard.classList.toggle("is-on", s.t === "end");
@@ -323,7 +324,7 @@
         captionNo.textContent = "No. " + String(s.i + 1).padStart(2, "0") + " / " + String(data.length).padStart(2, "0");
         captionText.textContent = "";
         caption.classList.toggle("is-long", !!d.title);
-        caption.classList.toggle("is-xlong", !!d.title && d.cap.length > 450);
+        caption.classList.toggle("is-xlong", !!d.title && textLen(d) > 500);
         if (d.title) {
           const hd = document.createElement("span");
           hd.className = "tour__h";

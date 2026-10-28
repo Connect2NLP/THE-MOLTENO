@@ -242,13 +242,13 @@ textarea:focus-visible {
 .header-row > .btn { flex-shrink: 0; }
 .nav { flex-shrink: 0; }
 .brand-logo {
-  height: clamp(80px, 12vw, 160px);
+  height: clamp(90px, 13.4vw, 180px);
   width: auto;
-  margin-left: -18px;
+  margin-left: 10px;
   transition: height var(--transition);
   animation: goldSheen 3.5s ease-in-out infinite;
 }
-.is-scrolled .brand-logo { height: clamp(64px, 9.6vw, 128px); }
+.is-scrolled .brand-logo { height: clamp(72px, 10.7vw, 144px); }
 @keyframes goldSheen {
   0%, 100% {
     filter: brightness(0) invert(50%) sepia(50%) saturate(350%) hue-rotate(0deg) brightness(100%);

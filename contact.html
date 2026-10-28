@@ -8,7 +8,7 @@
 <link rel="icon" href="assets/logo/molteno-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=20261216">
+<link rel="stylesheet" href="css/styles.css?v=20261219">
 <style>
   .page-hero {
     background: var(--color-navy);
@@ -16,6 +16,14 @@
     padding: 206px 0 90px;
     text-align: center;
   }
+  .page-hero--photo {
+    background:
+      linear-gradient(180deg, rgba(20, 38, 53, 0.84) 0%, rgba(31, 58, 82, 0.68) 45%, rgba(20, 38, 53, 0.92) 100%),
+      url("assets/images/contact-hero-protea.webp") center / cover no-repeat;
+    background-color: var(--color-navy);
+  }
+  .page-hero--photo h1 { font-weight: 300; filter: drop-shadow(0 2px 14px rgba(0, 0, 0, 0.6)); }
+  .page-hero--photo p { color: #eef1ec; text-shadow: 0 2px 16px rgba(0, 0, 0, 0.55); }
   .page-hero .eyebrow { color: var(--color-gold); }
   .page-hero h1 { margin-bottom: 12px; }
   .page-hero p { color: #dbe4dc; max-width: 520px; margin: 0 auto; }
@@ -123,7 +131,7 @@
   </div>
 </header>
 
-<section class="page-hero">
+<section class="page-hero page-hero--photo">
   <div class="container">
     <span class="eyebrow">Let's Talk</span>
     <h1>Want to know more?</h1>

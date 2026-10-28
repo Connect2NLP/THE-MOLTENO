@@ -8,13 +8,60 @@
 <link rel="icon" href="assets/logo/molteno-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=20261223">
+<link rel="stylesheet" href="css/styles.css?v=20261226">
 <style>
   .page-hero {
     background: var(--color-navy);
     color: var(--color-cream);
     padding: 206px 0 90px;
     text-align: center;
+  }
+  /* Banner photo: the whole picture, with its left and right edges blurred and faded into the navy */
+  .page-hero--photo {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    min-height: 620px;
+    background: var(--color-navy-dark);
+  }
+  .page-hero--photo::before {
+    content: "";
+    position: absolute;
+    inset: -60px;
+    z-index: -2;
+    background:
+      linear-gradient(180deg, rgba(20, 38, 53, 0.74), rgba(20, 38, 53, 0.9)),
+      url("assets/images/tours-hero-safari.webp") center / cover no-repeat;
+    filter: blur(34px) saturate(1.1);
+  }
+  .page-hero--photo::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: calc(clamp(90px, 13.4vw, 180px) + 12px);
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    aspect-ratio: 1265 / 516;
+    background:
+      linear-gradient(180deg, rgba(20, 38, 53, 0.72) 0%, rgba(31, 58, 82, 0.58) 55%, rgba(20, 38, 53, 0.7) 100%),
+      url("assets/images/tours-hero-safari.webp") center / cover no-repeat;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 18%, #000 82%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 18%, #000 82%, transparent 100%);
+  }
+  .page-hero--photo .container { position: relative; z-index: 1; }
+  .page-hero--photo h1 { font-weight: 300; filter: drop-shadow(0 2px 14px rgba(0, 0, 0, 0.65)); }
+  .page-hero--photo p { color: #eef1ec; text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6); }
+  @media (max-width: 900px) {
+    .page-hero--photo { min-height: 0; padding-bottom: 150px; }
+    .page-hero--photo::after {
+      left: 0;
+      right: 0;
+      bottom: auto;
+      transform: none;
+      width: 100%;
+      aspect-ratio: 1265 / 516;
+    }
   }
   .page-hero .eyebrow { color: var(--color-gold); }
   .page-hero h1 { margin-bottom: 12px; }
@@ -179,7 +226,7 @@
   </div>
 </header>
 
-<section class="page-hero">
+<section class="page-hero page-hero--photo">
   <div class="container">
     <span class="eyebrow">Transfers &amp; Tours</span>
     <h1>Places to See &amp; Things to Do</h1>

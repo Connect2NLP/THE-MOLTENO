@@ -8,7 +8,7 @@
 <link rel="icon" href="assets/logo/molteno-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=20261225">
+<link rel="stylesheet" href="css/styles.css?v=20261228">
 <style>
   .page-hero {
     background: var(--color-navy);
@@ -52,6 +52,15 @@
   .page-hero--photo .container { position: relative; z-index: 1; }
   .page-hero--photo h1 { font-weight: 300; filter: drop-shadow(0 2px 14px rgba(0, 0, 0, 0.65)); }
   .page-hero--photo p { color: #eef1ec; text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6); }
+  /* Desktop: photo on the left, the words sit to its right, clear of the picture */
+  @media (min-width: 901px) {
+    .page-hero--photo { text-align: left; }
+    .page-hero--photo::after { left: 2%; transform: none; }
+    .page-hero--photo .container > * { margin-left: auto; margin-right: 0; max-width: 430px; }
+    .page-hero--photo .container > .eyebrow { display: block; }
+    .page-hero--photo h1 { font-size: clamp(2.5rem, 4.2vw, 3.6rem); line-height: 1.1; }
+    .page-hero--photo p { max-width: 430px; }
+  }
   @media (max-width: 900px) {
     .page-hero--photo { min-height: 0; padding-bottom: 150px; }
     .page-hero--photo::after {

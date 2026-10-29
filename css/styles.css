@@ -1014,3 +1014,18 @@ textarea:focus-visible {
 .form-status--error { color: #8a2c2c; }
 .form-status a { text-decoration: underline; }
 select { width: 100%; }
+
+/* Availability calendars */
+.avail { margin: 18px 0 4px; border-top: 1px solid var(--color-line); padding-top: 14px; }
+.avail summary { cursor: pointer; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-gold-dark); }
+.avail__cal { margin-top: 14px; max-width: 340px; }
+.cal__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; font-family: var(--font-display); color: var(--color-navy); font-size: 1.1rem; }
+.cal__nav { border: 1px solid var(--color-line); background: var(--color-cream); border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 1.1rem; line-height: 1; color: var(--color-navy); }
+.cal__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; text-align: center; font-size: 0.85rem; }
+.cal__dow { font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; color: #5c5644; padding: 4px 0; }
+.cal__day { padding: 7px 0; border-radius: 4px; background: rgba(55, 89, 74, 0.1); color: var(--color-green-dark); }
+.cal__day.is-past { background: none; color: #a8a18c; }
+.cal__day.is-booked { background: rgba(138, 44, 44, 0.14); color: #8a2c2c; text-decoration: line-through; }
+.cal__legend { font-size: 0.78rem; color: #5c5644; margin: 10px 0 0; }
+.cal__key { display: inline-block; width: 12px; height: 12px; border-radius: 3px; background: rgba(138, 44, 44, 0.3); vertical-align: -1px; }
+.avail-note { margin-top: -6px; }

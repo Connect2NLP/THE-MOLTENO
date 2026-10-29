@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Bookings | The Molteno</title>
+<link rel="icon" href="assets/logo/molteno-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css?v=20270308">
+<style>
+  body { background: var(--color-sand); }
+  .adm { max-width: 1080px; margin: 0 auto; padding: 32px 16px 80px; }
+  .adm__top { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 28px; }
+  .adm__top img { height: 56px; width: auto; }
+  .adm h1 { font-family: var(--font-display); color: var(--color-navy); margin: 0; font-size: 2rem; }
+  .adm h2 { font-family: var(--font-display); color: var(--color-navy); font-size: 1.5rem; margin: 0 0 14px; }
+  .adm-card { background: var(--color-cream); border: 1px solid var(--color-line); border-radius: var(--radius); padding: 22px; margin-bottom: 24px; }
+  .adm-card form { display: grid; gap: 14px; }
+  .adm-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; }
+  .adm label { display: block; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: #5c5644; margin-bottom: 6px; }
+  .adm input, .adm select { width: 100%; font-family: var(--font-body); font-size: 0.95rem; padding: 11px 12px; border: 1px solid var(--color-line); background: #fff; border-radius: var(--radius); box-sizing: border-box; }
+  .adm .msg { margin: 0; min-height: 1.4em; font-size: 0.95rem; }
+  .adm .msg--err { color: #8a2c2c; }
+  .adm .msg--ok { color: var(--color-green); }
+  .adm table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  .adm th, .adm td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--color-line); vertical-align: top; }
+  .adm th { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: #5c5644; }
+  .adm .tablewrap { overflow-x: auto; }
+  .adm .link { background: none; border: 0; color: #8a2c2c; text-decoration: underline; cursor: pointer; font: inherit; padding: 0; }
+  .ov { overflow-x: auto; }
+  .ov table { min-width: 760px; font-size: 0.72rem; }
+  .ov th, .ov td { padding: 4px 2px; text-align: center; border: 1px solid rgba(200,175,116,0.4); }
+  .ov td.name { text-align: left; font-size: 0.82rem; padding: 6px 8px; white-space: nowrap; }
+  .ov td.b { background: var(--color-green); }
+  .ov th.past, .ov td.past:not(.b) { opacity: 0.45; }
+  .ov-nav { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+  .ov-nav button { border: 1px solid var(--color-line); background: #fff; border-radius: var(--radius); width: 36px; height: 36px; cursor: pointer; font-size: 1.2rem; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main class="adm">
+  <div class="adm__top">
+    <img src="assets/logo/molteno-logo.png" alt="The Molteno">
+    <h1>Bookings</h1>
+    <button type="button" class="btn btn--solid" id="logout" hidden>Log out</button>
+  </div>
+
+  <section class="adm-card" id="loginBox">
+    <h2>Log in</h2>
+    <form id="loginForm">
+      <div class="adm-row">
+        <div><label for="em">Email</label><input id="em" type="email" autocomplete="username" required></div>
+        <div><label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password" required></div>
+      </div>
+      <button type="submit" class="btn btn--solid" style="justify-self:start;">Log in</button>
+      <p class="msg" id="loginMsg" role="status"></p>
+    </form>
+  </section>
+
+  <div id="app" hidden>
+    <section class="adm-card">
+      <h2>Confirm a booking (blocks the room)</h2>
+      <form id="addForm">
+        <div class="adm-row">
+          <div><label for="room">Room</label><select id="room" required></select></div>
+          <div><label for="cin">Check-in</label><input id="cin" type="date" required></div>
+          <div><label for="cout">Check-out</label><input id="cout" type="date" required></div>
+          <div><label for="note">Guest name / note</label><input id="note" type="text" placeholder="e.g. Smith family"></div>
+        </div>
+        <button type="submit" class="btn btn--solid" style="justify-self:start;">Confirm booking</button>
+        <p class="msg" id="addMsg" role="status"></p>
+      </form>
+    </section>
+
+    <section class="adm-card">
+      <h2>Overview</h2>
+      <div class="ov-nav"><button type="button" id="prev" aria-label="Previous month">&lsaquo;</button><strong id="ovTitle"></strong><button type="button" id="next" aria-label="Next month">&rsaquo;</button></div>
+      <div class="ov" id="ov"></div>
+    </section>
+
+    <section class="adm-card">
+      <h2>Upcoming and current bookings</h2>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Room</th><th>Check-in</th><th>Check-out</th><th>Guest / note</th><th></th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table></div>
+      <p class="msg" id="listMsg"></p>
+    </section>
+  </div>
+</main>
+<script src="js/availability.js"></script>
+<script>
+(function () {
+  var A = window.MoltenoAvail, URL = A.URL, KEY = A.KEY, ROOMS = A.ROOMS;
+  var $ = function (id) { return document.getElementById(id); };
+  var token = null, bookings = [];
+  try { token = sessionStorage.getItem("molteno-admin"); } catch (e) {}
+  var now = new Date(), vy = now.getFullYear(), vm = now.getMonth();
+  var esc = function (s) { return String(s || "").replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+  var roomName = function (id) { var r = ROOMS.filter(function (x) { return x.id === id; })[0]; return r ? r.name : id; };
+  var fmt = function (k) { var p = k.split("-"); return Number(p[2]) + " " + A.MONTHS[Number(p[1]) - 1].slice(0, 3) + " " + p[0]; };
+
+  function api(path, opts) {
+    opts = opts || {};
+    opts.headers = Object.assign({ apikey: KEY, Authorization: "Bearer " + token, "Content-Type": "application/json" }, opts.headers || {});
+    return fetch(URL + path, opts).then(function (r) {
+      if (r.status === 401) { signedOut("Your session has ended. Please log in again."); throw new Error("401"); }
+      return r;
+    });
+  }
+
+  function signedOut(msg) {
+    token = null; try { sessionStorage.removeItem("molteno-admin"); } catch (e) {}
+    $("app").hidden = true; $("loginBox").hidden = false; $("logout").hidden = true;
+    $("loginMsg").className = "msg msg--err"; $("loginMsg").textContent = msg || "";
+  }
+  function signedIn() { $("app").hidden = false; $("loginBox").hidden = true; $("logout").hidden = false; refresh(); }
+
+  $("loginForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var m = $("loginMsg"); m.className = "msg"; m.textContent = "Logging in...";
+    fetch(URL + "/auth/v1/token?grant_type=password", {
+      method: "POST", headers: { apikey: KEY, "Content-Type": "application/json" },
+      body: JSON.stringify({ email: $("em").value.trim(), password: $("pw").value })
+    }).then(function (r) { return r.json(); }).then(function (r) {
+      if (!r.access_token) throw new Error("bad");
+      token = r.access_token; try { sessionStorage.setItem("molteno-admin", token); } catch (e) {}
+      $("pw").value = ""; m.textContent = ""; signedIn();
+    }).catch(function () { m.className = "msg msg--err"; m.textContent = "Email or password not recognised."; });
+  });
+  $("logout").addEventListener("click", function () { signedOut(""); });
+
+  $("room").innerHTML = ROOMS.map(function (r) { return '<option value="' + r.id + '">' + esc(r.name) + "</option>"; }).join("");
+  var today = A.key(now.getFullYear(), now.getMonth(), now.getDate());
+  $("cin").min = today; $("cout").min = today;
+  $("cin").addEventListener("change", function () { $("cout").min = $("cin").value || today; if ($("cout").value && $("cout").value <= $("cin").value) $("cout").value = ""; });
+
+  function refresh() {
+    api("/rest/v1/bookings?select=id,room_id,check_in,check_out,guest_note&check_out=gte." + today + "&order=check_in.asc")
+      .then(function (r) { return r.json(); }).then(function (list) { bookings = Array.isArray(list) ? list : []; draw(); })
+      .catch(function () {});
+  }
+
+  function draw() {
+    $("rows").innerHTML = bookings.length ? bookings.map(function (b) {
+      return "<tr><td>" + esc(roomName(b.room_id)) + "</td><td>" + fmt(b.check_in) + "</td><td>" + fmt(b.check_out) + "</td><td>" + esc(b.guest_note) +
+        '</td><td><button type="button" class="link" data-id="' + b.id + '">Remove</button></td></tr>';
+    }).join("") : '<tr><td colspan="5">No upcoming bookings.</td></tr>';
+    $("rows").querySelectorAll("button[data-id]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        if (!confirm("Remove this booking? The room's dates will open up again.")) return;
+        api("/rest/v1/bookings?id=eq." + btn.getAttribute("data-id"), { method: "DELETE" }).then(function () { refresh(); });
+      });
+    });
+    var days = new Date(vy, vm + 1, 0).getDate();
+    $("ovTitle").textContent = A.MONTHS[vm] + " " + vy;
+    var h = "<table><tr><th></th>";
+    for (var d = 1; d <= days; d++) h += "<th" + (A.key(vy, vm, d) < today ? ' class="past"' : "") + ">" + d + "</th>";
+    h += "</tr>";
+    ROOMS.forEach(function (r) {
+      h += '<tr><td class="name">' + esc(r.name) + "</td>";
+      for (var d = 1; d <= days; d++) {
+        var k = A.key(vy, vm, d);
+        var b = A.nightBooked(bookings, r.id, k);
+        h += '<td class="' + (b ? "b " : "") + (k < today ? "past" : "") + '"></td>';
+      }
+      h += "</tr>";
+    });
+    $("ov").innerHTML = h + "</table>";
+  }
+  $("prev").addEventListener("click", function () { var n = new Date(vy, vm - 1, 1); vy = n.getFullYear(); vm = n.getMonth(); draw(); });
+  $("next").addEventListener("click", function () { var n = new Date(vy, vm + 1, 1); vy = n.getFullYear(); vm = n.getMonth(); draw(); });
+
+  $("addForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var m = $("addMsg"); m.className = "msg"; m.textContent = "Saving...";
+    if ($("cout").value <= $("cin").value) { m.className = "msg msg--err"; m.textContent = "Check-out must be after check-in."; return; }
+    api("/rest/v1/bookings", {
+      method: "POST", headers: { Prefer: "return=minimal" },
+      body: JSON.stringify({ room_id: $("room").value, check_in: $("cin").value, check_out: $("cout").value, guest_note: $("note").value.trim() || null })
+    }).then(function (r) {
+      if (r.ok) {
+        m.className = "msg msg--ok"; m.textContent = roomName($("room").value) + " is now blocked from " + fmt($("cin").value) + " to " + fmt($("cout").value) + ".";
+        $("cin").value = ""; $("cout").value = ""; $("note").value = ""; refresh();
+      } else {
+        return r.json().then(function (j) {
+          m.className = "msg msg--err";
+          m.textContent = /23P01|overlap|conflict/i.test(JSON.stringify(j)) ? "That room is already booked for some of those dates." : "Could not save: " + (j.message || "unknown error");
+        });
+      }
+    }).catch(function () {});
+  });
+
+  if (token) signedIn();
+})();
+</script>
+</body>
+</html>

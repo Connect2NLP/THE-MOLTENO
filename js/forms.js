@@ -1,7 +1,7 @@
 // Enquiry and contact forms: sent by email to info@themolteno.com through Web3Forms.
 // Paste the Web3Forms access key between the quotes below (free key, emailed to info@themolteno.com).
 (function () {
-  var ACCESS_KEY = "";
+  var ACCESS_KEY = "3a65c4b3-747e-484b-b5d3-1ef624f79447";
   var EMAIL = "info@themolteno.com";
   var WHATSAPP = "27723034857";
 

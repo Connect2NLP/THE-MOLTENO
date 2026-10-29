@@ -53,9 +53,21 @@
     let fadeTimer = null;
     bgMusic.volume = 1;
   
+    // Phones will not play sound until the visitor touches the page, so while
+    // the music is off the button shows a small "Tap for music" hint.
+    let hint = document.getElementById("musicHint");
+    if (!hint) {
+      hint = document.createElement("span");
+      hint.id = "musicHint";
+      hint.className = "music-hint";
+      hint.textContent = "Tap for music";
+      document.body.appendChild(hint);
+    }
     const setState = (playing) => {
       musicToggle.setAttribute("aria-pressed", String(playing));
+      hint.hidden = playing || userStopped;
     };
+    hint.hidden = userStopped;
   
     // Carry on from where the previous page stopped.
     const resumeAt = readMusic().t;
@@ -90,13 +102,17 @@
     // interacts with the page, so if that happens, keep trying on every real
     // interaction (click, tap, key press) until playback actually starts.
     const gestures = ["pointerdown", "pointerup", "click", "touchend", "keydown"];
-    const onGesture = () => {
+    const onGesture = (ev) => {
       if (userStopped || tourOpen) return;
+      if (ev && ev.target && ev.target.closest && ev.target.closest("#musicToggle")) return;
       if (!bgMusic.paused) return removeGestures();
       bgMusic.play().then(() => {
         setState(true);
         removeGestures();
-      }).catch(() => {});
+      }).catch(() => {
+        // Not loaded yet on a slow phone connection: try again once it is.
+        bgMusic.addEventListener("canplay", start, { once: true });
+      });
     };
     const removeGestures = () => gestures.forEach((e) => window.removeEventListener(e, onGesture));
     gestures.forEach((e) => window.addEventListener(e, onGesture, { passive: true }));

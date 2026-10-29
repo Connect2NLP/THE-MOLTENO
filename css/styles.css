@@ -809,6 +809,24 @@ textarea:focus-visible {
     animation: none;
   }
 }
+.music-hint {
+  position: fixed;
+  right: 88px;
+  bottom: 36px;
+  z-index: 50;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(20, 38, 53, 0.85);
+  color: var(--color-gold);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  pointer-events: none;
+  animation: musicToggleFlash 2.2s ease-in-out infinite;
+}
+.music-hint[hidden] { display: none; }
+@media (max-width: 640px) {
+  .music-hint { right: 72px; bottom: 25px; }
+}
 .music-toggle__icon { width: 22px; height: 22px; }
 .music-toggle__icon--on { display: none; }
 .music-toggle[aria-pressed="true"] .music-toggle__icon--muted { display: none; }

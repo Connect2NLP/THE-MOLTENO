@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Summer Escape Offer | The Molteno Guesthouse, Gardens, Cape Town</title>
 <meta name="description" content="Stay longer, enjoy more. Book direct at The Molteno, a boutique Victorian guesthouse in Gardens, Cape Town, and receive a complimentary cheese board, airport transfer or a free night. Book by 7 December 2026.">
-<meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://themolteno.com/summer-escape.html">
 <link rel="icon" href="assets/logo/molteno-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,11 +47,23 @@
   .lp-foot { text-align: center; padding: 28px 20px 110px; font-size: 0.85rem; color: #5c5644; }
   .lp-foot a { text-decoration: underline; }
   .lp-float { position: fixed; right: 16px; bottom: 16px; z-index: 40; display: flex; align-items: center; gap: 8px; padding: 13px 20px; border-radius: 999px; background: #1f8f4e; color: #fff; font-weight: 600; letter-spacing: 0.04em; box-shadow: 0 6px 20px rgba(0,0,0,0.3); text-decoration: none; }
+  .lp-rates { background: var(--color-cream); }
+  .lp-table-wrap { overflow-x: auto; max-width: 760px; margin: 0 auto; }
+  .lp-table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--color-line); }
+  .lp-table th, .lp-table td { padding: 14px 12px; border-bottom: 1px solid var(--color-line); text-align: center; }
+  .lp-table thead th { font-family: var(--font-display); font-size: 1.15rem; color: var(--color-navy); font-weight: 600; }
+  .lp-table thead small { display: block; font-family: var(--font-body); font-size: 0.72rem; letter-spacing: 0.06em; color: #5c5644; font-weight: 400; margin-top: 2px; }
+  .lp-table tbody th { text-align: left; font-weight: 500; color: var(--color-navy); }
+  .lp-table td strong { display: block; font-size: 1.15rem; color: var(--color-green-dark); }
+  .lp-table .fx { display: block; font-size: 0.75rem; color: #5c5644; margin-top: 3px; white-space: nowrap; }
+  .lp-fine { font-size: 0.82rem; max-width: 640px; margin: 18px auto 0; color: #5c5644; }
   @media (max-width: 640px) {
     .lp-card .form-row { grid-template-columns: 1fr; }
     .lp-bar img { height: 56px; }
     .lp-sec { padding: 52px 0; }
     .lp-card { padding: 20px; }
+    .lp-table th, .lp-table td { padding: 12px 6px; }
+    .lp-table .fx { white-space: normal; }
   }
 </style>
 </head>
@@ -105,6 +116,27 @@
   </div>
 </section>
 
+<section class="lp-sec lp-rates" id="rates">
+  <div class="container">
+    <span class="eyebrow">Rates</span>
+    <h2>Simple, honest nightly rates</h2>
+    <p class="lp-lead">Per room, per night, including continental breakfast. Shown in South African Rand with the approximate price in pounds, euro and US dollars.</p>
+    <div class="lp-table-wrap">
+      <table class="lp-table">
+        <thead><tr><th scope="col">Suite</th><th scope="col">Escape season<small>16 Oct &ndash; 15 Dec</small></th><th scope="col">Grand season<small>16 Dec &ndash; 15 Mar</small></th></tr></thead>
+        <tbody>
+          <tr><th scope="row">The Studio</th><td data-zar="1050"><strong>R1 050</strong><span class="fx">≈ £47 · €56 · $63</span></td><td data-zar="1450"><strong>R1 450</strong><span class="fx">≈ £65 · €78 · $87</span></td></tr>
+          <tr><th scope="row">Azura Haven</th><td data-zar="1250"><strong>R1 250</strong><span class="fx">≈ £56 · €67 · $75</span></td><td data-zar="1550"><strong>R1 550</strong><span class="fx">≈ £69 · €83 · $93</span></td></tr>
+          <tr><th scope="row">The Sanctuary</th><td data-zar="1250"><strong>R1 250</strong><span class="fx">≈ £56 · €67 · $75</span></td><td data-zar="1550"><strong>R1 550</strong><span class="fx">≈ £69 · €83 · $93</span></td></tr>
+          <tr><th scope="row">The Panorama Suite</th><td data-zar="1450"><strong>R1 450</strong><span class="fx">≈ £65 · €78 · $87</span></td><td data-zar="1750"><strong>R1 750</strong><span class="fx">≈ £78 · €94 · $105</span></td></tr>
+          <tr><th scope="row">The Monarch Suite</th><td data-zar="1450"><strong>R1 450</strong><span class="fx">≈ £65 · €78 · $87</span></td><td data-zar="1750"><strong>R1 750</strong><span class="fx">≈ £78 · €94 · $105</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="lp-center lp-fine" id="fxNote">Rates are for one guest. A second guest is R200 per night (≈ £9 · €11 · $12). Foreign-currency amounts are approximate, based on the exchange rate at the time of writing; your booking is confirmed and paid in South African Rand.</p>
+  </div>
+</section>
+
 <section class="lp-sec" style="background:var(--color-sand-deep);">
   <div class="container">
     <span class="eyebrow">Why The Molteno</span>
@@ -143,6 +175,10 @@
           <div><label for="phone">Phone / WhatsApp</label><input id="phone" name="Phone" type="tel" autocomplete="tel"></div>
         </div>
         <div class="form-row">
+          <div><label for="city">City</label><input id="city" name="City" type="text" autocomplete="address-level2"></div>
+          <div><label for="country">Country</label><input id="country" name="Country" type="text" autocomplete="country-name"></div>
+        </div>
+        <div class="form-row">
           <div><label for="dfrom">Check-in</label><input id="dfrom" name="Date From" type="date" required></div>
           <div><label for="dto">Check-out</label><input id="dto" name="Date To" type="date" required></div>
         </div>
@@ -178,5 +214,17 @@
 
 <script src="js/forms.js?v=20270307"></script>
 <script src="js/availability.js?v=20270308"></script>
+<script>
+// Refresh the approximate foreign-currency amounts with today's exchange rate (the page already shows a fallback).
+(function () {
+  fetch("https://open.er-api.com/v6/latest/ZAR").then(function (r) { return r.json(); }).then(function (j) {
+    if (!j || !j.rates) return;
+    var f = function (z) { return "≈ £" + Math.round(z * j.rates.GBP) + " · €" + Math.round(z * j.rates.EUR) + " · $" + Math.round(z * j.rates.USD); };
+    document.querySelectorAll("td[data-zar]").forEach(function (td) { td.querySelector(".fx").textContent = f(Number(td.getAttribute("data-zar"))); });
+    var n = document.getElementById("fxNote");
+    if (n) n.textContent = "Rates are for one guest. A second guest is R200 per night (" + f(200) + "). Foreign-currency amounts are approximate, based on today’s exchange rate; your booking is confirmed and paid in South African Rand.";
+  }).catch(function () {});
+})();
+</script>
 </body>
 </html>

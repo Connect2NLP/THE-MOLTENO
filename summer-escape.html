@@ -18,7 +18,9 @@
   .lp-hero { position: relative; min-height: 92vh; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--color-cream);
     background: linear-gradient(180deg, rgba(20,38,53,0.55) 0%, rgba(20,38,53,0.72) 60%, rgba(20,38,53,0.9) 100%), url("assets/images/home-exterior.webp") center / cover no-repeat; background-color: var(--color-navy-dark); padding: 130px 20px 80px; }
   .lp-hero .eyebrow { color: var(--color-gold); }
-  .lp-hero h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.6rem, 8vw, 5rem); line-height: 1.05; margin: 8px 0 14px; color: var(--color-cream); text-shadow: 0 2px 18px rgba(0,0,0,0.5); }
+  .lp-hero h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.6rem, 8vw, 5rem); line-height: 1.05; margin: 8px 0 14px; color: #e8ecf0; background: linear-gradient(100deg, #8a929b 0%, #e9edf1 18%, #ffffff 30%, #aeb5bd 44%, #f4f6f8 58%, #7f8892 72%, #dfe4e9 86%, #8a929b 100%); background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: lpShimmer 5s linear infinite; filter: drop-shadow(0 2px 14px rgba(0,0,0,0.55)); }
+  @keyframes lpShimmer { 0% { background-position: 150% 0; } 100% { background-position: -100% 0; } }
+  @media (prefers-reduced-motion: reduce) { .lp-hero h1 { animation: none; } }
   .lp-hero p { max-width: 560px; margin: 0 auto 10px; font-size: 1.1rem; color: #eef1ec; }
   .lp-deadline { display: inline-block; margin: 18px 0 26px; padding: 8px 18px; border: 1px solid var(--color-gold); border-radius: 999px; letter-spacing: 0.08em; font-size: 0.85rem; text-transform: uppercase; color: var(--color-gold); }
   .lp-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
@@ -47,6 +49,15 @@
   .lp-foot { text-align: center; padding: 28px 20px 110px; font-size: 0.85rem; color: #5c5644; }
   .lp-foot a { text-decoration: underline; }
   .lp-float { position: fixed; right: 16px; bottom: 16px; z-index: 40; display: flex; align-items: center; gap: 8px; padding: 13px 20px; border-radius: 999px; background: #1f8f4e; color: #fff; font-weight: 600; letter-spacing: 0.04em; box-shadow: 0 6px 20px rgba(0,0,0,0.3); text-decoration: none; }
+  .lp-offer { background: var(--color-navy); color: var(--color-cream); }
+  .lp-offer .eyebrow { color: var(--color-gold); }
+  .lp-offer h2 { color: var(--color-cream); }
+  .lp-offer .lp-lead { color: #eef1ec; }
+  .lp-offer .promo-card { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.28); }
+  .lp-offer .promo-card h3 { color: #ffffff; }
+  .lp-offer .promo-card p { color: #eef1ec; font-size: 1.02rem; }
+  .lp-offer .promo-card__nights { color: #e3c488; font-size: 0.8rem; }
+  .lp-offer .lp-fine, .lp-offer .lp-fine a { color: #eef1ec; }
   .lp-rates { background: var(--color-cream); }
   .lp-table-wrap { overflow-x: auto; max-width: 760px; margin: 0 auto; }
   .lp-table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--color-line); }
@@ -87,7 +98,7 @@
   </div>
 </section>
 
-<section class="lp-sec">
+<section class="lp-sec lp-offer">
   <div class="container">
     <span class="eyebrow">Your Summer Bonus</span>
     <h2>The longer you stay, the more you get</h2>
@@ -112,7 +123,7 @@
         <p>Enjoy one complimentary night&rsquo;s accommodation, courtesy of The Molteno.</p>
       </article>
     </div>
-    <p class="lp-center" style="margin-top:18px;font-size:0.85rem;">One benefit per booking. Subject to availability. <a href="index.html#summer-escape-terms" style="text-decoration:underline;">Terms &amp; conditions</a> apply.</p>
+    <p class="lp-center lp-fine" style="margin-top:22px;">One benefit per booking. Subject to availability. <a href="index.html#summer-escape-terms" style="text-decoration:underline;">Terms &amp; conditions</a> apply.</p>
   </div>
 </section>
 

@@ -48,6 +48,8 @@
   .lp-or { text-align: center; margin: 22px 0 0; color: #5c5644; font-size: 0.95rem; }
   .lp-foot { text-align: center; padding: 28px 20px 110px; font-size: 0.85rem; color: #5c5644; }
   .lp-foot a { text-decoration: underline; }
+  .music-toggle { right: auto; left: 16px; bottom: 16px; width: 52px; height: 52px; }
+  .music-hint { right: auto; left: 78px; bottom: 28px; }
   .lp-float { position: fixed; right: 16px; bottom: 16px; z-index: 40; display: flex; align-items: center; gap: 8px; padding: 13px 20px; border-radius: 999px; background: #1f8f4e; color: #fff; font-weight: 600; letter-spacing: 0.04em; box-shadow: 0 6px 20px rgba(0,0,0,0.3); text-decoration: none; }
   .lp-offer { background: var(--color-navy); color: var(--color-cream); }
   .lp-offer .eyebrow { color: var(--color-gold); }
@@ -221,8 +223,24 @@
   <p><a href="index.html">Visit our full website</a> &middot; <a href="index.html#summer-escape-terms">Offer terms &amp; conditions</a> &middot; <a href="privacy-policy.html">Privacy</a></p>
 </footer>
 
+<audio id="lpMusic" src="assets/audio/summer-escape-music.mp3" loop preload="auto"></audio>
+<button id="musicToggle" class="music-toggle" aria-label="Toggle background music" aria-pressed="false">
+  <svg class="music-toggle__icon music-toggle__icon--muted" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor"/>
+    <line x1="16" y1="9" x2="21" y2="15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    <line x1="21" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </svg>
+  <svg class="music-toggle__icon music-toggle__icon--on" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor"/>
+    <path d="M16 9c1.2 1 1.9 2.1 1.9 3.5S17.2 15 16 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M18.2 6.8c2 1.6 3.1 3.5 3.1 5.7s-1.1 4.1-3.1 5.7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </svg>
+</button>
+<span id="musicHint" class="music-hint">Tap for music</span>
+
 <a class="lp-float" href="https://wa.me/27723034857?text=Hi%20The%20Molteno%2C%20I%27d%20like%20to%20know%20more%20about%20the%20Summer%20Escape%20offer.">WhatsApp</a>
 
+<script src="js/lp-music.js?v=20270310"></script>
 <script src="js/forms.js?v=20270307"></script>
 <script src="js/availability.js?v=20270308"></script>
 <script>

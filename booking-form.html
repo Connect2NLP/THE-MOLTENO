@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guest Booking Form | The Molteno Guesthouse, Gardens, Cape Town</title>
+<meta name="description" content="Complete your booking details for The Molteno, a boutique Victorian guesthouse in Gardens, Cape Town.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://themolteno.com/booking-form.html">
+<link rel="icon" href="assets/logo/molteno-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css?v=20270312">
+<style>
+  .page-hero {
+    background: var(--color-navy);
+    color: var(--color-cream);
+    padding: 206px 0 90px;
+    text-align: center;
+  }
+  .page-hero--photo {
+    background:
+      linear-gradient(180deg, rgba(20, 38, 53, 0.84) 0%, rgba(31, 58, 82, 0.68) 45%, rgba(20, 38, 53, 0.92) 100%),
+      url("assets/images/contact-hero-protea.webp") center / cover no-repeat;
+    background-color: var(--color-navy);
+  }
+  .page-hero--photo h1 { font-weight: 300; filter: drop-shadow(0 2px 14px rgba(0, 0, 0, 0.6)); }
+  .page-hero--photo p { color: #eef1ec; text-shadow: 0 2px 16px rgba(0, 0, 0, 0.55); }
+  .page-hero .eyebrow { color: var(--color-gold); }
+  .page-hero h1 { margin-bottom: 12px; }
+  .page-hero p { color: #dbe4dc; max-width: 520px; margin: 0 auto; }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 64px;
+  }
+  .contact-info dt {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    margin-top: 28px;
+  }
+  .contact-info dt:first-child { margin-top: 0; }
+  .contact-info dd {
+    margin: 6px 0 0;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--color-navy);
+  }
+  form { display: grid; gap: 18px; }
+  .bf-h { font-family: var(--font-display); color: var(--color-navy); font-size: 1.5rem; font-weight: 500; margin: 14px 0 0; padding-bottom: 6px; border-bottom: 1px solid var(--color-line); }
+  .bf-h:first-of-type { margin-top: 0; }
+  .bf-checks { display: grid; gap: 10px; }
+  .bf-check { display: flex; align-items: flex-start; gap: 10px; text-transform: none; letter-spacing: 0; font-size: 0.95rem; color: var(--color-ink); margin: 0; }
+  .bf-check input { width: auto; margin-top: 4px; }
+  .bf-check a { text-decoration: underline; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  label {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #5c5644;
+    margin-bottom: 8px;
+  }
+  input, textarea, select {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    padding: 13px 14px;
+    border: 1px solid var(--color-line);
+    background: var(--color-cream);
+    color: var(--color-ink);
+    border-radius: var(--radius);
+  }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--color-green); }
+  textarea { min-height: 140px; resize: vertical; }
+  @media (max-width: 800px) {
+    .contact-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+
+  /* Meet your host */
+  #host { scroll-margin-top: 110px; }
+  .host-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 88px;
+    align-items: center;
+  }
+  .host-photo { margin: 0; }
+  .host-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 2px;
+    outline: 1px solid rgba(211, 176, 107, 0.6);
+    outline-offset: 12px;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+  }
+  .host-copy .eyebrow { color: var(--color-gold); }
+  .host-copy h2 { color: var(--color-cream); margin: 0 0 22px; }
+  .host-copy p { color: #dbe4dc; }
+  .host-copy .host-lead {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.5rem;
+    line-height: 1.45;
+    color: #d3b06b;
+    margin: 0 0 22px;
+  }
+  @media (max-width: 900px) {
+    .host-grid { grid-template-columns: 1fr; gap: 44px; }
+    .host-photo { max-width: 420px; margin: 0 auto; }
+    .host-photo img { outline-offset: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header is-scrolled" id="siteHeader">
+  <div class="container header-row">
+    <a href="index.html" class="brand">
+      <img src="assets/logo/molteno-logo.png" alt="The Molteno" class="brand-logo">
+    </a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="reviews.html">Reviews</a>
+      <div class="nav-item has-dropdown">
+        <a href="contact.html">Contact</a>
+        <div class="nav-dropdown">
+          <a href="contact.html#host">Meet your host</a>
+        </div>
+      </div>
+      <a href="the-molteno-experience.html">The Molteno Experience</a>
+      <div class="nav-item has-dropdown">
+        <a href="transfers-tours.html">Tours</a>
+        <div class="nav-dropdown">
+          <a href="dining-out.html">Dining Out</a>
+        </div>
+      </div>
+      <a href="rooms-rates.html">Rooms &amp; Rates</a>
+    </nav>
+    <a href="enquire.html" class="btn btn--nav">Reservations</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="page-hero page-hero--photo">
+  <div class="container">
+    <span class="eyebrow">Your Reservation</span>
+    <h1>Guest booking form</h1>
+    <p>Thank you for your interest in The Molteno. Please complete your details below so we can prepare your stay and confirm your booking.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container contact-grid">
+    <dl class="contact-info">
+      <dt>Visit Us</dt>
+      <dd>4 Molteno Road, Gardens, Cape Town</dd>
+      <dt>Call Us</dt>
+      <dd><a href="tel:+27723034857">+27 72 303 4857</a></dd>
+      <dt>Email Us</dt>
+      <dd><a href="mailto:info@themolteno.com">info@themolteno.com</a></dd>
+    </dl>
+
+    <form data-email-form>
+      <input type="hidden" name="_subject" value="Guest booking form completed: The Molteno">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="Source" value="Guest booking form">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <h2 class="bf-h">1. About you</h2>
+      <div class="form-row">
+        <div><label for="fname">First Name</label><input id="fname" name="First Name" type="text" required autocomplete="given-name"></div>
+        <div><label for="lname">Last Name</label><input id="lname" name="Last Name" type="text" required autocomplete="family-name"></div>
+      </div>
+      <div class="form-row">
+        <div><label for="email">Email</label><input id="email" name="email" type="email" required autocomplete="email"></div>
+        <div><label for="phone">Phone / WhatsApp (with country code)</label><input id="phone" name="Phone" type="tel" required autocomplete="tel"></div>
+      </div>
+      <div class="form-row">
+        <div><label for="city">City</label><input id="city" name="City" type="text" autocomplete="address-level2"></div>
+        <div><label for="country">Country</label><input id="country" name="Country" type="text" required autocomplete="country-name"></div>
+      </div>
+
+      <h2 class="bf-h">2. Your stay</h2>
+      <div>
+        <label for="suite">Suite</label>
+        <select id="suite" name="Suite" required>
+          <option value="" disabled selected>Select a suite</option>
+          <option>Azura Suite (Deluxe)</option>
+          <option>Sanctuary Suite (Deluxe)</option>
+          <option>The Studio Suite (Premium)</option>
+          <option>The Monarch Suite (Superior)</option>
+          <option>The Panorama Suite (Executive)</option>
+          <option>Not sure yet, please advise</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div><label for="dfrom">Check-in date</label><input id="dfrom" name="Date From" type="date" required></div>
+        <div><label for="dto">Check-out date</label><input id="dto" name="Date To" type="date" required></div>
+      </div>
+      <div class="form-row">
+        <div><label for="adults">Adults</label><input id="adults" name="Adults" type="number" min="1" max="20" inputmode="numeric" required></div>
+        <div><label for="children">Children (with ages)</label><input id="children" name="Children" type="text" placeholder="e.g. 2 children, aged 5 and 8"></div>
+      </div>
+      <div class="form-row">
+        <div><label for="arrival">Expected arrival time</label><input id="arrival" name="Arrival Time" type="time"></div>
+        <div><label for="flight">Flight number (if arriving by air)</label><input id="flight" name="Flight Number" type="text"></div>
+      </div>
+      <div>
+        <label for="offer">Are you booking under an offer?</label>
+        <select id="offer" name="Offer">
+          <option>No offer</option>
+          <option>Summer Escape offer (book by 7 December 2026)</option>
+          <option>Other, I will explain below</option>
+        </select>
+      </div>
+
+      <h2 class="bf-h">3. Making it special</h2>
+      <div class="bf-checks">
+        <label class="bf-check"><input type="checkbox" name="Airport Transfer" value="Yes"> I would like an airport transfer quote</label>
+        <label class="bf-check"><input type="checkbox" name="Celebrating" value="Yes"> We are celebrating a special occasion</label>
+      </div>
+      <div>
+        <label for="diet">Dietary requirements or allergies</label>
+        <input id="diet" name="Dietary Requirements" type="text">
+      </div>
+      <div>
+        <label for="message">Other requests or questions</label>
+        <textarea id="message" name="Message"></textarea>
+      </div>
+
+      <h2 class="bf-h">4. Confirm</h2>
+      <p class="promo-note">Please do not enter payment card details or ID numbers on this form. We will confirm payment arrangements with you directly, and we will ask to see identification when you check in.</p>
+      <label class="bf-check bf-check--consent"><input type="checkbox" name="Privacy Consent" value="Yes" required> I agree that The Molteno may use these details to arrange my booking, as described in the <a href="privacy-policy.html" target="_blank" rel="noopener">privacy policy</a>.</label>
+      <button type="submit" class="btn btn--solid" style="justify-self:start;">Submit Booking Form</button>
+      <p class="form-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/logo/molteno-logo.png" alt="The Molteno">
+        <p>Cape Town's Victorian Gem — a classy, elegant, effortless home away from home beneath the slopes of Table Mountain.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Explore</h4>
+        <a href="index.html">Home</a>
+        <a href="reviews.html">Reviews</a>
+        <a href="the-molteno-experience.html">The Molteno Experience</a>
+      <a href="transfers-tours.html">Transfers &amp; Tours</a>
+        <a href="dining-out.html">Dining Out</a>
+        <a href="rooms-rates.html">Rooms &amp; Rates</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-links">
+        <h4>Get In Touch</h4>
+        <div>4 Molteno Road, Gardens, Cape Town</div>
+        <a href="tel:+27723034857">+27 72 303 4857</a>
+        <a href="mailto:info@themolteno.com">info@themolteno.com</a>
+      </div>
+      <div class="footer-links">
+        <h4>Follow Us</h4>
+        <a href="https://www.facebook.com/share/1BxByJtBjG/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.instagram.com/themolteno" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@themolteno" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://wa.me/27723034857" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 The Molteno. All rights reserved.</span>
+      <a href="privacy-policy.html">Privacy Policy</a> &nbsp;&middot;&nbsp; <a href="terms-of-use.html">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/shell.js?v=20270304"></script>
+<script src="js/main.js?v=20270303"></script>
+<script src="js/consent.js?v=20270314"></script>
+<script src="js/forms.js?v=20270312"></script>
+<script src="js/availability.js?v=20270308"></script>
+</body>
+</html>

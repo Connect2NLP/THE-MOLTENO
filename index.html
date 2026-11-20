@@ -10,6 +10,22 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css?v=20270308">
+<style>
+  /* Black Friday Escape: full-width hero banner, then two offer cards */
+  .promo--bf { padding: 0; }
+  .bf-hero { margin: 0; line-height: 0; background: var(--color-navy-dark); }
+  .bf-hero img { display: block; width: 100%; height: auto; }
+  .promo--bf > .section { padding-top: 64px; }
+  .promo-grid--two { grid-template-columns: repeat(2, 1fr); max-width: 820px; margin-left: auto; margin-right: auto; }
+  .promo-card--bf { padding: 40px 28px; }
+  .promo-card__big { font-family: var(--font-display); font-size: clamp(2.4rem, 5vw, 3.4rem); line-height: 1.1; margin: 0 0 8px; color: var(--color-gold-dark); }
+  .promo--bf .promo__cta .promo__tagline { margin: 6px 0 24px; }
+  .promo--bf .promo__cta .btn { margin: 0 6px 10px; }
+  @media (max-width: 900px) {
+    .promo--bf > .section { padding-top: 44px; }
+    .promo-grid--two { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
 <body>
 
@@ -73,50 +89,45 @@
   </ul>
 </section>
 
-<section class="section promo" id="summer-escape">
-  <div class="container">
-    <div class="promo__head">
-      <span class="eyebrow">Limited-Time Offer</span>
-      <h2>The Molteno Summer Escape</h2>
-      <p class="promo__tagline">Stay Longer. Enjoy More.</p>
-      <p>Make The Molteno your Cape Town home this summer and enjoy a little extra when you book directly with us.</p>
-      <p class="promo__deadline">Book by <strong>7 December 2026</strong> to qualify</p>
-    </div>
-    <div class="promo-grid">
-      <article class="promo-card">
-        <img src="assets/images/offers/offer-cheese-board.jpg" alt="A cheese board with fruit, nuts and bread" class="promo-card__img" loading="lazy" decoding="async">
-        <p class="promo-card__nights">3 Nights or More</p>
-        <h3>Complimentary Cheese Board</h3>
-        <p>Enjoy a complimentary cheese board anytime during your stay.</p>
-      </article>
-      <article class="promo-card">
-        <img src="assets/images/offers/offer-driver.jpg" alt="The Molteno chauffeur at the wheel" class="promo-card__img" loading="lazy" decoding="async">
-        <p class="promo-card__nights">5 Nights or More</p>
-        <h3>Complimentary Airport Transfer</h3>
-        <p>Receive a complimentary airport transfer with The Molteno Chauffeur.</p>
-      </article>
-      <article class="promo-card">
-        <img src="assets/images/offers/offer-free-night.jpg" alt="A warm welcome at the guesthouse reception" class="promo-card__img" loading="lazy" decoding="async">
-        <p class="promo-card__nights">8 Nights or More</p>
-        <h3>One Night Free</h3>
-        <p>Enjoy one complimentary night&rsquo;s accommodation, courtesy of The Molteno.</p>
-      </article>
-    </div>
-    <div class="promo__cta">
-      <p>Experience the charm of our Victorian guesthouse, the comfort of a memorable stay, and the convenience of being perfectly positioned at the foot of Table Mountain. Your Cape Town escape starts here.</p>
-      <a href="enquire.html" class="btn btn--solid">Enquire Now</a>
-    </div>
-    <div class="promo__terms" id="summer-escape-terms">
-      <h3>Terms &amp; Conditions</h3>
-      <ol>
-        <li>The offer applies only to qualifying bookings confirmed before or on 7 December 2026. Bookings confirmed after this deadline do not qualify.</li>
-        <li>Each booking qualifies for one benefit only, according to the applicable length of stay.</li>
-        <li>Benefits are not cumulative. For example, an eight-night booking receives one complimentary night&rsquo;s accommodation only, not the cheese board or airport transfer.</li>
-        <li>Complimentary benefits are non-transferable and cannot be exchanged for cash.</li>
-        <li>Airport transfers must be arranged in advance and are subject to confirmation.</li>
-        <li>The complimentary night is subject to availability and applies to the qualifying accommodation booking.</li>
-        <li>Standard seasonal room rates apply. The offer is subject to availability and cannot be combined with other promotions.</li>
-      </ol>
+<section class="promo promo--bf" id="black-friday" aria-labelledby="bf-title">
+  <figure class="bf-hero">
+    <img src="assets/images/offers/black-friday-hero.webp" alt="The Molteno Black Friday Escape: a warmly lit suite and Table Mountain at sunset. 15% off for 3 or more nights, 20% off for 5 or more nights." width="2000" height="1000" decoding="async" fetchpriority="high">
+  </figure>
+  <div class="section">
+    <div class="container">
+      <div class="promo__head">
+        <span class="eyebrow">Limited-Time Offer</span>
+        <h2 id="bf-title">The Molteno Black Friday Escape</h2>
+        <p class="promo__deadline"><strong>27&ndash;29 November 2026</strong></p>
+      </div>
+      <div class="promo-grid promo-grid--two">
+        <article class="promo-card promo-card--bf">
+          <p class="promo-card__nights">3 Nights or More</p>
+          <p class="promo-card__big">15% Off</p>
+          <p>Accommodation</p>
+        </article>
+        <article class="promo-card promo-card--bf">
+          <p class="promo-card__nights">5 Nights or More</p>
+          <p class="promo-card__big">20% Off</p>
+          <p>Accommodation</p>
+        </article>
+      </div>
+      <div class="promo__cta">
+        <p>Three days. Exclusive savings. An exceptional Cape Town stay.</p>
+        <p class="promo__tagline">Book Direct. Stay Longer. Save More.</p>
+        <a href="enquire.html" class="btn btn--solid">Book Direct</a>
+        <a href="https://wa.me/27723034857?text=Hello%20The%20Molteno%2C%20I%27d%20like%20to%20book%20the%20Black%20Friday%20Escape." class="btn" target="_blank" rel="noopener">WhatsApp Us</a>
+      </div>
+      <div class="promo__terms" id="black-friday-terms">
+        <h3>Terms &amp; Conditions</h3>
+        <ol>
+          <li>The Black Friday Escape runs from 27 to 29 November 2026.</li>
+          <li>Stays of 3 nights or more receive 15% off accommodation. Stays of 5 nights or more receive 20% off accommodation.</li>
+          <li>Discounts are not cumulative: one discount applies per booking, according to the length of stay.</li>
+          <li>The discount applies to accommodation only and to bookings made directly with The Molteno.</li>
+          <li>The offer is subject to availability and cannot be combined with other promotions.</li>
+        </ol>
+      </div>
     </div>
   </div>
 </section>
